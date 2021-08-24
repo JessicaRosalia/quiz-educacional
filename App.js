@@ -1,15 +1,30 @@
 import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
-import Routes from './src/routes';
+import { StyleSheet, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Login from './src/pages/Login/Login';
+
 
 
  const App = () => {
    return (
-     <SafeAreaView>
-      <Routes/>
+      <SafeAreaView style={Style.container}>
+        <Text>BASE</Text>
+        <Login/>
+       
      </SafeAreaView>
+    
    );
  };
+
+
+const Style = StyleSheet.create({
+  container: {
+    backgroundColor: '#f6f6f6',
+    display: 'flex',
+    flex:1,
+  }
+})
+
 
 
  export default App;

@@ -5,10 +5,12 @@ import { Text } from 'react-native';
 
 const Stack = createStackNavigator();
 
+
 const Routes = () => {
 
     return (
-        <Text>.</Text>
+
+       <Text >ROUTE</Text>
     )
 }
 
