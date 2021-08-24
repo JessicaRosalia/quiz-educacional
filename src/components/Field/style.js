@@ -4,6 +4,7 @@ const style = StyleSheet.create({
     container: {
         width: 300,
         display: "flex",
+        
     },
     label: {
         fontSize: 18,
@@ -31,6 +32,7 @@ const style = StyleSheet.create({
         borderLeftWidth: 0,
         borderWidth: 1,
         borderBottomColor: "#D3D3D3",
+        
     },
     visiblePassword: {
         width: "10%",
