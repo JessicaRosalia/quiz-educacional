@@ -12,11 +12,11 @@ const Field = ({label, placeholder, keyboardType}) => {
     const [input, setInput] = useState('');
     const [hidePass, setHidePass] = useState(true);
 
-    let isTrue = label === "Senha" ? true : false
+    let labelPassIsTrue = label === "Senha" ? true : false
     return (
         <View style={style.container}>
             <Text style={style.label}>{label}</Text>
-            {!isTrue 
+            {!labelPassIsTrue
             ? <TextInput
                 placeholder={placeholder}
                 placeholderTextColor="#B1B1B1"
