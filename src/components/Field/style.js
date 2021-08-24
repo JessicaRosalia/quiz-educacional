@@ -20,11 +20,10 @@ const style = StyleSheet.create({
     },
     containerPassword: {
         flexDirection: "row",
-        width: "90%",
         alignItems: "center",
     },
     textInputPassword: {
-        width: "85%",
+        width: "90%",
         color: "#000",
         paddingLeft: 10,
         borderTopWidth: 0,
@@ -32,6 +31,13 @@ const style = StyleSheet.create({
         borderLeftWidth: 0,
         borderWidth: 1,
         borderBottomColor: "#D3D3D3",
+    },
+    visiblePassword: {
+        width: "10%",
+        borderBottomColor: "#D3D3D3",
+        borderBottomWidth: 1,
+        paddingTop: 20,
+        paddingBottom: 5,
     }
 })
 

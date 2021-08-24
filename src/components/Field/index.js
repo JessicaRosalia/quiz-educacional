@@ -27,7 +27,7 @@ const Field = ({label, placeholder, keyboardType}) => {
                     onChangeText={(text) => { console.warn(text) }}
                 />
 
-                <View>
+                <View style={style.visiblePassword}>
                     <TouchableOpacity>
                         <Image source={eye}/>
                     </TouchableOpacity>
