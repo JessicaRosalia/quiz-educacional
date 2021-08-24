@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
-import { Button, Image, Text, TouchableHighlightBase, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import style from './style';
-import eye from '../../assets/icons/btn-verSenha.png';
-import {Ionicons} from 'react-native-vector-icons/Ionicons';
+import eyeShowPassword from '../../assets/icons/btn-verSenha.png';
+import eyeHidePassword from '../../assets/icons/btn-ocultarSenha.png';
+
 
 
 const Field = ({label, placeholder, keyboardType}) => {
+
     const [input, setInput] = useState('');
+    const [hidePass, setHidePass] = useState(true);
 
     let isTrue = label === "Senha" ? true : false
     return (
@@ -30,11 +33,17 @@ const Field = ({label, placeholder, keyboardType}) => {
                     style={style.textInputPassword}
                     value={input}
                     onChangeText={(text) => { setInput(text) }}
+                    secureTextEntry={hidePass}
                 />
 
                 <View style={style.visiblePassword}>
-                    <TouchableOpacity>
-                        <Image source={eye}/>
+                    <TouchableOpacity onPress={ () => setHidePass(!hidePass)}>
+                        {
+                            hidePass ?
+                                <Image source={eyeHidePassword}/>
+                            :
+                                <Image source={eyeShowPassword} />
+                            }
                     </TouchableOpacity>
                 </View>
             </View> }
