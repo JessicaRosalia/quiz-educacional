@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Button, Image, Text, TouchableHighlightBase, TouchableOpacity, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import style from './style';
 import eye from '../../assets/icons/btn-verSenha.png';
 import {Ionicons} from 'react-native-vector-icons/Ionicons';
 
+
 const Field = ({label, placeholder, keyboardType}) => {
+    const [input, setInput] = useState('');
+
     let isTrue = label === "Senha" ? true : false
     return (
         <View style={style.container}>
@@ -16,7 +19,8 @@ const Field = ({label, placeholder, keyboardType}) => {
                 placeholderTextColor="#B1B1B1"
                 keyboardType={keyboardType}
                 style={style.textInput}
-                onChangeText={(text)=>{console.warn(text)}}
+                value={input}
+                onChangeText={(text)=>{setInput(text)}}
             />
             : <View style={style.containerPassword}>
                 <TextInput
@@ -24,7 +28,8 @@ const Field = ({label, placeholder, keyboardType}) => {
                     placeholderTextColor="#B1B1B1"
                     keyboardType={keyboardType}
                     style={style.textInputPassword}
-                    onChangeText={(text) => { console.warn(text) }}
+                    value={input}
+                    onChangeText={(text) => { setInput(text) }}
                 />
 
                 <View style={style.visiblePassword}>
