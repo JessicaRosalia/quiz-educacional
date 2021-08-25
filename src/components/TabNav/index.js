@@ -3,8 +3,10 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import style from '../TabNav/style';
 
 const TabNav = ({login, register}) => {
+    
     const [pageIsCadNow, setPageIsCadNow] = useState(register);
     const [pageIsLoginNow, setPageIsLoginNow] = useState(login);
+
     return (
         <View style={style.containerTabNav}>
 
