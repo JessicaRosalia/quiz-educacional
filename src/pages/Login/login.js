@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Field from '../../components/Field';
-import TabNav from '../../components/TabNav';
+import Field from '../../components/Field/index';
+import TabNav from '../../components/TabNav/index';
 
 
 
