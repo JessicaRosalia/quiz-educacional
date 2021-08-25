@@ -13,11 +13,14 @@ const style = StyleSheet.create({
     },
     textBtnActivity:{
         color: "#0C066B",
-        
+        fontSize:25,
+        fontWeight: "bold",
     },
     textBtnSecundary: {
         color: "rgb(12,6,107)",
         opacity: 0.5,
+        fontSize: 25,
+        fontWeight: "bold",
     },
     btnCadastro: {
         width: 134,
