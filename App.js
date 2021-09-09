@@ -1,14 +1,16 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Login from './src/pages/Login/login';
+
+import Home from './src/pages/Home/home';
+
 
 
 
  const App = () => {
    return (
       <SafeAreaView style={Style.container}>
-        <Login/>
+      <Home/>
        
      </SafeAreaView>
     
