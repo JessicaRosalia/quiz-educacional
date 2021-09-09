@@ -36,10 +36,11 @@ const style = StyleSheet.create({
     marked: {
         backgroundColor: "#FFEA21",
         height: 4,
-        width: 120,
+        width: 134,
     },
     noMarked: {
-        backgroundColor: "green",
+        backgroundColor: "#FFEA21",
+        opacity: 0.2,
         height: 5,
         width: 134,
 

@@ -20,22 +20,28 @@ const TabNav = ({login, register}) => {
                 </View>
                 : <View>
                     <Text style={style.textBtnSecundary}>Login</Text>
+                    <View style={style.noMarked} />
                   </View>
              
             }
                 
             </TouchableOpacity>
             
-            
+            <View>
             <TouchableOpacity style={style.btnCadastro} activeOpacity={1} onPress={()=>{pageIsLoginNow !== true ? setPageIsCadNow(true) & setPageIsLoginNow(false) : setPageIsCadNow(true) & setPageIsLoginNow(false)}}>
                 {pageIsCadNow === true
                     ? <View>
                         <Text style={style.textBtnActivity}>Cadastro</Text>
                         <View style={style.marked} />
                      </View>
-                    : <Text style={style.textBtnSecundary}>Cadastro</Text>
+                    : <View>
+                        <Text style={style.textBtnSecundary}>Cadastro</Text>
+                        <View style={style.noMarked} />
+                     </View>
                 }
             </TouchableOpacity>
+            
+            </View>
         </View>
         
     )
