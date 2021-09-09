@@ -13,19 +13,26 @@ const Login = () => {
         <SafeAreaView >
             <View style={style.Container}>
                 <View style={style.ViewBox}>
-                    <View>
+
+                    <View style={style.TabNav}>
                         <TabNav login={true} register={false} page="login" />
-                        <Field label="E-mail" placeholder="exemplo@gmail.com" keyboardType="email-address" />
-                        <Field label="Senha" placeholder="Sua senha" keyboardType="default" />
-
-                        <TouchableOpacity >
-                            <Text style={style.linkSenha}>Esqueci a Senha</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={style.containerButton}>
-                            <Text style={style.enterText} >Entrar</Text>
-                        </TouchableOpacity>
-
                     </View>
+
+                    <View style={style.Email}>
+                        <Field label="E-mail" placeholder="exemplo@gmail.com" keyboardType="email-address" />
+                    </View>
+                    <View style= {style.Senha}>
+                        <Field label="Senha" placeholder="Sua senha" keyboardType="default" />
+                    </View>
+
+
+
+                    <TouchableOpacity >
+                        <Text style={style.linkSenha}>Esqueci a Senha</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={style.containerButton}>
+                        <Text style={style.enterText} >Entrar</Text>
+                    </TouchableOpacity>
                 </View>
                 <TouchableOpacity >
                     <Text style={style.linkCadastro}>Não possui cadastro? Cadastre-se</Text>
