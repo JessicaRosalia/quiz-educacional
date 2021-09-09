@@ -34,20 +34,23 @@ export default StyleSheet.create({
         marginBottom:44,
     },
     linkCadastro: {
-        color: "#0C066B",
+        color: "#000",
         fontSize: 16,
+        marginBottom:20,
+       
     },
 
     ViewBox: { 
       
         width: 350,
-        backgroundColor:"#c4c4c4",
+        backgroundColor:"#fff",
         alignItems:"center",
         borderRadius:20,
         paddingLeft: 20,
         paddingRight:20,
         paddingTop:20,
         paddingBottom:30,
+        marginBottom:30,
     },
     Container: {
         backgroundColor: "#F6FBFF",
@@ -55,5 +58,14 @@ export default StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+    },
+    textoCad:{
+        color: "#0C066B",
+        fontSize: 16,
+        fontWeight:'bold',
+        textDecorationLine: "underline",  
+    }, 
+    Barra:{
+        marginBottom:30,
     }
 });

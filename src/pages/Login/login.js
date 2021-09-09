@@ -21,7 +21,7 @@ const Login = () => {
                     <View style={style.Email}>
                         <Field label="E-mail" placeholder="exemplo@gmail.com" keyboardType="email-address" />
                     </View>
-                    <View style= {style.Senha}>
+                    <View style={style.Senha}>
                         <Field label="Senha" placeholder="Sua senha" keyboardType="default" />
                     </View>
 
@@ -35,10 +35,15 @@ const Login = () => {
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity >
-                    <Text style={style.linkCadastro}>Não possui cadastro? Cadastre-se</Text>
+                <View style={style.Barra}>
+                <Text  style={style.linkCadastro}>  Não possui cadastro?  <Text style={style.textoCad}>Cadastre-se</Text>
+                </Text>
+                
+                </View>
+                
                 </TouchableOpacity>
-            </View>
-        </SafeAreaView>
+            </View >
+        </SafeAreaView >
 
     )
 }
