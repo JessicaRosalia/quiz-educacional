@@ -1,14 +1,11 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import CardOptions from '../../components/CardOptions';
 import Field from '../../components/Field/index';
 import TabNav from '../../components/TabNav/index';
 import style from './style';
 
 
-//  <Text style={style.label}>{label}</Text>
 const Login = () => {
     return (
         <SafeAreaView >
@@ -35,7 +32,7 @@ const Login = () => {
                         <Text style={style.enterText} >Entrar</Text>
                     </TouchableOpacity>
                 </View>
-                
+
                 <TouchableOpacity >
                 <View style={style.Barra}>
                 <Text  style={style.linkCadastro}>  Não possui cadastro?  <Text style={style.textoCad}>Cadastre-se</Text>
