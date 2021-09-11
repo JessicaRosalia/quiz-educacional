@@ -1,26 +1,33 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+    containerHome:{
+        paddingLeft:22,
+        paddingRight:22,
+        paddingTop:37,
+        paddingBottom:10,
+    },
     cardUm: {
         display: "flex",
         flexDirection: "row",
         textAlign: "center",
-        paddingTop: "60%",
+        paddingTop: "50%",
         paddingLeft: "58%",
     },
     cardDois: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        marginLeft: 65,
-       
+        paddingLeft:30,
+        paddingTop:20,
+
     },
     cardTres: {
         margin:10,
-        padding: 20,
-        paddingLeft: "16%",
-        marginLeft: -22,
+        paddingLeft:30
+        
     },
+
 
 
 })

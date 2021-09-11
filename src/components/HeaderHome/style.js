@@ -8,7 +8,6 @@ export default StyleSheet.create({
         fontSize:22,
         fontWeight:"bold",
         marginLeft:10,
-       paddingTop:25,
         
     },
     helloText:{
