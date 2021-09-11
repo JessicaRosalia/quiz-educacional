@@ -6,26 +6,24 @@ export default StyleSheet.create({
         paddingRight:22,
         paddingTop:37,
         paddingBottom:10,
-
     },
     cardUm: {
         display: "flex",
         flexDirection: "row",
         textAlign: "center",
-        paddingTop: "60%",
+        paddingTop: "50%",
         paddingLeft: "58%",
     },
     cardDois: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        paddingLeft:31,
+        paddingLeft:30,
+        paddingTop:20,
 
     },
     cardTres: {
         margin:10,
-        
-        //paddingRight:"-15%",
         paddingLeft:30
         
     },

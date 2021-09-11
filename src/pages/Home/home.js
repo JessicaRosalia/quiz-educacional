@@ -33,7 +33,6 @@ const Home = () => {
                         <Text>Gerenciar competições</Text>
                     </CardOptions>
                 </View>
-
             </View>
         </View >
         </ScrollView>
