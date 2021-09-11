@@ -1,5 +1,7 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
 import CardOptions from "../../components/CardOptions";
 import HeaderHome from "../../components/HeaderHome/";
 import style from "./style";
@@ -7,6 +9,8 @@ import style from "./style";
 const Home = () => {
 
     return (
+        <SafeAreaView>
+       <ScrollView>
         <View style={style.containerHome}>
             <HeaderHome />
             <View style={style.cardUm}>
@@ -32,6 +36,8 @@ const Home = () => {
 
             </View>
         </View >
+        </ScrollView>
+        </SafeAreaView>
     )
 }
 export default Home;
