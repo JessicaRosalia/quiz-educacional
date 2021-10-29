@@ -11,22 +11,25 @@ export default StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         textAlign: "center",
-        paddingTop: "50%",
-        paddingLeft: "58%",
+        marginBottom: 10,
     },
     cardDois: {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        paddingLeft:30,
-        paddingTop:20,
 
     },
     cardTres: {
-        margin:10,
-        paddingLeft:30
-        
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        marginLeft:10,
     },
+    containerMenus: {
+        display: "flex",
+        marginTop: "50%",
+        alignItems: "flex-end",
+    }
 
 
 
