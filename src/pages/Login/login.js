@@ -6,14 +6,15 @@ import TabNav from '../../components/TabNav/index';
 import style from './style';
 
 
-const Login = () => {
+const Login = ({navigation}) => {
+
     return (
         <SafeAreaView >
             <View style={style.Container}>
                 <View style={style.ViewBox}>
 
                     <View style={style.TabNav}>
-                        <TabNav login={true} register={false} page="login" />
+                        <TabNav login={true} register={false} page={navigation} />
                     </View>
 
                     <View style={style.Email}>
