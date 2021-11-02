@@ -32,13 +32,25 @@ export default StyleSheet.create({
     input: {
         width: "100%",
         marginBottom: 10,
+        display: "flex",
+        
+        flexDirection: "column",
+    
+    },
+    label: {
+        marginLeft: 10,
+        fontWeight: "bold",
+        fontSize: 16,
+    },
+    required: {
+        color: "red",
     },
     ContainerButton: {
         backgroundColor: "#0C066B",
         width: "95%",
         height: 54,
         borderRadius: 7,
-        marginTop: 10,
+        marginTop: 20,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

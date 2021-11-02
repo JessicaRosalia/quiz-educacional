@@ -45,15 +45,13 @@ const Registration = ({navigation}) => {
                             </View>
                             
                             <View style={style.input}>
-                                <Input label="Nome" placeholder="Maria Heloísa Ferreira" keyboardType="default" placeholderTextColor="#c3c3c3"  onChangeText={value=>setNome(value)} errorMessage={errorNome} style={{color: "#000", fontSize: 15 }}/>
+                                <Text style={style.label}>Nome <Text style={style.required}>*</Text> </Text> 
+                                <Input placeholder="Maria Heloísa Ferreira" keyboardType="default" placeholderTextColor="#c3c3c3"  onChangeText={value=>setNome(value)} errorMessage={errorNome} style={{color: "#000", fontSize: 15 }}/>
                             </View>
 
                             <View style={style.input}>
-                                <Input label="CPF" placeholder="XXX.XXX.XXX-XX" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value=>setCpf(value)} errorMessage={errorCpf} style={{color: "#000", fontSize: 15 }}/>
-                            </View>
-
-                            <View style={style.input}>
-                                <Input label="E-mail" placeholder="exemplo@gmail.com" keyboardType="email-address" placeholderTextColor="#c3c3c3" onChangeText={value=>setEmail(value)} style={{color: "#000", fontSize: 15 }}/>
+                                <Text style={style.label}>CPF <Text style={style.required}>*</Text> </Text>
+                                <Input placeholder="XXX.XXX.XXX-XX" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value=>setCpf(value)} errorMessage={errorCpf} style={{color: "#000", fontSize: 15 }}/>
                             </View>
 
                             <View style={style.input}>
@@ -65,7 +63,12 @@ const Registration = ({navigation}) => {
                             </View>
 
                             <View style={style.input}>
-                                <Input label="Senha" placeholder="Sua senha" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value=>setSenha(value)} secureTextEntry={true} errorMessage={errorSenha} style={{color: "#000", fontSize: 15 }}/>
+                                <Input label="E-mail" placeholder="exemplo@gmail.com" keyboardType="email-address" placeholderTextColor="#c3c3c3" onChangeText={value=>setEmail(value)} style={{color: "#000", fontSize: 15 }}/>
+                            </View>                            
+
+                            <View style={style.input}>
+                                <Text style={style.label}>Senha <Text style={style.required}>*</Text> </Text> 
+                                <Input placeholder="Sua senha" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value=>setSenha(value)} secureTextEntry={true} errorMessage={errorSenha} style={{color: "#000", fontSize: 15 }}/>
                             </View>
 
                             <TouchableOpacity style={style.ContainerButton} onPress={()=>validar()}>
