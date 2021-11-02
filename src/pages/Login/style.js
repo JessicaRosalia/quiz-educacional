@@ -39,16 +39,17 @@ export default StyleSheet.create({
         backgroundColor: '#0C066B',
         width: 200,
         height: 54,
-        borderRadius: 10,
+        borderRadius: 7,
         display: "flex",
         alignItems: "center",
-        justifyContent: 'center',
+        justifyContent: "center",
     },
     enterText: {
-        color: '#fff',
+        color: "#fff",
         textAlign: "center",
-        justifyContent: 'center',
+        justifyContent: "center",
         fontSize: 16,
+        fontWeight: "bold"
     },
     linkCadastro: {
         color: "#000",

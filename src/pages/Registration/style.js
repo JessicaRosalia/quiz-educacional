@@ -24,6 +24,7 @@ export default StyleSheet.create({
     form: {
         justifyContent: "center",
         alignItems: "center",
+        width: "100%",
     },
     TabNav:{
         marginBottom:50,  
@@ -34,9 +35,9 @@ export default StyleSheet.create({
     },
     ContainerButton: {
         backgroundColor: "#0C066B",
-        width: 200,
+        width: "95%",
         height: 54,
-        borderRadius: 10,
+        borderRadius: 7,
         marginTop: 10,
         display: "flex",
         alignItems: "center",
@@ -48,6 +49,7 @@ export default StyleSheet.create({
         textAlign: "center",
         justifyContent: "center",
         fontSize: 16,
+        fontWeight: "bold",
     },
 
 
