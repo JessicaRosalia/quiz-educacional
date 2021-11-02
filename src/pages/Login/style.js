@@ -2,46 +2,14 @@ import { StyleSheet } from 'react-native';
 
 
 export default StyleSheet.create({
-    containerButton: {
-        backgroundColor: '#0C066B',
-        width: 200,
-        height: 54,
-        borderRadius: 10,
-        justifyContent: 'center',
+    Container: {
+        backgroundColor: "#F6FBFF",
+        height: "100%",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
     },
-    TabNav:{
-        marginBottom:50,  
-    },
-    Email:{
-        marginBottom:44,
-    },
-    Senha:{
-        marginBottom:6,
-    },
-    enterText: {
-        color: '#fff',
-        textAlign: "center",
-        justifyContent: 'center',
-        fontSize: 16,
-    },
-    linkSenha: {
-        textAlign: "right",
-        fontSize: 13,
-        textDecorationLine: "underline",
-        justifyContent: "space-around",
-        marginLeft: "50%",
-        marginTop:10,
-        marginBottom:44,
-    },
-    linkCadastro: {
-        color: "#000",
-        fontSize: 16,
-        marginBottom:20,
-       
-    },
-
     ViewBox: { 
-      
         width: 350,
         backgroundColor:"#fff",
         alignItems:"center",
@@ -51,13 +19,44 @@ export default StyleSheet.create({
         paddingTop:20,
         paddingBottom:30,
         marginBottom:30,
+    },    
+    TabNav:{
+        marginBottom:50,  
     },
-    Container: {
-        backgroundColor: "#F6FBFF",
-        height: "100%",
-        flexDirection: "column",
-        justifyContent: "center",
+    input: {
+        width: "100%",
+        marginBottom: 10,
+    },
+    linkSenha: {
+        textAlign: "right",
+        fontSize: 13,
+        textDecorationLine: "underline",
+        justifyContent: "space-around",
+        marginLeft: "62%",
+        marginBottom:44,
+    },    
+    containerButton: {
+        backgroundColor: '#0C066B',
+        width: 200,
+        height: 54,
+        borderRadius: 10,
+        display: "flex",
         alignItems: "center",
+        justifyContent: 'center',
+    },
+    enterText: {
+        color: '#fff',
+        textAlign: "center",
+        justifyContent: 'center',
+        fontSize: 16,
+    },
+    linkCadastro: {
+        color: "#000",
+        fontSize: 16,
+        marginBottom:20,
+    },
+    Barra:{
+        marginBottom:30,
     },
     textoCad:{
         color: "#0C066B",
@@ -65,7 +64,5 @@ export default StyleSheet.create({
         fontWeight:'bold',
         textDecorationLine: "underline",  
     }, 
-    Barra:{
-        marginBottom:30,
-    }
+
 });
