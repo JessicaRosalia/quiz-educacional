@@ -3,14 +3,14 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     Container: {
-        backgroundColor: "#F6FBFF",
+        backgroundColor: "#f1f1f1",
         height: "100%",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
     },
     ViewBox: { 
-        width: 350,
+        width: "90%",
         backgroundColor:"#fff",
         alignItems:"center",
         borderRadius:20,
@@ -54,9 +54,6 @@ export default StyleSheet.create({
         color: "#000",
         fontSize: 16,
         marginBottom:20,
-    },
-    Barra:{
-        marginBottom:30,
     },
     textoCad:{
         color: "#0C066B",

@@ -11,8 +11,8 @@ import style from './style';
 
 const Login = ({navigation}) => {
 
-    const [email, setEmail] = useState(null);
-    const [senha, setSenha] = useState(null);
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
 
     const [errorSenha, setErrorSenha] = useState('');
     const [errorEmail, setErrorEmail] = useState('');
@@ -21,16 +21,23 @@ const Login = ({navigation}) => {
 
     const validar = () => {
         let error = false
-        if(email == null){
+        if(email == ''){
             setErrorEmail("Preencha seu e-mail corretamente.")
             error = true
         }
-        if(senha == null){
+        if(senha == ''){
             setErrorSenha("Preencha sua senha corretamente.")
             error = true
         }
         return !error
     }
+
+    /*useEffect(()=>{
+        if(validar()){
+            setErrorEmail('')
+            setErrorSenha('')
+        }
+    },[setErrorEmail, setErrorSenha ,email, senha])*/
 
     return (
         <SafeAreaView >
