@@ -14,8 +14,8 @@ const HeaderHome = () => {
             </View>
 
             <View>
-                <Text style={style.helloText}>Olá, <Text style={style.name}>Maria</Text></Text>
-                <Text style={style.subtitleText}>O que você quer aprender hoje?</Text>
+                <Text style={style.helloText}>Olá, <Text style={style.name}>Maria!</Text></Text>
+                <Text style={style.subtitleText}>O que você quer fazer hoje?</Text>
 
             </View>
         </View>

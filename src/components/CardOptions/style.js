@@ -9,8 +9,10 @@ const style = StyleSheet.create({
         justifyContent: "center",
         borderRadius: 7,
         elevation: 4,
-        width: 140,
+        width: 145,
         height: 160,
+        paddingLeft: 4,
+        paddingRight: 4,
     },
     imageCard: {
         marginBottom: 10,
