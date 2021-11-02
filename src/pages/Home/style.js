@@ -27,7 +27,7 @@ export default StyleSheet.create({
     },
     containerMenus: {
         display: "flex",
-        marginTop: "50%",
+        marginTop: "30%",
         alignItems: "flex-end",
     }
 
