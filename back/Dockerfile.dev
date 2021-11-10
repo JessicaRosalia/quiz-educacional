@@ -1,0 +1,9 @@
+from node:alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+COPY ts*.json ./
+COPY .env-dev ./
+
+RUN npm install
