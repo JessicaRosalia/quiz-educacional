@@ -26,6 +26,7 @@ const style = StyleSheet.create({
     subtitleCard: {
         fontSize: 15,
         color: "#0C066B",
+        textAlign: "center",
     }
 })
 

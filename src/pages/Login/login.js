@@ -13,9 +13,12 @@ const Login = ({navigation}) => {
 
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const [cpf, setCpf] = useState('');
 
     const [errorSenha, setErrorSenha] = useState('');
     const [errorEmail, setErrorEmail] = useState('');
+    const [errorCpf, setErrorCpf] = useState('');
+
 
     const [hidePass, setHidePass] = useState(true);
 
@@ -32,13 +35,6 @@ const Login = ({navigation}) => {
         return !error
     }
 
-    /*useEffect(()=>{
-        if(validar()){
-            setErrorEmail('')
-            setErrorSenha('')
-        }
-    },[setErrorEmail, setErrorSenha ,email, senha])*/
-
     return (
         <SafeAreaView >
             <View style={style.Container}>
@@ -51,6 +47,9 @@ const Login = ({navigation}) => {
                     <View style={style.input}>
                         <Input label="E-mail" errorMessage={errorEmail} placeholder="exemplo@gmail.com" keyboardType="email-address" placeholderTextColor="#c3c3c3" onChangeText={value=>setEmail(value)} style={{color: "#000", fontSize: 15 }}/>
                     </View>
+
+         
+                   
                     
                     <View style={style.input}>
                         <Input label="Senha" labelStyle={{color: '#000'}} placeholder="Sua senha" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value=>setSenha(value)} secureTextEntry={true} errorMessage={errorSenha} style={{color: "#000", fontSize: 15 }}/>

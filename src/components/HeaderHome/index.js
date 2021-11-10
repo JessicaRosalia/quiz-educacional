@@ -10,7 +10,7 @@ const HeaderHome = () => {
             <View style={style.containerMenu} >
                 <Image source={require('../../assets/icons/menuHamburguer.png')} />
 
-                <Text style={style.quizName}>Quiz Educaional</Text>
+                <Text style={style.quizName}>Quiz Educacional</Text>
             </View>
 
             <View>
