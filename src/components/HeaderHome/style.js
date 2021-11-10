@@ -14,7 +14,11 @@ export default StyleSheet.create({
         color: "#0C066B",
         fontSize:17,
         paddingTop:50,
-        
+        marginBottom: 5,
+    },
+    subtitleText: {
+        color: "#0C066B",
+        fontSize: 17,
     },
     name: {
         fontWeight: "bold",

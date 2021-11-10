@@ -2,16 +2,23 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import style from '../TabNav/style';
 
-const TabNav = ({login, register}) => {
+const TabNav = ({login, register, page}) => {
     
     const [pageIsCadNow, setPageIsCadNow] = useState(register);
     const [pageIsLoginNow, setPageIsLoginNow] = useState(login);
 
+    function handleLoginButton() {
+        page.navigate('Login') && (pageIsLoginNow === true ? setPageIsCadNow(false) & setPageIsLoginNow(true) : setPageIsCadNow(false) & setPageIsLoginNow(true))
+    }
+
+    function handleRegisterButton() {
+        page.navigate('Cadastro') && (pageIsLoginNow !== true ? setPageIsCadNow(true) & setPageIsLoginNow(false) : setPageIsCadNow(true) & setPageIsLoginNow(false))
+    }
+
     return (
         <View style={style.containerTabNav}>
-
             <TouchableOpacity style={style.btnLogin} activeOpacity={1}
-                onPress={() => { pageIsLoginNow === true ? setPageIsCadNow(false) & setPageIsLoginNow(true) : setPageIsCadNow(false) & setPageIsLoginNow(true) }}
+                onPress={() => handleLoginButton() }
             >
             { pageIsLoginNow === true 
                 ? <View>
@@ -28,7 +35,7 @@ const TabNav = ({login, register}) => {
             </TouchableOpacity>
             
             <View>
-            <TouchableOpacity style={style.btnCadastro} activeOpacity={1} onPress={()=>{pageIsLoginNow !== true ? setPageIsCadNow(true) & setPageIsLoginNow(false) : setPageIsCadNow(true) & setPageIsLoginNow(false)}}>
+            <TouchableOpacity style={style.btnCadastro} activeOpacity={1} onPress={()=>{handleRegisterButton()}}>
                 {pageIsCadNow === true
                     ? <View>
                         <Text style={style.textBtnActivity}>Cadastro</Text>

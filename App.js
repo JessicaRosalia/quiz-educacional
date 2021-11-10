@@ -1,20 +1,22 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Routes from './src/pages/routes';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Home from './src/pages/Home/home';
 
 
+
+const Stack = createNativeStackNavigator();
 
 
  const App = () => {
    return (
       <SafeAreaView style={Style.container}>
-      <Home/>
-       
+        <Routes/>
      </SafeAreaView>
     
-   );
+   )
  };
 
 
