@@ -22,8 +22,8 @@ function errorLogger(error: express.ErrorRequestHandler, req: express.Request, r
     next(error) // forward to next middleware
 }
 
-function errorResponder(error: express.ErrorRequestHandler, req: express.Request, res: express.Response, next: express.NextFunction) { // responding to client
-    res.status(500).send({ error: error.toString() })
+function errorResponder(error: Error, req: express.Request, res: express.Response, next: express.NextFunction) { // responding to client
+    res.status(500).send({ error: error.message })
 }
 
 app.use(errorLogger)

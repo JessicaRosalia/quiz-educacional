@@ -14,9 +14,6 @@ authRouter.post('/login',
     errorWreaper(async (req: Request, res: Response, next: NextFunction) => {
         const userInput = req.body as UserLogin;
         const user = await userLoginController.login(userInput);
-        if (user === undefined) {
-            throw new Error("wrong user or passowrd");
-        }
         user.password = "";
         res.json(user);
     }),
@@ -33,7 +30,6 @@ authRouter.post('/signup',
         const userInput = req.body as UserSignup;
         const user = await userLoginController.signup(userInput);
         res.json(user);
-
     }),
 )
 
