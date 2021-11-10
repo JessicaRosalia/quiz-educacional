@@ -1,24 +1,34 @@
 import { User } from '../models/User'
 import { UserInput, UserOuput } from '../models/User'
 
-export const create = async (payload: UserInput): Promise<UserOuput> => {
-    const user = await User.create(payload)
+export const create = async (userInput: UserInput): Promise<UserOuput> => {
+    const createdUser = await User.findOne({
+        where: {
+            email: userInput.email
+        }
+    })
+
+    if (createdUser) {
+        throw new Error('user already exist');
+    }
+
+    const user = await User.create(userInput)
 
     return user
 }
 
-export const findOrCreate = async (payload: UserInput): Promise<UserOuput> => {
+export const findOrCreate = async (userInput: UserInput): Promise<UserOuput> => {
     const [user] = await User.findOrCreate({
         where: {
-            id: payload.id
+            id: userInput.id
         },
-        defaults: payload
+        defaults: userInput
     })
 
     return user
 }
 
-export const update = async (id: number, payload: Partial<UserInput>): Promise<UserOuput> => {
+export const update = async (id: number, userInput: Partial<UserInput>): Promise<UserOuput> => {
     const user = await User.findByPk(id)
 
     if (!user) {
@@ -26,7 +36,7 @@ export const update = async (id: number, payload: Partial<UserInput>): Promise<U
         throw new Error('not found')
     }
 
-    const updatedUser = await user.update(payload)
+    const updatedUser = await user.update(userInput)
     return updatedUser
 }
 

@@ -12,3 +12,12 @@ export const validateErrors = (msg: string) =>
         }
         next()
     }
+
+export const errorWreaper = (f: any) =>
+    async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        try {
+            await f(req, res);
+        } catch (error) {
+            next(error)
+        }
+    }

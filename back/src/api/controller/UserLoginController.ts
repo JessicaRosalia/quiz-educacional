@@ -17,7 +17,7 @@ export const login = async (userInput: UserLogin) => {
 }
 
 export const signup = async (user: UserSignup) => {
-    console.log(user);
+
     return await UserService.create(user);
 }
 
