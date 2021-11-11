@@ -4,11 +4,6 @@ dotenv.config({ path: process.env.NODE_ENV === 'production' ? ".env" : ".env-dev
 import express from "express";
 import routes from "./api/routes/routes"
 
-import dbInit from './database'
-
-dbInit()
-
-
 const port = 3000;
 
 const app = express();

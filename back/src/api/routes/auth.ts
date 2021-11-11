@@ -9,7 +9,7 @@ const authRouter = Router()
 
 authRouter.post('/login',
     body('email').exists().withMessage('missing parameter').isEmail().normalizeEmail().withMessage('must be an email'),
-    body('password').exists().withMessage('missing parameter').isLength({ min: 6 }).withMessage('must have at least 6 characters'),
+    body('password').exists().withMessage('missing parameter').isLength({ min: 4 }).withMessage('must have at least 4 characters'),
     validateErrors("user login error"),
     errorWreaper(async (req: Request, res: Response, next: NextFunction) => {
         const userInput = req.body as UserLogin;
@@ -24,7 +24,7 @@ authRouter.post('/signup',
     body('name').exists().withMessage('missing parameter'),
     body('cpf').exists().withMessage('missing parameter'),
     body('email').exists().withMessage('missing parameter').isEmail().normalizeEmail().withMessage('must be an email'),
-    body('password').exists().withMessage('missing parameter').isLength({ min: 6 }).withMessage('must have at least 6 characters'),
+    body('password').exists().withMessage('missing parameter').isLength({ min: 4 }).withMessage('must have at least 4 characters'),
     validateErrors("user signup error"),
     errorWreaper(async (req: Request, res: Response, next: NextFunction) => {
         const userInput = req.body as UserSignup;

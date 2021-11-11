@@ -1,6 +1,7 @@
-import { DataTypes, Model, Optional } from 'sequelize'
-import sequelizeConnection from '../config'
-const bcrypt = require('bcrypt');
+import { CreateOptions, DataTypes, Model, Optional } from 'sequelize'
+import { sequelize } from '.'
+import bcrypt from "bcrypt";
+import { HookReturn } from 'sequelize/types/lib/hooks';
 
 export interface UserAttributes {
     id: number,
@@ -62,22 +63,18 @@ User.init({
     }
 }, {
     timestamps: true,
-    sequelize: sequelizeConnection,
+    sequelize,
     paranoid: true
 })
 
-const validateUser = async (user: User) => {
+const validateUser = async (user: User, options: CreateOptions<UserAttributes>) => {
     if (user === null) {
         throw new Error('No found employee');
     }
-    else if (!user.changed('password')) return user.password;
-    else {
-        // let salt = bcrypt.genSaltSync();
-        // return user.password = bcrypt.hashSync(user.password, salt);
-        return user.password = await bcrypt.hash(user.password, 8);
-    }
+    if (user.changed('password'))
+        user.password = await bcrypt.hash(user.password, 8);
 }
 
-User.beforeCreate(validateUser);
+User.beforeCreate("update_password", validateUser);
 
-User.beforeUpdate(validateUser);
+User.beforeUpdate("update_password", validateUser);
