@@ -5,8 +5,11 @@
     ],
     "jsRules": {},
     "rules": {
-        "trailing-comma": [ true ],
-        "no-console": false
+        "trailing-comma": [
+            true
+        ],
+        "no-console": false,
+        "no-var-requires": false
     },
     "rulesDirectory": []
 }

@@ -5,5 +5,6 @@ WORKDIR /app
 COPY package*.json ./
 COPY ts*.json ./
 COPY .env-dev ./
+COPY src/config/database.js ./dist/config/
 
 RUN npm install

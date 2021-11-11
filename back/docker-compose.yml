@@ -12,7 +12,7 @@ services:
       - ./src:/app/src
     ports:
       - "3000:3000"
-    command: npm run dev
+    command: npm run dev-docker
   db:
     image: postgres
     environment:

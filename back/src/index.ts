@@ -4,11 +4,6 @@ dotenv.config({ path: process.env.NODE_ENV === 'production' ? ".env" : ".env-dev
 import express from "express";
 import routes from "./api/routes/routes"
 
-import dbInit from './database'
-
-dbInit()
-
-
 const port = 3000;
 
 const app = express();
@@ -16,6 +11,18 @@ const app = express();
 app.use(express.json());
 
 app.use(routes);
+
+function errorLogger(error: express.ErrorRequestHandler, req: express.Request, res: express.Response, next: express.NextFunction) { // for logging errors
+    console.error(error) // or using any fancy logging library
+    next(error) // forward to next middleware
+}
+
+function errorResponder(error: Error, req: express.Request, res: express.Response, next: express.NextFunction) { // responding to client
+    res.status(500).send({ error: error.message })
+}
+
+app.use(errorLogger)
+app.use(errorResponder)
 
 
 app.listen(port, () => {
