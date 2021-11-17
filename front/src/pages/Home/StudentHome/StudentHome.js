@@ -2,11 +2,11 @@ import React from "react";
 import { Image, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
-import CardOptions from "../../components/CardOptions";
-import HeaderHome from "../../components/HeaderHome/";
-import style from "./style";
+import CardOptions from "../../../components/CardOptions";
+import HeaderHome from "../../../components/HeaderHome";
+import style from "../Style";
 
-const Home = () => {
+const StudentHome = () => {
 
     return (
         <SafeAreaView>
@@ -16,22 +16,22 @@ const Home = () => {
                     <View style={style.containerMenus}>
                         <View style={style.cardUm}>
                             <CardOptions>
-                                <Image source={require("../../assets/icons/prof-cadastroQuestoes.png")} />
-                                <Text>Questões</Text>
-                                <Text>Gerenciar banco</Text>
+                                <Image source={require("../../../assets/icons/estudante-historico.png")} />
+                                <Text>Histórico</Text>
+                                <Text>Veja seu histórico de partidas</Text>
                             </CardOptions>
                         </View>
                         <View style={style.cardDois}>
                             <CardOptions>
-                                <Image source={require("../../assets/icons/prof-busca.png")} />
+                                <Image source={require("../../../assets/icons/prof-estudante-busca.png")} />
                                 <Text>Busca</Text>
-                                <Text>Buscar por colegas, professores</Text>
+                                <Text>Busque por colegas, professores</Text>
                             </CardOptions>
                             <View style={style.cardTres}>
                                 <CardOptions >
-                                    <Image source={require("../../assets/icons/prof-duelos.png")} />
-                                    <Text>Duelos</Text>
-                                    <Text>Gerenciar competições</Text>
+                                    <Image source={require("../../../assets/icons/estudante-jogar.png")} />
+                                    <Text>Jogar</Text>
+                                    <Text>Jogue com amigos</Text>
                                 </CardOptions>
                             </View>
                         </View>
@@ -41,4 +41,4 @@ const Home = () => {
         </SafeAreaView>
     )
 }
-export default Home;
+export default StudentHome;

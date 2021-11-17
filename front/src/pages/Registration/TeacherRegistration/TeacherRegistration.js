@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Input } from 'react-native-elements/dist/input/Input';
-import TabNav from '../../../components/TabNav';
-import style from './style';
+import TabNav from '../../../components/TabNav/index';
+import style from '../style';
 
-const StudentRegistration = ({navigation}) => {
+const TeacherRegistration = ({navigation}) => {
     
     const [nome, setNome] = useState(null);
     const [cpf, setCpf] = useState(null);
@@ -99,4 +99,4 @@ const StudentRegistration = ({navigation}) => {
         </SafeAreaView>
     )
 }
-export default StudentRegistration;
+export default TeacherRegistration;
