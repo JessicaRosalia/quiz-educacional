@@ -64,7 +64,7 @@ const Login = ({navigation}) => {
                     </TouchableOpacity>
                 </View>
 
-                <TouchableOpacity onPress={()=> navigation.navigate('Cadastro')}>
+                <TouchableOpacity onPress={()=> navigation.navigate('TeacherRegistration')}>
                     <View style={style.Barra}>
                         <Text  style={style.linkCadastro}>  Não possui cadastro?  <Text style={style.textoCad}>Cadastre-se</Text></Text>
                     </View>
