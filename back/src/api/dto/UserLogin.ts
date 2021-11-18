@@ -1,3 +1,5 @@
+import { UserType } from "./User";
+
 export interface UserLogin {
     email: string;
     password: string;
@@ -9,5 +11,6 @@ export interface UserSignup {
     email: string,
     phoneNumber?: string,
     schoolName?: string,
-    password: string
+    password: string,
+    type: UserType,
 }

@@ -3,6 +3,8 @@ import { sequelize } from '.'
 import bcrypt from "bcrypt";
 import { HookReturn } from 'sequelize/types/lib/hooks';
 
+type UserType = "professor" | "student"
+
 export interface UserAttributes {
     id: number,
     name: string,
@@ -10,7 +12,8 @@ export interface UserAttributes {
     email: string,
     phoneNumber?: string,
     schoolName?: string,
-    password: string
+    password: string,
+    type: UserType
 }
 
 export interface UserInput extends Optional<UserAttributes, 'id'> { }
@@ -24,6 +27,7 @@ export class User extends Model<UserAttributes, UserInput> implements UserAttrib
     public phoneNumber!: string
     public schoolName!: string
     public password!: string
+    public type!: UserType
 
     // timestamps!
     public readonly createdAt!: Date;
@@ -60,7 +64,13 @@ User.init({
     password: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    type: {
+        type: DataTypes.ENUM,
+        values: ["professor", "student"],
+        defaultValue: "student",
+        allowNull: false
+    },
 }, {
     timestamps: true,
     sequelize,
@@ -78,3 +88,10 @@ const validateUser = async (user: User, options: CreateOptions<UserAttributes>) 
 User.beforeCreate("update_password", validateUser);
 
 User.beforeUpdate("update_password", validateUser);
+
+User.prototype.toJSON = function () {
+    var values = Object.assign({}, this.get());
+
+    delete values.password;
+    return values;
+}
