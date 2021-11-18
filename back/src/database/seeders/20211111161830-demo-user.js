@@ -9,6 +9,7 @@ module.exports = {
       password: "$2b$08$Zl7RMMWIPVaowi1.fxdrw.osYfAqpRRds9O/urg94FmqmaxSLIQn.", //admin
       "created_at": new Date(),
       "updated_at": new Date(),
+      type: "professor",
     }], {});
   },
 
