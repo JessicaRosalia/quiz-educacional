@@ -1,14 +1,16 @@
 import express from "express";
+
 import authRouter from "./auth";
 import userRouter from "./user"
+import questionRouter from "./question"
+
 import { verifyToken } from "./middleware/token";
-
-
 
 const routes = express.Router();
 
-routes.use('/auth', authRouter);
+routes.use("/question", questionRouter);
 
+routes.use('/auth', authRouter);
 
 routes.get("/", (req: express.Request, res: express.Response) => {
     res.json({ "msg": "Alive!!" });

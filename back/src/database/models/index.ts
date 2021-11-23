@@ -1,5 +1,7 @@
 import { Sequelize } from 'sequelize';
 import { User } from "./User";
+import { Option } from './Option';
+import { Question } from './Question';
 
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../../config/database.js')[env];

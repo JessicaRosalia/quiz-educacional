@@ -22,7 +22,7 @@ export const verifyToken = (req: express.Request, res: express.Response, next: e
                     response: "Token inválido",
                 });
             } else {
-                req.body['user_id'] = authData.user_id;
+                req.body.user_id = authData.user_id;
                 next();
             }
         });
