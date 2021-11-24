@@ -33,8 +33,11 @@ const Login = ({ navigation }) => {
             email,
             password: senha,
         }).then((res) => console.log(res.data)).catch(error => {
-            const errorMsg = error.response.data.error;
-            setErrorLogin(errorMsg)
+            console.error(error)
+            if (error.response) {
+                const errorMsg = error.response.data.error;
+                setErrorLogin(errorMsg)
+            }
         })
     }
 
