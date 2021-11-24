@@ -8,7 +8,8 @@ import Field from '../../components/Field/index';
 import TabNav from '../../components/TabNav/index';
 import style from './style';
 
-import axios from "../../api"
+import createAxiosInstance from "../../api"
+import * as SecureStore from 'expo-secure-store';
 import { ThemeConsumer } from 'react-native-elements';
 
 const Login = ({ navigation }) => {
@@ -22,17 +23,21 @@ const Login = ({ navigation }) => {
     const [errorLogin, setErrorLogin] = useState('');
     const [errorCpf, setErrorCpf] = useState('');
 
-    const login = () => {
-        console.log("login")
+    const login = async () => {
         if (!validar()) {
             setErrorLogin('')
             return;
         }
 
+        const axios = await createAxiosInstance();
+
         axios.post("/auth/login", {
             email,
             password: senha,
-        }).then((res) => console.log(res.data)).catch(error => {
+        }).then((res) => {
+            const { token } = res.data
+            SecureStore.setItemAsync("auth-token", token);
+        }).catch(error => {
             console.error(error)
             if (error.response) {
                 const errorMsg = error.response.data.error;
@@ -44,15 +49,18 @@ const Login = ({ navigation }) => {
     const [hidePass, setHidePass] = useState(true);
 
     const validar = () => {
-        console.log("validar", email, senha)
         let error = false
         if (email == '') {
             setErrorEmail("Preencha seu e-mail corretamente.")
             error = true
+        } else {
+            setErrorEmail("")
         }
         if (senha == '') {
             setErrorSenha("Preencha sua senha corretamente.")
             error = true
+        } else {
+            setErrorSenha("")
         }
         return !error
     }

@@ -1,16 +1,26 @@
 import axios from 'axios';
 import Constants from "expo-constants";
 const { manifest } = Constants;
+import * as SecureStore from 'expo-secure-store';
 
-const api = (typeof manifest.packagerOpts === "object") && manifest.packagerOpts.dev
-    ? `http://${manifest.debuggerHost.split(":").shift().concat(":3000")}`
-    : "http://quiz-educacional.com.br";
+const createAxiosInstance = async () => {
 
-console.log(api)
+    const token = await SecureStore.getItemAsync("auth-token");
+    console.log("token", token)
 
-const instance = axios.create({
-    timeout: 180000,
-    baseURL: api
-});
+    const api = (typeof manifest.packagerOpts === "object") && manifest.packagerOpts.dev
+        ? `http://${manifest.debuggerHost.split(":").shift().concat(":3000")}`
+        : "http://quiz-educacional.com.br";
 
-export default instance
+    console.log(api)
+
+    const instance = axios.create({
+        timeout: 180000,
+        baseURL: api,
+        headers: { 'authorization': token == null ? "" : `Bearer ${token}` }
+    });
+
+    return instance
+}
+
+export default createAxiosInstance
