@@ -21,11 +21,11 @@ app.use("/api-docs", swaggerUi.serve, async (_req: express.Request, res: express
 
 RegisterRoutes(app);
 
-// app.use(function notFoundHandler(_, res: express.Response) {
-//     res.status(404).send({
-//         message: "Not Found",
-//     });
-// });
+app.use(function notFoundHandler(_, res: express.Response) {
+    res.status(404).send({
+        message: "Not Found",
+    });
+});
 
 app.use(function errorHandler(
     err: unknown,
