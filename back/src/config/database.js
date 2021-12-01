@@ -1,5 +1,5 @@
 require('dotenv').config({ path: process.env.NODE_ENV === 'production' ? ".env" : ".env-dev" });
-console.log(process.env)
+
 module.exports = {
     "development": {
         "username": process.env.DB_USER,

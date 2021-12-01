@@ -18,7 +18,7 @@ function errorLogger(error: express.ErrorRequestHandler, req: express.Request, r
 }
 
 function errorResponder(error: Error, req: express.Request, res: express.Response, next: express.NextFunction) { // responding to client
-    res.status(500).send({ error: error.message })
+    res.status(400).send({ error: error.message })
 }
 
 app.use(errorLogger)

@@ -9,7 +9,7 @@ import { User } from "../dto/User";
 export const login = async (userInput: UserLogin) => {
     const user = await UserService.getByEmail(userInput.email);
     if (await bcrypt.compare(userInput.password, user.password)) {
-        const token = jwt.sign({ user_id: user.id }, process.env.JWT_SECRET)
+        const token = jwt.sign({ user_id: user.id, user_type: user.type }, process.env.JWT_SECRET)
         return token;
     } else {
         throw new Error("wrong user or passowrd ");
