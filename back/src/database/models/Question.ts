@@ -63,7 +63,7 @@ Question.belongsTo(Option, {
 });
 
 Question.prototype.toJSON = function () {
-    var values = Object.assign({}, this.get());
+    const values = Object.assign({}, this.get());
 
     if (process.env.NODE_ENV === "production") delete values.answerId;
     return values;

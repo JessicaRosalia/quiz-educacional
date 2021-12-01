@@ -1,23 +1,36 @@
 import { UserLogin, UserSignup } from "../dto/UserLogin"
-
+import {
+    Controller,
+    Post,
+    Route,
+    Body,
+} from "tsoa";
 import * as UserService from '../../database/services/UserService'
 import jwt from 'jsonwebtoken';
 
 import bcrypt from "bcrypt";
 import { User } from "../dto/User";
+import { allScopes } from '../../utils';
 
-export const login = async (userInput: UserLogin) => {
-    const user = await UserService.getByEmail(userInput.email);
-    if (await bcrypt.compare(userInput.password, user.password)) {
-        const token = jwt.sign({ user_id: user.id, user_type: user.type }, process.env.JWT_SECRET)
-        return token;
-    } else {
-        throw new Error("wrong user or passowrd ");
+interface LoginToken {
+    token: string
+}
+
+@Route("auth")
+export class UserLoginController extends Controller {
+    @Post("login")
+    public async login(@Body() userInput: UserLogin): Promise<LoginToken> {
+        const user = await UserService.getByEmail(userInput.email);
+        if (await bcrypt.compare(userInput.password, user.password)) {
+            const token = jwt.sign({ user_id: user.id, user_type: user.type }, process.env.JWT_SECRET)
+            return { token };
+        } else {
+            throw new Error("wrong user or passowrd ");
+        }
+    }
+
+    @Post("signup")
+    public async signup(@Body() userSignup: UserSignup): Promise<User> {
+        return UserService.create(userSignup);
     }
 }
-
-export const signup = async (userSignup: UserSignup) => {
-    const user = await UserService.create(userSignup);
-    return user;
-}
-

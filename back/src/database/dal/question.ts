@@ -24,19 +24,19 @@ export const update = async (id: number, questionInput: Partial<QuestionInput>):
 
     if (!question) {
         // @todo throw custom error
-        throw new Error('not found')
+        throw new Error('questão não encontrada')
     }
 
     const updatedQuestion = await question.update(questionInput)
     return updatedQuestion
 }
 
-export const getById = async (id: number): Promise<QuestionOuput> => {
-    const question = await Question.findByPk(id, { include: [Question.associations.options] })
+export const getById = async (id: number): Promise<Question> => {
+    const question = await Question.findByPk(id, { include: [Question.associations.options, Question.associations.answer] })
 
     if (!question) {
         // @todo throw custom error
-        throw new Error('not found')
+        throw new Error('questão não encontrada')
     }
 
     return question

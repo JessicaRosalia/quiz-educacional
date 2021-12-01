@@ -10,7 +10,7 @@ interface QuestionServiceInput extends QuestionInput {
 }
 
 interface QuestionServiceOutput extends QuestionOuput {
-    options?: OptionOutput[]
+    options?: OptionOutput[],
 }
 
 export const create = async (payload: QuestionServiceInput): Promise<QuestionServiceOutput> => {
@@ -27,7 +27,7 @@ export const create = async (payload: QuestionServiceInput): Promise<QuestionSer
     if (numOfAnswers > 1) {
         throw new Error("várias respostas fornecidas");
     }
-    if (numOfAnswers == 0) {
+    if (numOfAnswers === 0) {
         throw new Error("nenhuma resposta fornecida");
     }
 
@@ -58,8 +58,13 @@ export const update = async (id: number, payload: Partial<QuestionServiceInput>)
     return questionDal.update(id, inputQuestion as QuestionInput)
 }
 
-export const getById = (id: number): Promise<QuestionServiceOutput> => {
+export const getById = (id: number): Promise<Question> => {
     return questionDal.getById(id)
+}
+
+export const getAnswerById = async (id: number): Promise<Option> => {
+    const question = await questionDal.getById(id);
+    return question.answer;
 }
 
 export const deleteById = (id: number): Promise<boolean> => {

@@ -90,7 +90,7 @@ User.beforeCreate("update_password", validateUser);
 User.beforeUpdate("update_password", validateUser);
 
 User.prototype.toJSON = function () {
-    var values = Object.assign({}, this.get());
+    const values = Object.assign({}, this.get());
 
     delete values.password;
     return values;

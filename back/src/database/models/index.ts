@@ -11,6 +11,6 @@ const sequelize = config.url
   : new Sequelize(config.database, config.username, config.password, config);
 
 
-process.env.NODE_ENV !== "production" && sequelize.sync();
+if (process.env.NODE_ENV !== "production") sequelize.sync();
 
 export { Sequelize, sequelize };

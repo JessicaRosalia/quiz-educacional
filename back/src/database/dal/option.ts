@@ -22,7 +22,7 @@ export const update = async (id: number, optionInput: Partial<OptionInput>): Pro
 
     if (!option) {
         // @todo throw custom error
-        throw new Error('not found')
+        throw new Error('opção não encontrada')
     }
 
     const updatedOption = await option.update(optionInput)
@@ -34,7 +34,7 @@ export const getById = async (id: number): Promise<OptionOutput> => {
 
     if (!option) {
         // @todo throw custom error
-        throw new Error('not found')
+        throw new Error('opção não encontrada')
     }
 
     return option
