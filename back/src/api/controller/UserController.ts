@@ -13,12 +13,22 @@ import { allScopes } from '../../utils';
 
 @Route("user")
 export class UserController extends Controller {
+    /**
+     * Dados do usuário logado.
+     * @returns Dados do usuário logado.
+     */
     @Security("jwt", allScopes)
     @Get()
     public async me(@Request() request: ExRequest): Promise<User> {
         return UserService.getById(request.body.user_id);
     }
 
+    /**
+     * Dados do usuário pelo ID
+     * @param userId ID do usário
+     * 
+     * @returns Dados do usuário logado.
+     */
     @Security("jwt", allScopes)
     @Get("{userId}")
     public async getUser(@Path() userId: number): Promise<User> {

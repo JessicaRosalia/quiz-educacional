@@ -63,7 +63,7 @@ export const getById = (id: number): Promise<Question> => {
 }
 
 export const getAnswerById = async (id: number): Promise<Option> => {
-    const question = await questionDal.getById(id);
+    const question = await questionDal.getById(id, true);
     return question.answer;
 }
 

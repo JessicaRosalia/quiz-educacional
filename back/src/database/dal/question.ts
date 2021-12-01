@@ -31,8 +31,11 @@ export const update = async (id: number, questionInput: Partial<QuestionInput>):
     return updatedQuestion
 }
 
-export const getById = async (id: number): Promise<Question> => {
-    const question = await Question.findByPk(id, { include: [Question.associations.options, Question.associations.answer] })
+export const getById = async (id: number, answer?: boolean): Promise<Question> => {
+    const include = [Question.associations.options]
+    if (answer) include.push(Question.associations.answer);
+
+    const question = await Question.findByPk(id, { include })
 
     if (!question) {
         // @todo throw custom error

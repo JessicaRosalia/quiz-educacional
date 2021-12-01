@@ -18,6 +18,10 @@ interface LoginToken {
 
 @Route("auth")
 export class UserLoginController extends Controller {
+    /**
+     * Logar usuário.
+     * @returns Token JWT.
+     */
     @Post("login")
     public async login(@Body() userInput: UserLogin): Promise<LoginToken> {
         const user = await UserService.getByEmail(userInput.email);
@@ -29,6 +33,10 @@ export class UserLoginController extends Controller {
         }
     }
 
+    /**
+     * Cadastro de usuário.
+     * @returns Usuário criado.
+     */
     @Post("signup")
     public async signup(@Body() userSignup: UserSignup): Promise<User> {
         return UserService.create(userSignup);
