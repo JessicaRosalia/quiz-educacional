@@ -9,19 +9,19 @@ export default StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    ViewBox: { 
+    ViewBox: {
         width: "90%",
-        backgroundColor:"#fff",
-        alignItems:"center",
-        borderRadius:20,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        borderRadius: 20,
         paddingLeft: 20,
-        paddingRight:20,
-        paddingTop:20,
-        paddingBottom:30,
-        marginBottom:30,
-    },    
-    TabNav:{
-        marginBottom:50,  
+        paddingRight: 20,
+        paddingTop: 20,
+        paddingBottom: 30,
+        marginBottom: 30,
+    },
+    TabNav: {
+        marginBottom: 50,
     },
     input: {
         width: "100%",
@@ -33,8 +33,8 @@ export default StyleSheet.create({
         textDecorationLine: "underline",
         justifyContent: "space-around",
         marginLeft: "62%",
-        marginBottom:44,
-    },    
+        marginBottom: 44,
+    },
     containerButton: {
         backgroundColor: '#0C066B',
         width: 200,
@@ -54,13 +54,15 @@ export default StyleSheet.create({
     linkCadastro: {
         color: "#000",
         fontSize: 16,
-        marginBottom:20,
+        marginBottom: 20,
     },
-    textoCad:{
+    textoCad: {
         color: "#0C066B",
         fontSize: 16,
-        fontWeight:'bold',
-        textDecorationLine: "underline",  
-    }, 
-
+        fontWeight: 'bold',
+        textDecorationLine: "underline",
+    },
+    errorMsg: {
+        color: "red"
+    }
 });

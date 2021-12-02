@@ -4,7 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CardOptions from "../../../components/CardOptions";
 import HeaderHome from "../../../components/HeaderHome";
-import style from "../Style";
+import style from "../style";
 
 const StudentHome = () => {
 
