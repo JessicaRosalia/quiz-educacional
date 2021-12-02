@@ -43,7 +43,7 @@ const TeacherRegistration = ({navigation}) => {
         }).catch(error => {
             console.error(error);
             if (error.response) {
-                const errorMsg = error.response.data.error;
+                const errorMsg = error.response.data.message;
                 console.log("errorMessage", errorMsg);
                 setErrorCadastro(errorMsg);
             }
@@ -119,6 +119,8 @@ const TeacherRegistration = ({navigation}) => {
                                 <Input placeholder="Sua senha" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value=>setSenha(value)} secureTextEntry={true} errorMessage={errorSenha} style={{color: "#000", fontSize: 15 }}/>
                             </View>
 
+                            {errorCadastro != "" &&
+                            <Text style={style.errorMsg} >{errorCadastro}</Text>}
 
                             <TouchableOpacity style={style.ContainerButton} onPress={()=>cadastrar()}>
                                 <Text style={style.registerText}>Cadastrar-se</Text>

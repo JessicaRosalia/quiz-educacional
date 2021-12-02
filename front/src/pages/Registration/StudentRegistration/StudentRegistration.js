@@ -39,7 +39,7 @@ const StudentRegistration = ({navigation}) => {
         }).catch(error => {
             console.error(error);
             if (error.response) {
-                const errorMsg = error.response.data.error;
+                const errorMsg = error.response.data.message;
                 setErrorCadastro(errorMsg);
             }
         })
