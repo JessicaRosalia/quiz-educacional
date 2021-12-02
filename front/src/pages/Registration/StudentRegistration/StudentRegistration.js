@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Input } from 'react-native-elements/dist/input/Input';
+import createAxiosInstance from '../../../api';
 import TabNav from '../../../components/TabNav';
 import style from '../style';
 
@@ -16,6 +17,33 @@ const StudentRegistration = ({navigation}) => {
     const [errorNome, setErrorNome] = useState(false);
     const [errorCpf, setErrorCpf] = useState(false);
     const [errorSenha, setErrorSenha] = useState(false);
+    const [errorCadastro, setErrorCadastro] = useState(false);
+
+    const cadastrar = async () => {
+        if(!validar()){
+            return;
+        }
+
+        const axios = await createAxiosInstance();
+
+        axios.post("auth/signup", {
+            name: nome,
+            cpf,
+            email,
+            phoneNumber: telefone,
+            schoolName: nomeEscola,
+            password: senha,
+            type: "student",
+        }).then(()=> {
+            navigation.navigate('Login');
+        }).catch(error => {
+            console.error(error);
+            if (error.response) {
+                const errorMsg = error.response.data.message;
+                setErrorCadastro(errorMsg);
+            }
+        })
+    }
 
     const validar = () => {
         let error = false
@@ -71,7 +99,9 @@ const StudentRegistration = ({navigation}) => {
                                 <Input placeholder="Sua senha" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value=>setSenha(value)} secureTextEntry={true} errorMessage={errorSenha} style={{color: "#000", fontSize: 15 }}/>
                             </View>
 
-                            <TouchableOpacity style={style.ContainerButton} onPress={()=>validar()}>
+                            {errorCadastro != "" &&
+                            <Text style={style.errorMsg} >{errorCadastro}</Text>}
+                            <TouchableOpacity style={style.ContainerButton} onPress={()=>cadastrar()}>
                                 <Text style={style.registerText}>Cadastrar-se</Text>
                             </TouchableOpacity>
                         </View>

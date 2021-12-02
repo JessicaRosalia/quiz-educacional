@@ -63,8 +63,9 @@ export default StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
     },
-
-
+    errorMsg: {
+        color: "red"
+    }
 })
 
 
