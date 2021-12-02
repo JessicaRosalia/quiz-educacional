@@ -8,7 +8,7 @@ import Field from '../../components/Field/index';
 import TabNav from '../../components/TabNav/index';
 import style from './style';
 
-import createAxiosInstance from "../../api"
+import createAxiosInstance from "../../api";
 import * as SecureStore from 'expo-secure-store';
 import { ThemeConsumer } from 'react-native-elements';
 
@@ -37,6 +37,7 @@ const Login = ({ navigation }) => {
         }).then((res) => {
             const { token } = res.data
             SecureStore.setItemAsync("auth-token", token);
+            navigation.navigate('StudentHome');
         }).catch(error => {
             console.error(error)
             if (error.response) {
@@ -100,8 +101,8 @@ const Login = ({ navigation }) => {
                         <Text style={style.linkCadastro}>  Não possui cadastro?  <Text style={style.textoCad}>Cadastre-se</Text></Text>
                     </View>
                 </TouchableOpacity>
-            </View >
-        </SafeAreaView >
+            </View>
+        </SafeAreaView>
     )
 }
 

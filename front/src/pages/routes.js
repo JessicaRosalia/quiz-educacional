@@ -13,7 +13,7 @@ const Routes = () => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Login">
+            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="StudentRegistration">
                 <Stack.Screen name="Login" component={Login}/>
                 <Stack.Screen name="TeacherHome" component={TeacherHome}/>
                 <Stack.Screen name="StudentHome" component={StudentHome}/>
