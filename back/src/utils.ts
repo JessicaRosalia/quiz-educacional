@@ -21,3 +21,7 @@ export const errorWreaper = (f: any) =>
             next(error)
         }
     }
+
+export const proffesorScope = ["professor"]
+export const studentScope = ["student"]
+export const allScopes = ["professor", "student"]

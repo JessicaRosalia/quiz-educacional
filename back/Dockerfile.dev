@@ -2,9 +2,9 @@ from node:alpine
 
 WORKDIR /app
 
-COPY package*.json ./
-COPY ts*.json ./
+COPY *.json ./
 COPY .env-dev ./
+COPY .sequelizerc ./
 COPY src/config/database.js ./dist/config/
 
 RUN npm install

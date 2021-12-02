@@ -9,7 +9,7 @@ export const create = async (userInput: UserInput): Promise<UserOuput> => {
     })
 
     if (createdUser) {
-        throw new Error('user already exist');
+        throw new Error('usuário já existe');
     }
 
     const user = await User.create(userInput)
@@ -33,7 +33,7 @@ export const update = async (id: number, userInput: Partial<UserInput>): Promise
 
     if (!user) {
         // @todo throw custom error
-        throw new Error('not found')
+        throw new Error('usuário não encontrado')
     }
 
     const updatedUser = await user.update(userInput)
@@ -45,7 +45,7 @@ export const getById = async (id: number): Promise<UserOuput> => {
 
     if (!user) {
         // @todo throw custom error
-        throw new Error('not found')
+        throw new Error('usuário não encontrado')
     }
 
     return user
@@ -60,7 +60,7 @@ export const getByEmail = async (email: string): Promise<UserOuput> => {
 
     if (!user) {
         // @todo throw custom error
-        throw new Error('not found')
+        throw new Error('usuário não encontrado')
     }
 
     return user
