@@ -44,7 +44,7 @@ const StudentRegistration = ({navigation}) => {
             }
         })
     }
-    
+
     const validar = () => {
         let error = false
         if(nome == null){
@@ -100,7 +100,7 @@ const StudentRegistration = ({navigation}) => {
                             </View>
 
                             {errorCadastro != "" &&
-                            <Text style={style.errorMsg} >{console.warn(errorCadastro)}</Text>}
+                            <Text style={style.errorMsg} >{errorCadastro}</Text>}
                             <TouchableOpacity style={style.ContainerButton} onPress={()=>cadastrar()}>
                                 <Text style={style.registerText}>Cadastrar-se</Text>
                             </TouchableOpacity>

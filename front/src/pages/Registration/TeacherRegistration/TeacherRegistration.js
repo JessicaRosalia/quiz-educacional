@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Input } from 'react-native-elements/dist/input/Input';
+import createAxiosInstance from '../../../api';
 import TabNav from '../../../components/TabNav/index';
 import style from '../style';
 
@@ -19,6 +20,35 @@ const TeacherRegistration = ({navigation}) => {
     const [errorNumeroMatricula, setErrorNumeroMatricula] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
     const [errorSenha, setErrorSenha] = useState(false);
+    const [errorCadastro, setErrorCadastro] = useState(false);
+    
+
+        const cadastrar = async () => {
+        if(!validar()){
+            return;
+        }
+
+        const axios = await createAxiosInstance();
+
+        axios.post("auth/signup", {
+            name: nome,
+            cpf,
+            email,
+            //schoolMat: numeroMatricula,
+            schoolName: nomeEscola,
+            password: senha,
+            type: "professor",
+        }).then(()=> {
+            navigation.navigate('Login');
+        }).catch(error => {
+            console.error(error);
+            if (error.response) {
+                const errorMsg = error.response.data.error;
+                console.log("errorMessage", errorMsg);
+                setErrorCadastro(errorMsg);
+            }
+        })
+    }
 
     const validar = () => {
         let error = false
@@ -89,7 +119,8 @@ const TeacherRegistration = ({navigation}) => {
                                 <Input placeholder="Sua senha" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value=>setSenha(value)} secureTextEntry={true} errorMessage={errorSenha} style={{color: "#000", fontSize: 15 }}/>
                             </View>
 
-                            <TouchableOpacity style={style.ContainerButton} onPress={()=>validar()}>
+
+                            <TouchableOpacity style={style.ContainerButton} onPress={()=>cadastrar()}>
                                 <Text style={style.registerText}>Cadastrar-se</Text>
                             </TouchableOpacity>
                         </View>
