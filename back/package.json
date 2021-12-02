@@ -8,7 +8,9 @@
     "build": "tsoa spec-and-routes && tsc",
     "prestart": "npm run build",
     "start": "node .",
+    "predev": "tsoa spec-and-routes",
     "dev": "concurrently \"nodemon -x tsoa spec-and-routes\" \"nodemon\"",
+    "predev-docker": "tsoa spec-and-routes",
     "dev-docker": "NODE_ENV=development-docker concurrently \"nodemon -x tsoa spec-and-routes\" \"nodemon\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
