@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Text, Image, TouchableOpacity, View } from 'react-native';
-import eyeShowPassword from '../../assets/icons/btn-verSenha.png';
-import eyeHidePassword from '../../assets/icons/btn-ocultarSenha.png';
+import React, { useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Input } from 'react-native-elements/dist/input/Input';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import Field from '../../components/Field/index';
-import TabNav from '../../components/TabNav/index';
 import style from './style';
 
 import createAxiosInstance from "../../api";
 import * as SecureStore from 'expo-secure-store';
-import { ThemeConsumer } from 'react-native-elements';
+import { getUserInfo } from '../../api/utils';
+import Toast from 'react-native-root-toast';
 
 const Login = ({ navigation }) => {
 
@@ -36,13 +32,20 @@ const Login = ({ navigation }) => {
             password: senha,
         }).then((res) => {
             const { token } = res.data
-            SecureStore.setItemAsync("auth-token", token);
-            navigation.navigate('StudentHome');
+            SecureStore.setItemAsync("auth-token", token).then(() => {
+                let user = getUserInfo(token);
+                if (user.user_type === "student") navigation.navigate('StudentHome');
+                if (user.user_type === "professor") navigation.navigate('TeacherHome');
+            })
         }).catch(error => {
-            console.error(error)
+            console.error(error);
             if (error.response) {
                 const errorMsg = error.response.data.message;
-                setErrorLogin(errorMsg)
+                console.log(errorMsg);
+                Toast.show(errorMsg[0].toUpperCase() + errorMsg.slice(1), {
+                    duration: Toast.durations.LONG,
+                    position: Toast.positions.CENTER,
+                });
             }
         })
     }
@@ -67,42 +70,40 @@ const Login = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView >
-            <View style={style.Container}>
-                <View style={style.ViewBox}>
+        <View style={style.Container}>
+            <View style={style.ViewBox}>
 
 
-                    <View style={style.TabNav}>
-                        <TabNav login={true} register={false} page={navigation} />
-                    </View>
-
-                    <View style={style.input}>
-                        <Input label="E-mail" errorMessage={errorEmail} placeholder="exemplo@gmail.com" keyboardType="email-address" placeholderTextColor="#c3c3c3" onChangeText={value => setEmail(value)} style={{ color: "#000", fontSize: 15 }} />
-                    </View>
-
-                    <View style={style.input}>
-                        <Input label="Senha" labelStyle={{ color: '#000' }} placeholder="Sua senha" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value => setSenha(value)} secureTextEntry={true} errorMessage={errorSenha} style={{ color: "#000", fontSize: 15 }} />
-                    </View>
-
-                    <TouchableOpacity >
-                        <Text style={style.linkSenha}>Esqueci a Senha</Text>
-                    </TouchableOpacity>
-
-                    {errorLogin != "" &&
-                        <Text style={style.errorMsg} >{errorLogin}</Text>}
-
-                    <TouchableOpacity style={style.containerButton} onPress={() => login()}>
-                        <Text style={style.enterText} >Entrar</Text>
-                    </TouchableOpacity>
+                <View style={style.TabNav}>
+                    <Text style={style.headerText}>Login</Text>
                 </View>
 
-                <TouchableOpacity onPress={() => navigation.navigate('TeacherRegistration')}>
-                    <View style={style.Barra}>
-                        <Text style={style.linkCadastro}>  Não possui cadastro?  <Text style={style.textoCad}>Cadastre-se</Text></Text>
-                    </View>
+                <View style={style.input}>
+                    <Input label="E-mail" errorMessage={errorEmail} errorStyle={{ color: "red" }} placeholder="exemplo@gmail.com" keyboardType="email-address" placeholderTextColor="#c3c3c3" onChangeText={value => setEmail(value)} style={{ color: "#000", fontSize: 15 }} />
+                </View>
+
+                <View style={style.input}>
+                    <Input label="Senha" labelStyle={{ color: '#000' }} placeholder="Sua senha" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value => setSenha(value)} secureTextEntry={true} errorMessage={errorSenha} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
+                </View>
+
+                <TouchableOpacity >
+                    <Text style={style.linkSenha}>Esqueci a Senha</Text>
+                </TouchableOpacity>
+
+                {errorLogin != "" &&
+                    <Text style={style.errorMsg} >{errorLogin}</Text>}
+
+                <TouchableOpacity style={style.containerButton} onPress={() => login()}>
+                    <Text style={style.enterText} >Entrar</Text>
                 </TouchableOpacity>
             </View>
-        </SafeAreaView>
+
+            <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
+                <View style={style.Barra}>
+                    <Text style={style.linkCadastro}>  Não possui cadastro?  <Text style={style.textoCad}>Cadastre-se</Text></Text>
+                </View>
+            </TouchableOpacity>
+        </View>
     )
 }
 

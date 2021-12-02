@@ -2,18 +2,18 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
 
-    
-    quizName:{
+
+    quizName: {
         color: "#0C066B",
-        fontSize:22,
-        fontWeight:"bold",
-        marginLeft:10,
-        
+        fontSize: 22,
+        fontWeight: "bold",
+        marginLeft: 10,
+
     },
-    helloText:{
+    helloText: {
         color: "#0C066B",
-        fontSize:17,
-        paddingTop:50,
+        fontSize: 17,
+        paddingTop: 50,
         marginBottom: 5,
     },
     subtitleText: {
@@ -23,15 +23,24 @@ export default StyleSheet.create({
     name: {
         fontWeight: "bold",
         color: "#0C066B",
-        fontSize:28,
-       
-    }, 
-    containerMenu:{
-        paddingBottom:50,
+        fontSize: 28,
+
+    },
+    logout: {
+        paddingLeft: 50,
+        display: "flex",
+        alignItems: "flex-end"
+    },
+    logoutText: {
+        fontWeight: "bold",
+        color: "#0C066B",
+        fontSize: 21,
+        textDecorationLine: "underline",
+    },
+    containerMenu: {
+        paddingBottom: 50,
         display: "flex",
         flexDirection: "row",
-        alignItems:"center",
-    }
-
-
+        alignItems: "center",
+    },
 })

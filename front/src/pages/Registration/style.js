@@ -9,33 +9,40 @@ export default StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-    },    
-    ViewBox: { 
+    },
+    ViewBox: {
         width: "90%",
-        backgroundColor:"#fff",
-        alignItems:"center",
-        borderRadius:20,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        borderRadius: 20,
         paddingLeft: 10,
-        paddingRight:10,
-        paddingTop:20,
-        paddingBottom:30,
+        paddingRight: 10,
+        paddingTop: 20,
+        paddingBottom: 30,
         height: "90%",
+    },
+    scrollView: {
+        width: "100%"
     },
     form: {
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
     },
-    TabNav:{
-        marginBottom:50,  
+    TabNav: {
+        marginBottom: 30,
+    },
+    headerText: {
+        fontSize: 25,
+        fontWeight: "bold"
     },
     input: {
         width: "100%",
         marginBottom: 10,
         display: "flex",
-        
+
         flexDirection: "column",
-    
+
     },
     label: {
         marginLeft: 10,
@@ -57,7 +64,7 @@ export default StyleSheet.create({
     },
     registerText: {
         color: "#fff",
-        display :"flex",
+        display: "flex",
         textAlign: "center",
         justifyContent: "center",
         fontSize: 16,

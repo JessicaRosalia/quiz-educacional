@@ -6,19 +6,22 @@ import StudentHome from './Home/StudentHome/StudentHome';
 import Login from './Login/login';
 import TeacherRegistration from './Registration/TeacherRegistration/TeacherRegistration';
 import StudentRegistration from './Registration/StudentRegistration/StudentRegistration';
+import Registration from './Registration'
+import StartUp from './StartUp';
 
 const Stack = createNativeStackNavigator();
 
 const Routes = () => {
-
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="TeacherRegistration">
-                <Stack.Screen name="Login" component={Login}/>
-                <Stack.Screen name="TeacherHome" component={TeacherHome}/>
-                <Stack.Screen name="StudentHome" component={StudentHome}/>
-                <Stack.Screen name="TeacherRegistration" component={TeacherRegistration}/>
-                <Stack.Screen name="StudentRegistration" component={StudentRegistration}/>
+            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={"StartUp"} >
+                <Stack.Screen name="StartUp" component={StartUp} />
+                <Stack.Screen name="Login" component={Login} />
+                <Stack.Screen name="TeacherHome" component={TeacherHome} />
+                <Stack.Screen name="StudentHome" component={StudentHome} />
+                <Stack.Screen name="TeacherRegistration" component={TeacherRegistration} />
+                <Stack.Screen name="StudentRegistration" component={StudentRegistration} />
+                <Stack.Screen name="Registration" component={Registration} />
             </Stack.Navigator>
         </NavigationContainer>
     )

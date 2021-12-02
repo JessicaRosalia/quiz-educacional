@@ -6,39 +6,37 @@ import CardOptions from "../../../components/CardOptions";
 import HeaderHome from "../../../components/HeaderHome";
 import style from "../style";
 
-const StudentHome = () => {
+const StudentHome = ({ navigation }) => {
 
     return (
-        <SafeAreaView>
-            <ScrollView>
-                <View style={style.containerHome}>
-                    <HeaderHome />
-                    <View style={style.containerMenus}>
-                        <View style={style.cardUm}>
-                            <CardOptions>
-                                <Image source={require("../../../assets/icons/estudante-historico.png")} />
-                                <Text>Histórico</Text>
-                                <Text>Veja seu histórico de partidas</Text>
+        <ScrollView>
+            <View style={style.containerHome}>
+                <HeaderHome navigation={navigation} />
+                <View style={style.containerMenus}>
+                    <View style={style.cardUm}>
+                        <CardOptions>
+                            <Image source={require("../../../assets/icons/estudante-historico.png")} />
+                            <Text>Histórico</Text>
+                            <Text>Veja seu histórico de partidas</Text>
+                        </CardOptions>
+                    </View>
+                    <View style={style.cardDois}>
+                        <CardOptions>
+                            <Image source={require("../../../assets/icons/prof-estudante-busca.png")} />
+                            <Text>Busca</Text>
+                            <Text>Busque por colegas, professores</Text>
+                        </CardOptions>
+                        <View style={style.cardTres}>
+                            <CardOptions >
+                                <Image source={require("../../../assets/icons/estudante-jogar.png")} />
+                                <Text>Jogar</Text>
+                                <Text>Jogue com amigos</Text>
                             </CardOptions>
-                        </View>
-                        <View style={style.cardDois}>
-                            <CardOptions>
-                                <Image source={require("../../../assets/icons/prof-estudante-busca.png")} />
-                                <Text>Busca</Text>
-                                <Text>Busque por colegas, professores</Text>
-                            </CardOptions>
-                            <View style={style.cardTres}>
-                                <CardOptions >
-                                    <Image source={require("../../../assets/icons/estudante-jogar.png")} />
-                                    <Text>Jogar</Text>
-                                    <Text>Jogue com amigos</Text>
-                                </CardOptions>
-                            </View>
                         </View>
                     </View>
-                </View >
-            </ScrollView>
-        </SafeAreaView>
+                </View>
+            </View >
+        </ScrollView>
     )
 }
 export default StudentHome;

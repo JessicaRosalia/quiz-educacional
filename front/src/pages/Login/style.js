@@ -21,7 +21,11 @@ export default StyleSheet.create({
         marginBottom: 30,
     },
     TabNav: {
-        marginBottom: 50,
+        marginBottom: 30,
+    },
+    headerText: {
+        fontSize: 25,
+        fontWeight: "bold"
     },
     input: {
         width: "100%",
@@ -53,12 +57,12 @@ export default StyleSheet.create({
     },
     linkCadastro: {
         color: "#000",
-        fontSize: 16,
+        fontSize: 23,
         marginBottom: 20,
     },
     textoCad: {
         color: "#0C066B",
-        fontSize: 16,
+        fontSize: 23,
         fontWeight: 'bold',
         textDecorationLine: "underline",
     },
