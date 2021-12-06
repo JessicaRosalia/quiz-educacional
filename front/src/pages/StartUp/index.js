@@ -24,15 +24,13 @@ export default function StartUp({ navigation }) {
 
     useEffect(async () => {
         const token = await SecureStore.getItemAsync("auth-token");
-        console.log("here")
-        if (false || token) {
+        if (token) {
             console.log("here2")
             const user = getUserInfo(token);
             console.log("here3")
             if (user.type === "student") createNewNavigationStack(navigation, 'StudentHome');
             if (user.type === "professor") createNewNavigationStack(navigation, 'TeacherHome');
         } else {
-            console.log("login")
             createNewNavigationStack(navigation, "Login")
         }
     })

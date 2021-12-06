@@ -39,8 +39,8 @@ const Login = ({ navigation }) => {
                     duration: Toast.durations.SHORT,
                     position: Toast.positions.CENTER,
                 });
-                if (user.user_type === "student") navigation.navigate('StudentHome');
-                if (user.user_type === "professor") navigation.navigate('TeacherHome');
+                if (user.type === "student") navigation.navigate('StudentHome');
+                if (user.type === "professor") navigation.navigate('TeacherHome');
             })
         }).catch(error => {
             console.error(error);
