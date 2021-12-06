@@ -46,7 +46,7 @@ const StudentRegistration = ({ navigation }) => {
             if (error.response) {
                 const errorMsg = error.response.data.message;
                 console.log(errorMsg);
-                Toast.show(errorMsg[0].toUpperCase() + errorMsg.slice(1), {
+                Toast.show(capitalize(errorMsg), {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.CENTER,
                 });

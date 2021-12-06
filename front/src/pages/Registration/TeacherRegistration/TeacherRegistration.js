@@ -5,6 +5,7 @@ import { Input } from 'react-native-elements/dist/input/Input';
 import createAxiosInstance from '../../../api';
 import TabNav from '../../../components/TabNav/index';
 import style from '../style';
+import Toast from 'react-native-root-toast';
 
 const TeacherRegistration = ({ navigation }) => {
 
@@ -35,7 +36,7 @@ const TeacherRegistration = ({ navigation }) => {
             name: nome,
             cpf,
             email,
-            //schoolMat: numeroMatricula,
+            schoolMat: numeroMatricula,
             schoolName: nomeEscola,
             password: senha,
             type: "professor",
@@ -50,7 +51,7 @@ const TeacherRegistration = ({ navigation }) => {
             if (error.response) {
                 const errorMsg = error.response.data.message;
                 console.log(errorMsg);
-                Toast.show(errorMsg[0].toUpperCase() + errorMsg.slice(1), {
+                Toast.show(capitalize(errorMsg), {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.CENTER,
                 });

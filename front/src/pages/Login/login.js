@@ -7,6 +7,7 @@ import createAxiosInstance from "../../api";
 import * as SecureStore from 'expo-secure-store';
 import { getUserInfo } from '../../api/utils';
 import Toast from 'react-native-root-toast';
+import { capitalize } from '../../components/utils';
 
 const Login = ({ navigation }) => {
 
@@ -46,7 +47,7 @@ const Login = ({ navigation }) => {
             if (error.response) {
                 const errorMsg = error.response.data.message;
                 console.log(errorMsg);
-                Toast.show(errorMsg[0].toUpperCase() + errorMsg.slice(1), {
+                Toast.show(capitalize(errorMsg), {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.CENTER,
                 });
