@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import MaskInput, { Masks } from 'react-native-mask-input';
 import { Input } from 'react-native-elements/dist/input/Input';
 import createAxiosInstance from '../../../api';
 import TabNav from '../../../components/TabNav/index';
@@ -39,6 +40,10 @@ const TeacherRegistration = ({ navigation }) => {
             password: senha,
             type: "professor",
         }).then(() => {
+            Toast.show("Professor cadastrado!", {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.CENTER,
+            });
             navigation.navigate('Login');
         }).catch(error => {
             console.error(error);
@@ -98,7 +103,8 @@ const TeacherRegistration = ({ navigation }) => {
 
                         <View style={style.input}>
                             <Text style={style.label}>CPF <Text style={style.required}>*</Text> </Text>
-                            <Input placeholder="XXX.XXX.XXX-XX" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value => setCpf(value)} errorMessage={errorCpf} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
+                            <Input InputComponent={MaskInput} onChangeText={(_masked, unmasked) => { setCpf(unmasked); }} value={cpf} mask={Masks.BRL_CPF}
+                                placeholder="XXX.XXX.XXX-XX" keyboardType="number-pad" placeholderTextColor="#c3c3c3" errorMessage={errorCpf} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
                         </View>
 
                         <View style={style.input}>
@@ -108,12 +114,12 @@ const TeacherRegistration = ({ navigation }) => {
 
                         <View style={style.input}>
                             <Text style={style.label}>Número da Matrícula da Escola <Text style={style.required}>*</Text> </Text>
-                            <Input placeholder="706.543.673-3" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value => SetNumeroMatricula(value)} errorMessage={errorNumeroMatricula} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
+                            <Input placeholder="706.543.673-3" keyboardType="number-pad" placeholderTextColor="#c3c3c3" onChangeText={value => SetNumeroMatricula(value)} errorMessage={errorNumeroMatricula} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
                         </View>
 
                         <View style={style.input}>
                             <Text style={style.label}>E-mail <Text style={style.required}>*</Text> </Text>
-                            <Input placeholder="exemplo@gmail.com" keyboardType="email-address" placeholderTextColor="#c3c3c3" onChangeText={value => setEmail(value)} errorMessage={errorEmail} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
+                            <Input placeholder="exemplo@gmail.com" keyboardType="email-address" autoCapitalize="none" placeholderTextColor="#c3c3c3" onChangeText={value => setEmail(value)} errorMessage={errorEmail} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
                         </View>
 
                         <View style={style.input}>

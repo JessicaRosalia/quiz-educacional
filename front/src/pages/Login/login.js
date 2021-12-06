@@ -34,6 +34,10 @@ const Login = ({ navigation }) => {
             const { token } = res.data
             SecureStore.setItemAsync("auth-token", token).then(() => {
                 let user = getUserInfo(token);
+                Toast.show("Usuário logado com sucesso!", {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.CENTER,
+                });
                 if (user.user_type === "student") navigation.navigate('StudentHome');
                 if (user.user_type === "professor") navigation.navigate('TeacherHome');
             })
@@ -79,7 +83,7 @@ const Login = ({ navigation }) => {
                 </View>
 
                 <View style={style.input}>
-                    <Input label="E-mail" errorMessage={errorEmail} errorStyle={{ color: "red" }} placeholder="exemplo@gmail.com" keyboardType="email-address" placeholderTextColor="#c3c3c3" onChangeText={value => setEmail(value)} style={{ color: "#000", fontSize: 15 }} />
+                    <Input label="E-mail" errorMessage={errorEmail} errorStyle={{ color: "red" }} placeholder="exemplo@gmail.com" autoCapitalize="none" keyboardType="email-address" placeholderTextColor="#c3c3c3" onChangeText={value => setEmail(value)} style={{ color: "#000", fontSize: 15 }} />
                 </View>
 
                 <View style={style.input}>

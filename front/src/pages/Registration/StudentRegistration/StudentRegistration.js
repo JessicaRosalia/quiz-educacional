@@ -4,6 +4,7 @@ import { Input } from 'react-native-elements/dist/input/Input';
 import createAxiosInstance from '../../../api';
 import Toast from 'react-native-root-toast';
 import style from '../style';
+import MaskInput, { Masks } from 'react-native-mask-input';
 
 const StudentRegistration = ({ navigation }) => {
 
@@ -35,6 +36,10 @@ const StudentRegistration = ({ navigation }) => {
             password: senha,
             type: "student",
         }).then(() => {
+            Toast.show("Estudante cadastrado!", {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.CENTER,
+            });
             navigation.navigate('Login');
         }).catch(error => {
             console.error(error);
@@ -82,11 +87,13 @@ const StudentRegistration = ({ navigation }) => {
 
                         <View style={style.input}>
                             <Text style={style.label}>CPF <Text style={style.required}>*</Text> </Text>
-                            <Input placeholder="XXX.XXX.XXX-XX" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value => setCpf(value)} errorMessage={errorCpf} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
+                            <Input placeholder="XXX.XXX.XXX-XX" InputComponent={MaskInput} onChangeText={(_masked, unmasked) => { setCpf(unmasked); }} value={cpf} mask={Masks.BRL_CPF}
+                                keyboardType="number-pad" placeholderTextColor="#c3c3c3" errorMessage={errorCpf} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
                         </View>
 
                         <View style={style.input}>
-                            <Input label="Telefone" placeholder="(84) 99900-0000" keyboardType="default" placeholderTextColor="#c3c3c3" onChangeText={value => setTelefone(value)} style={{ color: "#000", fontSize: 15 }} />
+                            <Input label="Telefone" placeholder="(84) 99900-0000" InputComponent={MaskInput} onChangeText={(_masked, unmasked) => { setTelefone(unmasked); }} value={telefone} mask={Masks.BRL_PHONE}
+                                keyboardType="phone-pad" placeholderTextColor="#c3c3c3" style={{ color: "#000", fontSize: 15 }} />
                         </View>
 
                         <View style={style.input}>
@@ -94,7 +101,7 @@ const StudentRegistration = ({ navigation }) => {
                         </View>
 
                         <View style={style.input}>
-                            <Input label="E-mail" placeholder="exemplo@gmail.com" keyboardType="email-address" placeholderTextColor="#c3c3c3" onChangeText={value => setEmail(value)} style={{ color: "#000", fontSize: 15 }} />
+                            <Input label="E-mail" placeholder="exemplo@gmail.com" keyboardType="email-address" autoCapitalize="none" placeholderTextColor="#c3c3c3" onChangeText={value => setEmail(value)} style={{ color: "#000", fontSize: 15 }} />
                         </View>
 
                         <View style={style.input}>

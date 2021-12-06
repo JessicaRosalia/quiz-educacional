@@ -8,6 +8,7 @@ const TeacherRegistration = ({ navigation }) => {
     useEffect(() => {
         if (type === "student") navigation.navigate("StudentRegistration")
         if (type === "professor") navigation.navigate("TeacherRegistration")
+        setType(null);
     }, [type])
 
     return (
