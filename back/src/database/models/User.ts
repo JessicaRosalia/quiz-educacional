@@ -10,10 +10,11 @@ export interface UserAttributes {
     name: string,
     cpf: string,
     email: string,
+    password: string,
+    type: UserType,
     phoneNumber?: string,
     schoolName?: string,
-    password: string,
-    type: UserType
+    schoolMat?: string
 }
 
 export interface UserInput extends Optional<UserAttributes, 'id'> { }
@@ -28,6 +29,7 @@ export class User extends Model<UserAttributes, UserInput> implements UserAttrib
     public schoolName!: string
     public password!: string
     public type!: UserType
+    public schoolMat!: string
 
     // timestamps!
     public readonly createdAt!: Date;
@@ -61,6 +63,10 @@ User.init({
         type: DataTypes.STRING,
         allowNull: true
     },
+    schoolMat: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     password: {
         type: DataTypes.STRING,
         allowNull: false
@@ -91,6 +97,8 @@ User.beforeUpdate("update_password", validateUser);
 
 User.prototype.toJSON = function () {
     const values = Object.assign({}, this.get());
+
+    if(values.type === "student") delete values.schoolMat
 
     delete values.password;
     return values;

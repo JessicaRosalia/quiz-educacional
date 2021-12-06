@@ -18,6 +18,7 @@ export interface UserLogin {
  *  "email": "joaopedro@email.com",
  *  "phoneNumber": "8391231234",
  *  "schoolName": "Escola Maria de Fátima",
+ *  "schoolMat": "123.456-8"
  *  "type": "student"
  * }
  */
@@ -25,8 +26,9 @@ export interface UserSignup {
     name: string,
     cpf: string,
     email: string,
-    phoneNumber?: string,
-    schoolName?: string,
     password: string,
     type: UserType,
+    phoneNumber?: string,
+    schoolName?: string,
+    schoolMat?: string,
 }
