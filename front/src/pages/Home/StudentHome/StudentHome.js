@@ -27,7 +27,7 @@ const StudentHome = ({ navigation }) => {
                             <Text>Busque por colegas, professores</Text>
                         </CardOptions>
                         <View style={style.cardTres}>
-                            <CardOptions >
+                            <CardOptions navigation={navigation} routeName="QuestionScreen">
                                 <Image source={require("../../../assets/icons/estudante-jogar.png")} />
                                 <Text>Jogar</Text>
                                 <Text>Jogue com amigos</Text>
@@ -35,7 +35,7 @@ const StudentHome = ({ navigation }) => {
                         </View>
                     </View>
                 </View>
-            </View >
+            </View>
         </ScrollView>
     )
 }
