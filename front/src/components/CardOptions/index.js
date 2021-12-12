@@ -8,7 +8,6 @@ import style from '../../components/CardOptions/style';
 function CardOptions({children, routeName, navigation}) {
 
     function goToQuestionScreen(){
-        console.warn("oi");
         navigation.navigate(routeName);
     }
     return (

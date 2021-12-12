@@ -8,7 +8,7 @@ import TeacherRegistration from './Registration/TeacherRegistration/TeacherRegis
 import StudentRegistration from './Registration/StudentRegistration/StudentRegistration';
 import Registration from './Registration'
 import StartUp from './StartUp';
-import QuestionScreen from './QuestionScreen/QuestionScreen';
+import QuestionScreen from './QuestionScreen/QuestionScreen.js';
 
 const Stack = createNativeStackNavigator();
 
