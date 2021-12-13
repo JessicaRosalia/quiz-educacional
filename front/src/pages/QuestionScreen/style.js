@@ -9,13 +9,14 @@ export default StyleSheet.create({
         paddingHorizontal: 30,
         paddingVertical: 15,
         borderBottomWidth: 1,
-        borderBottomColor: "#0C066B",
+        borderBottomColor: "#E7A21C",
     },
     infoMatch: {
         display: "flex",
         alignItems: "center",
     },
     area: {
+        color: "#0C066B",
         fontWeight: "700",
         fontSize: 16,
         marginTop: 10,
@@ -28,8 +29,9 @@ export default StyleSheet.create({
         
     },
     questionText: {
+        color:"#0C066B" ,
         fontWeight: "700",
-        fontSize: 20,
+        fontSize: 22,
     },
     answerQuestion: {
         display: "flex",
