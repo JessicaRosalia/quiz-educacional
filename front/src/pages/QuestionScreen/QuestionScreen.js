@@ -40,7 +40,7 @@ function QuestionScreen() {
     }, [])
 
 
-        useEffect(() => {
+    useEffect(() => {
        async function getOptions () {
             const axios = await createAxiosInstance();
             axios.get(`/question/${questionId}`).then(res => {
@@ -55,22 +55,22 @@ function QuestionScreen() {
         }
         getOptions();
     }, [])
-    
+
     return (
         <View>
             <View style={style.questionScreenHeader}>
                 <Text>{nome}</Text>
                 <View style={style.infoMatch}>
                     <Text>30 Segundos</Text>
-                    <Text>Humanas</Text>
+                    <Text style={style.area}>História</Text>
                 </View>
                 <Text>Nome 2</Text>
                 
             </View>
-            <View style={style.answerQuestion}>
-                <Text>{prompt}</Text>
+            <View style={style.question}>
+                <Text style={style.questionText}>{prompt}</Text>
             </View>
-            <View>
+            <View style={style.answerQuestion}>
                 <QuestionAnswerField option={option1} answer={answerQuestion}/>
                 <QuestionAnswerField option={option2} answer={answerQuestion}/>
                 <QuestionAnswerField option={option3} answer={answerQuestion}/>
