@@ -17,7 +17,7 @@ function QuestionScreen() {
     const [option4, setOption4] = useState([]);
 
     const [nome, setNome] = useState("");
-    const questionId=1;
+    const questionId=2;
 
     useEffect(async () => {
         const token = await SecureStore.getItemAsync("auth-token");
@@ -31,7 +31,7 @@ function QuestionScreen() {
             axios.get(`/question/${questionId}`).then(res => {
                 var data = res.data;
                 setPrompt(data.prompt);
-                setAnswerQuestion(data.id);
+                setAnswerQuestion(data.answerId);
             }).catch((error)=>{
                 console.warn("ERRO: ", error);
             })
@@ -47,13 +47,14 @@ function QuestionScreen() {
                 var data = res.data;
                 setOption1(data.options[0]);
                 setOption2(data.options[1]);
+                setOption3(data.options[2]);
+                setOption4(data.options[3]);
             }).catch((error)=>{
                 console.warn("ERRO: ", error);
             })
-       }
+        }
         getOptions();
     }, [])
-
     
     return (
         <View>
@@ -70,10 +71,10 @@ function QuestionScreen() {
                 <Text>{prompt}</Text>
             </View>
             <View>
-                <QuestionAnswerField answerText={option1.body}/>
-                <QuestionAnswerField answerText={option2.body}/>
-                <QuestionAnswerField answerText="Resposta 3"/>
-                <QuestionAnswerField answerText="Resposta 4"/>
+                <QuestionAnswerField option={option1} answer={answerQuestion}/>
+                <QuestionAnswerField option={option2} answer={answerQuestion}/>
+                <QuestionAnswerField option={option3} answer={answerQuestion}/>
+                <QuestionAnswerField option={option4} answer={answerQuestion}/>
             </View>
         </View>
         
