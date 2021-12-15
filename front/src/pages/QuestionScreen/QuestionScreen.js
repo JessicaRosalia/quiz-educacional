@@ -29,8 +29,8 @@ function QuestionScreen() {
                     var data = res.data;
                     setQuestion(data);
                     setIsLoading(false);
-                }).catch((error)=>{
-                    console.warn("ERRO: ", error);
+                }).catch(()=>{
+                    console.log("Não foi possível encontrar a pergunta.");
                 })  
             }
        }
