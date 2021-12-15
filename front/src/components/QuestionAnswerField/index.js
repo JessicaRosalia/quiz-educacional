@@ -4,9 +4,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import style from "./style";
 
 function QuestionAnswerField({option, answer}) {
- 
+
      function handleAnswer(){
-        if(option.id === answer) Alert.alert("RESPOSTA CORRETA!");
+             if(option.id === answer) Alert.alert("RESPOSTA CORRETA!")
     }
 
     return (
