@@ -6,12 +6,13 @@ import QuestionAnswerField from '../../components/QuestionAnswerField';
 import createAxiosInstance from "../../api";
 import style from '../QuestionScreen/style';
 import { capitalize } from '../../components/utils';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 function QuestionScreen() {
     
     const [question, setQuestion] = useState({});
-
     const [nome, setNome] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
     const questionId=2;
 
     useEffect(async () => {
@@ -22,13 +23,16 @@ function QuestionScreen() {
 
     useEffect(() => {
        async function getQuestion () {
-            const axios = await createAxiosInstance();
-            axios.get(`/question/${questionId}`).then(res => {
-                var data = res.data;
-                setQuestion(data);
-            }).catch((error)=>{
-                console.warn("ERRO: ", error);
-            })
+           if (isLoading) {
+                const axios = await createAxiosInstance();
+                axios.get(`/question/${questionId}`).then(res => {
+                    var data = res.data;
+                    setQuestion(data);
+                    setIsLoading(false);
+                }).catch((error)=>{
+                    console.warn("ERRO: ", error);
+                })  
+            }
        }
         getQuestion();
     }, [])
@@ -43,8 +47,10 @@ function QuestionScreen() {
                 </View>
                 <Text>Nome 2</Text>
             </View>
-
-
+            <Spinner
+                visible={isLoading}
+                textContent={'Carregando...'}
+            />
             {question.options &&
                 <View>
                     <View style={style.question}>
