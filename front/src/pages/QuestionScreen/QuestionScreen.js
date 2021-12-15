@@ -38,7 +38,7 @@ function QuestionScreen() {
             <View style={style.questionScreenHeader}>
                 <Text>{nome}</Text>
                 <View style={style.infoMatch}>
-                    <Text>30 Segundosss</Text>
+                    <Text>30 Segundos</Text>
                     <Text style={style.area}>História</Text>
                 </View>
                 <Text>Nome 2</Text>
