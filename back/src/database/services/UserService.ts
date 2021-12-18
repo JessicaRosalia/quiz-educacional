@@ -1,22 +1,22 @@
 
 import * as userDal from '../dal/user'
-import { UserInput, UserOuput } from '../models/User'
+import { UserInput, UserOutput } from '../models/User'
 
-export const create = async (payload: UserInput): Promise<UserOuput> => {
+export const create = async (payload: UserInput): Promise<UserOutput> => {
 
     return userDal.create(payload)
 }
 
-export const update = async (id: number, payload: Partial<UserInput>): Promise<UserOuput> => {
+export const update = async (id: number, payload: Partial<UserInput>): Promise<UserOutput> => {
 
     return userDal.update(id, payload)
 }
 
-export const getById = (id: number): Promise<UserOuput> => {
+export const getById = (id: number): Promise<UserOutput> => {
     return userDal.getById(id)
 }
 
-export const getByEmail = (email: string): Promise<UserOuput> => {
+export const getByEmail = (email: string): Promise<UserOutput> => {
     return userDal.getByEmail(email)
 }
 

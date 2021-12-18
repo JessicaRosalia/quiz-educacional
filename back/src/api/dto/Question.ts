@@ -19,3 +19,16 @@ export interface Question {
     prompt: string,
     options: Option[]
 }
+
+/**
+ * @example {
+ * userId: 1,
+ * questionId: 2,
+ * optionId: 3,
+ *}
+ */
+export interface Answer {
+    userId: number,
+    questionId: number,
+    optionId: number
+}

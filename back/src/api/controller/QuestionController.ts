@@ -1,5 +1,6 @@
 import * as QuestionService from '../../database/services/QuestionService'
-import { Question } from '../dto/Question'
+import * as AnswerService from '../../database/services/AnswerService'
+import { Answer, Question } from '../dto/Question'
 
 import {
     Controller,
@@ -8,6 +9,7 @@ import {
     Body,
     Get,
     Path,
+    BodyProp,
 } from "tsoa";
 
 export const create = async (question: Question) => {
@@ -41,8 +43,12 @@ export class QuestionController extends Controller {
      * @param questionId ID da questão
      * @returns Dados da resposta a questão.
      */
-    @Get("answer/{questionId}")
-    public async answer(@Path() questionId: number) {
-        return QuestionService.getAnswerById(questionId);
+    @Post("answer")
+    public async answer(
+        @Body() { questionId, userId, optionId }: Answer
+    ) {
+        let o = await QuestionService.getAnswerById(questionId);
+        let answer = AnswerService.findOrCreate(userId, questionId, optionId, o.id == optionId);
+        return answer;
     }
 }

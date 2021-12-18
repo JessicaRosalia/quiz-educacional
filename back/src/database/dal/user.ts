@@ -1,7 +1,7 @@
 import { User } from '../models/User'
-import { UserInput, UserOuput } from '../models/User'
+import { UserInput, UserOutput } from '../models/User'
 
-export const create = async (userInput: UserInput): Promise<UserOuput> => {
+export const create = async (userInput: UserInput): Promise<UserOutput> => {
     const createdUser = await User.findOne({
         where: {
             email: userInput.email
@@ -17,7 +17,7 @@ export const create = async (userInput: UserInput): Promise<UserOuput> => {
     return user
 }
 
-export const findOrCreate = async (userInput: UserInput): Promise<UserOuput> => {
+export const findOrCreate = async (userInput: UserInput): Promise<UserOutput> => {
     const [user] = await User.findOrCreate({
         where: {
             id: userInput.id
@@ -28,7 +28,7 @@ export const findOrCreate = async (userInput: UserInput): Promise<UserOuput> => 
     return user
 }
 
-export const update = async (id: number, userInput: Partial<UserInput>): Promise<UserOuput> => {
+export const update = async (id: number, userInput: Partial<UserInput>): Promise<UserOutput> => {
     const user = await User.findByPk(id)
 
     if (!user) {
@@ -40,7 +40,7 @@ export const update = async (id: number, userInput: Partial<UserInput>): Promise
     return updatedUser
 }
 
-export const getById = async (id: number): Promise<UserOuput> => {
+export const getById = async (id: number): Promise<UserOutput> => {
     const user = await User.findByPk(id)
 
     if (!user) {
@@ -51,7 +51,7 @@ export const getById = async (id: number): Promise<UserOuput> => {
     return user
 }
 
-export const getByEmail = async (email: string): Promise<UserOuput> => {
+export const getByEmail = async (email: string): Promise<UserOutput> => {
     const user = await User.findOne({
         where: {
             email
