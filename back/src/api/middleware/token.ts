@@ -33,7 +33,7 @@ export function expressAuthentication(
           if (err) {
             reject(err);
           } else {
-            req.body.user_id = authData.user.id;
+            req.body.userId = authData.user.id;
             console.log(scopes);
             if (!scopes.includes(authData.user.type))
               reject(new Error("JWT não é do usuário do tipo correto."));

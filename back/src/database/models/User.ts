@@ -18,7 +18,7 @@ export interface UserAttributes {
 }
 
 export interface UserInput extends Optional<UserAttributes, 'id'> { }
-export interface UserOuput extends Required<UserAttributes> { }
+export interface UserOutput extends Required<UserAttributes> { }
 
 export class User extends Model<UserAttributes, UserInput> implements UserAttributes {
     public id!: number
@@ -98,7 +98,7 @@ User.beforeUpdate("update_password", validateUser);
 User.prototype.toJSON = function () {
     const values = Object.assign({}, this.get());
 
-    if(values.type === "student") delete values.schoolMat
+    if (values.type === "student") delete values.schoolMat
 
     delete values.password;
     return values;

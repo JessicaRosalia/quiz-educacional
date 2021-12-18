@@ -20,7 +20,7 @@ export class UserController extends Controller {
     @Security("jwt", allScopes)
     @Get()
     public async me(@Request() request: ExRequest): Promise<User> {
-        return UserService.getById(request.body.user_id);
+        return UserService.getById(request.body.userId);
     }
 
     /**
