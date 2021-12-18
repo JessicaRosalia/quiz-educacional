@@ -1,7 +1,9 @@
 import * as QuestionService from '../../database/services/QuestionService'
 import * as AnswerService from '../../database/services/AnswerService'
 import { Answer, Question } from '../dto/Question'
-
+function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 import {
     Controller,
     Post,
@@ -48,7 +50,8 @@ export class QuestionController extends Controller {
         @Body() { questionId, userId, optionId }: Answer
     ) {
         let o = await QuestionService.getAnswerById(questionId);
-        let answer = AnswerService.findOrCreate(userId, questionId, optionId, o.id == optionId);
-        return { ...answer, correctOptionId: o.id };
+        const correct = o.id == optionId;
+        await AnswerService.findOrCreate(userId, questionId, optionId, correct);
+        return { correct, correctOptionId: o.id };
     }
 }
