@@ -49,6 +49,6 @@ export class QuestionController extends Controller {
     ) {
         let o = await QuestionService.getAnswerById(questionId);
         let answer = AnswerService.findOrCreate(userId, questionId, optionId, o.id == optionId);
-        return answer;
+        return { ...answer, correctOptionId: o.id };
     }
 }
