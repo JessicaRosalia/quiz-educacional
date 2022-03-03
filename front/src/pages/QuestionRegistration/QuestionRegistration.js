@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import InputText from '../../components/InputText';
 import Label from '../../components/Label';
@@ -8,17 +8,23 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const QuestionRegistration = () => {
 
+    const [descricaoPergunta, setDescricaoPergunta] = useState("");
+    const [alternativaA, setAlternativaA] = useState("");
+    const [alternativaB, setAlternativaB] = useState("");
+    const [alternativaC, setAlternativaC] = useState("");
+    const [alternativaD, setAlternativaD] = useState("");
+
     return (
         <View>
             <ScrollView>
                 <Label label={"Matéria"} required={true}/>
                 <Select/>
-                <InputText label={"Pergunta"} required={true} placeholder={"Informe o enunciado da pergunta"} />
+                <InputText label={"Pergunta"} required={true} placeholder={"Informe o enunciado da pergunta"} onChangeValue={setDescricaoPergunta} />
                 <Label label={"Alternativas de resposta"} required={false}/>
-                <InputText label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} />
-                <InputText label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} />
-                <InputText label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} />
-                <InputText label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} />
+                <InputText label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativaA} />
+                <InputText label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} onChangeValue={setAlternativaB}/>
+                <InputText label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} onChangeValue={setAlternativaC}/>
+                <InputText label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} onChangeValue={setAlternativaD}/>
             </ScrollView>
         </View>
             
