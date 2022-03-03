@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 
 
 const Select = () => {
+    const [selectedValue, setSelectedValue] = useState("Selecione");
+
+    const handlerSelectedValue = (itemValue) => {
+        setSelectedValue(itemValue);
+    }
     return (
-        <Picker selectedValue={"Selecione"}>
+        <Picker selectedValue={selectedValue} onValueChange={(itemValue) => handlerSelectedValue(itemValue)}>
             <Picker.Item label="Selecione" value={"Selecione"}/>
             <Picker.Item label="Artes" value={"Artes"}/>
             <Picker.Item label="Ciências" value={"Ciências"}/>
