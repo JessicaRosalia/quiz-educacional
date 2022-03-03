@@ -13,12 +13,23 @@ const QuestionRegistration = () => {
     const [alternativaB, setAlternativaB] = useState("");
     const [alternativaC, setAlternativaC] = useState("");
     const [alternativaD, setAlternativaD] = useState("");
+    const [selectedValue, setSelectedValue] = useState("Selecione");
+
+
+    const handlerSelectedValue = (itemValue) => {
+        setSelectedValue(itemValue);
+    }
+
+
+    useEffect(()=> {
+        console.log(selectedValue);
+    })
 
     return (
         <View>
             <ScrollView>
                 <Label label={"Matéria"} required={true}/>
-                <Select/>
+                <Select onChangeValueSelected={setSelectedValue} selectedValue={selectedValue}/>
                 <InputText label={"Pergunta"} required={true} placeholder={"Informe o enunciado da pergunta"} onChangeValue={setDescricaoPergunta} />
                 <Label label={"Alternativas de resposta"} required={false}/>
                 <InputText label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativaA} />
