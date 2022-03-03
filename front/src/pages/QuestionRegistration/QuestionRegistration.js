@@ -7,7 +7,6 @@ import { RadioButton } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const QuestionRegistration = () => {
-    const [checked, setChecked] = useState('a');
 
     return (
         <View>
