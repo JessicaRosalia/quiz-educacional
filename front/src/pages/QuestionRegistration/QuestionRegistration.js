@@ -8,7 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { postQuestion } from '../../api/utils';
 import { Button } from 'react-native-elements/dist/buttons/Button';
 import { TouchableHighlight } from 'react-native';
-
+import style from './style';
 const QuestionRegistration = () => {
 
     const [questionDescription, setQuestionDescription] = useState("");
@@ -51,18 +51,28 @@ const QuestionRegistration = () => {
 
 
     return (
-        <View>
-            <ScrollView>
-                <Label label={"Matéria"} required={true}/>
-                <Select onChangeValueSelected={setSelectedValue} selectedValue={selectedValue}/>
-                <InputText label={"Pergunta"} required={true} placeholder={"Informe o enunciado da pergunta"} onChangeValue={setQuestionDescription} />
-                <Label label={"Alternativas de resposta"} required={false}/>
-                <InputText label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativeA} />
-                <InputText label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} onChangeValue={setAlternativeB}/>
-                <InputText label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} onChangeValue={setAlternativeC}/>
-                <InputText label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} onChangeValue={setAlternativeD}/>
-                <TouchableHighlight style={{backgroundColor: "#ccc"}} onPress={registerQuestion}><Text>Cadastrar</Text></TouchableHighlight>
-            </ScrollView>
+        <View style={style.containerRegisterQuestion}>
+            <View style={style.viewBox}>
+                <ScrollView>
+                    <View style={style.form}>
+                        <View style={style.subject}>
+                            <Label label={"Matéria"} required={true}/>
+                            <Select onChangeValueSelected={setSelectedValue} selectedValue={selectedValue}/>
+                        </View>
+                        <View style={style.questionDescription}>
+                            <InputText label={"Pergunta"} required={true} placeholder={"Informe o enunciado da pergunta"} onChangeValue={setQuestionDescription} />
+                        </View>
+                        <View style={style.alternatives}>
+                            <Text style={style.headerAlternatives}>Alternativas de resposta</Text>
+                            <InputText label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativeA} />
+                            <InputText label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} onChangeValue={setAlternativeB}/>
+                            <InputText label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} onChangeValue={setAlternativeC}/>
+                            <InputText label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} onChangeValue={setAlternativeD}/>
+                            <TouchableHighlight style={style.registerButton} onPress={registerQuestion}><Text style={style.registerText}>Cadastrar</Text></TouchableHighlight>
+                        </View>
+                    </View>
+                </ScrollView>
+            </View>
         </View>
             
             
