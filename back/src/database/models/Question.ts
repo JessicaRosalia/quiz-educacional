@@ -1,6 +1,7 @@
 import { CreateOptions, DataTypes, HasManyAddAssociationMixin, HasManyCreateAssociationMixin, HasManyGetAssociationsMixin, HasManySetAssociationsMixin, HasOneSetAssociationMixin, Model, Optional } from 'sequelize'
 import { sequelize } from '.'
 import { Option } from './Option'
+import { User } from './User'
 
 export interface QuestionAttributes {
     id: number,
@@ -59,6 +60,11 @@ Question.hasMany(Option, {
 Question.belongsTo(Option, {
     as: 'answer',
     foreignKey: 'answerId',
+    constraints: false,
+});
+Question.belongsTo(User, {
+    as: 'user',
+    foreignKey: 'userId',
     constraints: false,
 });
 
