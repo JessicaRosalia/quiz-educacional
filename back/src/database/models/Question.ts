@@ -1,6 +1,7 @@
-import { CreateOptions, DataTypes, HasManyAddAssociationMixin, HasManyCreateAssociationMixin, HasManyGetAssociationsMixin, HasManySetAssociationsMixin, HasOneSetAssociationMixin, Model, Optional } from 'sequelize'
+import { DataTypes, HasManyAddAssociationMixin, HasManyCreateAssociationMixin, HasManyGetAssociationsMixin, HasManySetAssociationsMixin, HasOneSetAssociationMixin, Model, Optional } from 'sequelize'
 import { sequelize } from '.'
 import { Option } from './Option'
+import { QuestionType } from './QuestionType';
 import { User } from './User'
 
 export interface QuestionAttributes {
@@ -15,18 +16,25 @@ export interface QuestionOuput extends Required<QuestionAttributes> { }
 export class Question extends Model<QuestionAttributes, QuestionInput> implements QuestionAttributes {
     public id!: number
     public prompt!: string
-    // public answerId!: number
-
 
     public getOptions!: HasManyGetAssociationsMixin<Option>
     public addOptions!: HasManyAddAssociationMixin<Option[], number>;
     public createOptions!: HasManyCreateAssociationMixin<Option>
 
+    public getUser!: HasManyGetAssociationsMixin<User>
+    public getType!: HasManyGetAssociationsMixin<QuestionType>
+
     public setAnswer!: HasOneSetAssociationMixin<Option, number>
+    public setUser!: HasOneSetAssociationMixin<User, number>
+    public setType!: HasOneSetAssociationMixin<QuestionType, number>
 
     public readonly options?: Option[];
 
     public readonly answer?: Option;
+
+    public readonly user?: User;
+
+    public readonly type?: QuestionType;
 
 
     // timestamps!
@@ -50,6 +58,12 @@ Question.init({
     sequelize,
     paranoid: true
 })
+
+Question.belongsTo(QuestionType, {
+    as: 'type',
+    foreignKey: 'question_type_id',
+    constraints: false,
+});
 
 Question.hasMany(Option, {
     sourceKey: "id",

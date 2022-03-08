@@ -23,3 +23,7 @@ export const getByEmail = (email: string): Promise<UserOutput> => {
 export const deleteById = (id: number): Promise<boolean> => {
     return userDal.deleteById(id)
 }
+
+export const exists = (id: number): Promise<boolean> => {
+    return userDal.exists(id)
+}

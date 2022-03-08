@@ -33,7 +33,7 @@ export const update = async (id: number, questionInput: Partial<QuestionInput>):
 }
 
 export const getById = async (id: number, answer?: boolean): Promise<Question> => {
-    const include = [Question.associations.options, Question.associations.user,]
+    const include = [Question.associations.options, Question.associations.user, Question.associations.type,]
     if (answer) include.push(Question.associations.answer);
 
     const question = await Question.findByPk(id, { include })

@@ -4,9 +4,13 @@ import * as questionDal from '../dal/question'
 import { sequelize } from '../models'
 import { Option, OptionInput, OptionOutput } from '../models/Option'
 import { Question, QuestionInput, QuestionOuput } from '../models/Question'
+import { QuestionType } from '../models/QuestionType'
+import { User } from '../models/User'
 
 interface QuestionServiceInput extends QuestionInput {
     options: (OptionInput & { answer: boolean })[]
+    userId: number,
+    questionTypeId: number,
 }
 
 interface QuestionServiceOutput extends QuestionOuput {
@@ -41,6 +45,8 @@ export const create = async (payload: QuestionServiceInput): Promise<QuestionSer
         await q.addOptions(options, { transaction });
 
         await q.setAnswer(options[answerIndex], { transaction });
+        await q.setUser(await User.findByPk(inputQuestion.userId), { transaction });
+        await q.setType(await QuestionType.findByPk(inputQuestion.questionTypeId), { transaction });
         await transaction.commit();
 
         return questionDal.getById(q.id);
