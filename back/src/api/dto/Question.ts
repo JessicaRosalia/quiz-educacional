@@ -19,7 +19,7 @@ export interface Question {
     prompt: string,
     options: Option[]
     userId: number,
-    questionTypeId: number,
+    questionCategoryId: number,
 }
 
 /**

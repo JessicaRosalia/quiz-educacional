@@ -4,32 +4,32 @@ import { Option } from './Option'
 import { Question } from './Question'
 
 
-export interface QuestionTypeAttributes {
+export interface QuestionCategoryAttributes {
     id: number,
-    category: string,
-    subject: string
+    knowledgeArea: string,
+    discipline: string
 }
 
-export interface QuestionInput extends Optional<QuestionTypeAttributes, 'id'> { }
-export interface QuestionOuput extends Required<QuestionTypeAttributes> { }
+export interface QuestionCategoryInput extends Optional<QuestionCategoryAttributes, 'id'> { }
+export interface QuestionCategoryOuput extends Required<QuestionCategoryAttributes> { }
 
-export class QuestionType extends Model<QuestionTypeAttributes, QuestionInput> implements QuestionTypeAttributes {
+export class QuestionCategory extends Model<QuestionCategoryAttributes, QuestionCategoryInput> implements QuestionCategoryAttributes {
     public id!: number
-    public category!: string
-    public subject!: string
+    public knowledgeArea!: string
+    public discipline!: string
 }
 
-QuestionType.init({
+QuestionCategory.init({
     id: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
     },
-    category: {
+    knowledgeArea: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    subject: {
+    discipline: {
         type: DataTypes.STRING,
         allowNull: false
     },
