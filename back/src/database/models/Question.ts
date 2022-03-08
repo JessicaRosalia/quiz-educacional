@@ -1,7 +1,7 @@
 import { DataTypes, HasManyAddAssociationMixin, HasManyCreateAssociationMixin, HasManyGetAssociationsMixin, HasManySetAssociationsMixin, HasOneSetAssociationMixin, Model, Optional } from 'sequelize'
 import { sequelize } from '.'
 import { Option } from './Option'
-import { QuestionCategory } from './QuestionType';
+import { QuestionCategory } from './QuestionCategory';
 import { User } from './User'
 
 export interface QuestionAttributes {
@@ -11,7 +11,7 @@ export interface QuestionAttributes {
 }
 
 export interface QuestionInput extends Optional<QuestionAttributes, 'id'> { }
-export interface QuestionOuput extends Required<QuestionAttributes> { }
+export interface QuestionOutput extends Required<QuestionAttributes> { }
 
 export class Question extends Model<QuestionAttributes, QuestionInput> implements QuestionAttributes {
     public id!: number
@@ -34,7 +34,7 @@ export class Question extends Model<QuestionAttributes, QuestionInput> implement
 
     public readonly user?: User;
 
-    public readonly type?: QuestionCategory;
+    public readonly category?: QuestionCategory;
 
 
     // timestamps!

@@ -1,6 +1,7 @@
 import { Transaction } from 'sequelize/types'
 import { Question } from '../models/Question'
-import { QuestionInput, QuestionOuput } from '../models/Question'
+import { QuestionInput, QuestionOutput } from '../models/Question'
+import { QuestionCategory } from '../models/QuestionCategory'
 import { User } from '../models/User'
 
 export const create = async (questionInput: QuestionInput, transaction?: Transaction): Promise<Question> => {
@@ -33,7 +34,7 @@ export const update = async (id: number, questionInput: Partial<QuestionInput>):
 }
 
 export const getById = async (id: number, answer?: boolean): Promise<Question> => {
-    const include = [Question.associations.options, Question.associations.user, Question.associations.type,]
+    const include = [Question.associations.options, Question.associations.user, Question.associations.category,]
     if (answer) include.push(Question.associations.answer);
 
     const question = await Question.findByPk(id, { include })
@@ -57,5 +58,9 @@ export const deleteById = async (id: number): Promise<boolean> => {
 
 export const findAll = async (): Promise<Question[]> => {
     return await Question.findAll({ include: { all: true } });
+}
+
+export const findAllCategories = async (): Promise<QuestionCategory[]> => {
+    return await QuestionCategory.findAll();
 }
 

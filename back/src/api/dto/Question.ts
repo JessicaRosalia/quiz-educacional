@@ -12,7 +12,9 @@ import { Option } from "./Option";
  *		    "body": "Opção 2",
  *			"answer": false
  *		}
- *	]
+ *	],
+ * "userId": 1,
+ * "questionCategoryId": 1
  *}
  */
 export interface Question {

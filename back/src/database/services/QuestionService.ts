@@ -3,9 +3,9 @@ import { Transaction } from 'sequelize/types'
 import * as questionDal from '../dal/question'
 import { sequelize } from '../models'
 import { Option, OptionInput, OptionOutput } from '../models/Option'
-import { Question, QuestionInput, QuestionOuput } from '../models/Question'
-import { QuestionCategory } from '../models/QuestionType'
-import { User } from '../models/User'
+import { Question, QuestionInput, QuestionOutput } from '../models/Question'
+import { QuestionCategory, QuestionCategoryOutput } from '../models/QuestionCategory'
+import { User, UserOutput } from '../models/User'
 
 interface QuestionServiceInput extends QuestionInput {
     options: (OptionInput & { answer: boolean })[]
@@ -13,8 +13,10 @@ interface QuestionServiceInput extends QuestionInput {
     questionCategoryId: number,
 }
 
-interface QuestionServiceOutput extends QuestionOuput {
+interface QuestionServiceOutput extends QuestionOutput {
     options?: OptionOutput[],
+    user?: UserOutput,
+    category?: QuestionCategoryOutput
 }
 
 export const create = async (payload: QuestionServiceInput): Promise<QuestionServiceOutput> => {
@@ -79,4 +81,8 @@ export const deleteById = (id: number): Promise<boolean> => {
 
 export const findAll = async (): Promise<QuestionServiceOutput[]> => {
     return questionDal.findAll();
+}
+
+export const findAllCategories = async (): Promise<QuestionCategoryOutput[]> => {
+    return questionDal.findAllCategories();
 }

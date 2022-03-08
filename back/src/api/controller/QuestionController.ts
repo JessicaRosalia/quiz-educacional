@@ -33,7 +33,7 @@ export class QuestionController extends Controller {
     }
 
     /**
-     * Dados de uma questão.
+     * Lista de questões.
      * @param questionId ID da questão
      * @returns Dados da questão.
      */
@@ -44,14 +44,14 @@ export class QuestionController extends Controller {
     }
 
     /**
-     * Dados de uma questão.
+     * Lista de categorias de questões
      * @param questionId ID da questão
      * @returns Dados da questão. 
      */
     @Security("jwt", allScopes)
-    @Get("{questionId}")
-    public async getQuestion(@Path() questionId: number) {
-        return QuestionService.getById(questionId);
+    @Get("categories")
+    public async categories() {
+        return await QuestionService.findAllCategories();
     }
 
     /**
@@ -68,5 +68,16 @@ export class QuestionController extends Controller {
         const correct = o.id == optionId;
         await AnswerService.findOrCreate(userId, questionId, optionId, correct);
         return { correct, correctOptionId: o.id };
+    }
+
+    /**
+     * Dados de uma questão.
+     * @param questionId ID da questão
+     * @returns Dados da questão. 
+     */
+    @Security("jwt", allScopes)
+    @Get("{questionId}")
+    public async getQuestion(@Path() questionId: number) {
+        return QuestionService.getById(questionId);
     }
 }

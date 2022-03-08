@@ -11,7 +11,7 @@ export interface QuestionCategoryAttributes {
 }
 
 export interface QuestionCategoryInput extends Optional<QuestionCategoryAttributes, 'id'> { }
-export interface QuestionCategoryOuput extends Required<QuestionCategoryAttributes> { }
+export interface QuestionCategoryOutput extends Required<QuestionCategoryAttributes> { }
 
 export class QuestionCategory extends Model<QuestionCategoryAttributes, QuestionCategoryInput> implements QuestionCategoryAttributes {
     public id!: number
