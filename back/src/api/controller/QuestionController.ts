@@ -11,8 +11,9 @@ import {
     Body,
     Get,
     Path,
-    BodyProp,
+    Security,
 } from "tsoa";
+import { allScopes, professorScope } from '../../utils';
 
 export const create = async (question: Question) => {
     return await QuestionService.create(question);
@@ -25,6 +26,7 @@ export class QuestionController extends Controller {
      * Criar questão.
      * @returns Questão criada.
      */
+    @Security("jwt", professorScope)
     @Post()
     public async create(@Body() question: Question) {
         return QuestionService.create(question);
@@ -35,8 +37,20 @@ export class QuestionController extends Controller {
      * @param questionId ID da questão
      * @returns Dados da questão.
      */
+    @Security("jwt", professorScope)
+    @Get()
+    public async getQuestions() {
+        return QuestionService.findAll();
+    }
+
+    /**
+     * Dados de uma questão.
+     * @param questionId ID da questão
+     * @returns Dados da questão. 
+     */
+    @Security("jwt", allScopes)
     @Get("{questionId}")
-    public async get(@Path() questionId: number) {
+    public async getQuestion(@Path() questionId: number) {
         return QuestionService.getById(questionId);
     }
 
@@ -45,6 +59,7 @@ export class QuestionController extends Controller {
      * @param questionId ID da questão
      * @returns Dados da resposta a questão.
      */
+    @Security("jwt", allScopes)
     @Post("answer")
     public async answer(
         @Body() { questionId, userId, optionId }: Answer

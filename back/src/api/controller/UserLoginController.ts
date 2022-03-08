@@ -22,7 +22,7 @@ export class UserLoginController extends Controller {
     const user = await UserService.getByEmail(userInput.email);
     if (await bcrypt.compare(userInput.password, user.password)) {
       const { id, type, name } = user;
-      console.log({ user: { id, type, name } });
+      console.log("Login: ", { user: { id, type, name } });
       const token = jwt.sign(
         { user: { id, type, name } },
         process.env.JWT_SECRET

@@ -1,6 +1,7 @@
 import { Transaction } from 'sequelize/types'
 import { Question } from '../models/Question'
 import { QuestionInput, QuestionOuput } from '../models/Question'
+import { User } from '../models/User'
 
 export const create = async (questionInput: QuestionInput, transaction?: Transaction): Promise<Question> => {
     const question = await Question.create(questionInput, { transaction })
@@ -32,7 +33,7 @@ export const update = async (id: number, questionInput: Partial<QuestionInput>):
 }
 
 export const getById = async (id: number, answer?: boolean): Promise<Question> => {
-    const include = [Question.associations.options]
+    const include = [Question.associations.options, Question.associations.user,]
     if (answer) include.push(Question.associations.answer);
 
     const question = await Question.findByPk(id, { include })
@@ -52,5 +53,9 @@ export const deleteById = async (id: number): Promise<boolean> => {
     })
 
     return !!deletedQuestionCount
+}
+
+export const findAll = async (): Promise<Question[]> => {
+    return await Question.findAll({ include: { all: true } });
 }
 
