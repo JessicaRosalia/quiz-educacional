@@ -31,7 +31,7 @@ export default StyleSheet.create({
         fontSize: 16.5,
     },
     registerButton: {
-        backgroundColor: "#39980C",
+        backgroundColor: "#42AB11",
         width: "95%",
         height: 54,
         borderRadius: 7,
