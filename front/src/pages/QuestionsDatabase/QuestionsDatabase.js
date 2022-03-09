@@ -1,64 +1,49 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { getQuestion, getQuestions, postQuestion } from '../../api/utils';
+import { getQuestions } from '../../api/utils';
 import { TouchableHighlight } from 'react-native';
 import style from './style';
-import { Header, SearchBar } from 'react-native-elements';
 import backIcon from "../../assets/icons/btn-voltar.svg";
+import Header from '../../components/Header';
+import SearchBar from '../../components/SearchBar';
 const QuestionsDatabase = () => {
     const [questionList, setQuestionList] = useState();
-    const [question, setQuestion] = useState();
-    const [search, setSearch] = useState("");
         
      useEffect(()=>{
-        getQuestions().then(question=>{
-            setQuestion({...question, question});
-        }).catch(()=>{
-            console.log("Por algum motivo a lista não pôde ser exibida.");
+        getQuestions().then(questions=>{
+            if(questions){
+                const list = questions.map((question)=>{
+                    return {descricao: question.prompt, resposta: question.answerId};
+                })
+                setQuestionList([...list])
+            }
+        }).catch((e)=>{
+            console.log(e, "Por algum motivo a lista não pôde ser exibida. Tente novamente!");
         })
     },[]);
+
+    useEffect(()=>{
+        console.log(questionList);
+    },[questionList])
 
     return (
         <View style={style.container}>
             <View style={style.viewBox}>
-                <Header
-                    containerStyle={{
-                        backgroundColor: "#f6f6f6",
-                    }}
-                    leftComponent={{
-                        icon: 'menu',
-                        color: "#0C066B"
-                    }}
-                    centerComponent={{
-                        text: "Meu banco de Questões",
-                        style: style.titleHeader,
-                    }}
-                />
+                <Header/>
                 <ScrollView>
-                    <SearchBar
-                        placeholder="Pesquise aqui"
-                        containerStyle={{
-                            width: 315,
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            backgroundColor: "#fff",
-                            borderRadius: 7,
-                            borderTopWidth: 0,
-                            borderBottomWidth: 0
-                        }}
-                        inputContainerStyle={{
-                            backgroundColor: "#fff",
-                        }}
-                        round
-                        autoCorrect={false}
-                        value={search}
-                        onChangeText={(text)=>setSearch(text)}
-                    />
-                    <View style={style.questionCard}>
-                        <Text>{question?.prompt}</Text> 
-                        <TouchableHighlight style={style.registerButton}><Text style={style.registerText}>Cadastrar nova pergunta</Text></TouchableHighlight>
+                    <SearchBar/>
+                    <View style={style.containerCards}>
+                            {questionList?.map((question, index)=>{
+                                return (
+                                    <View style={style.questionCard} key={index}>
+                                        <Text style={style.descriptionCard}>{question.descricao}</Text>     
+                                        <Text style={style.answerCard}>Resposta correta: {question.resposta}</Text> 
+                                    </View>
+                                )
+                            })}   
                     </View>
+                    <TouchableHighlight onPress={() => Alert.alert("Nada aqui ainda")} style={style.registerButton}><Text style={style.registerText}>+</Text></TouchableHighlight>
                 </ScrollView>
             </View>
         </View>
