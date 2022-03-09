@@ -7,7 +7,7 @@ import style from './style';
 import backIcon from "../../assets/icons/btn-voltar.svg";
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
-const QuestionsDatabase = () => {
+const QuestionsDatabase = ({navigation}) => {
     const [questionList, setQuestionList] = useState();
         
      useEffect(()=>{
@@ -22,10 +22,6 @@ const QuestionsDatabase = () => {
             console.log(e, "Por algum motivo a lista não pôde ser exibida. Tente novamente!");
         })
     },[]);
-
-    useEffect(()=>{
-        console.log(questionList);
-    },[questionList])
 
     return (
         <View style={style.container}>
@@ -43,7 +39,7 @@ const QuestionsDatabase = () => {
                                 )
                             })}   
                     </View>
-                    <TouchableHighlight onPress={() => Alert.alert("Nada aqui ainda")} style={style.registerButton}><Text style={style.registerText}>+</Text></TouchableHighlight>
+                    <TouchableHighlight onPress={() => navigation.navigate("QuestionRegistration") } style={style.registerButton}><Text style={style.registerText}>+</Text></TouchableHighlight>
                 </ScrollView>
             </View>
         </View>
