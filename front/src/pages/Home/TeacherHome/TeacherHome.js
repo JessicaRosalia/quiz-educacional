@@ -13,7 +13,7 @@ const TeacherHome = ({ navigation }) => {
                 <HeaderHome navigation={navigation} />
                 <View style={style.containerMenus}>
                     <View style={style.cardUm}>
-                        <CardOptions navigation={navigation} routeName="QuestionRegistration">
+                        <CardOptions navigation={navigation} routeName="QuestionsDatabase">
                             <Image source={require("../../../assets/icons/prof-cadastroQuestoes.png")} />
                             <Text>Questões</Text>
                             <Text>Gerencie seu banco</Text>

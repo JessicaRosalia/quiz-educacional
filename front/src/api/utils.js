@@ -17,3 +17,11 @@ export async function postQuestion(parameters){
     });
     return response.data;
 }
+
+export async function getQuestions(){
+
+    const axios = await createAxiosInstance();
+    const response = await axios.get(`/questions`, {
+    });
+    return response.data;
+}
