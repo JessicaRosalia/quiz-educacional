@@ -9,6 +9,8 @@ const SearchBar = () => {
                 width: 315,
                 marginLeft: "auto",
                 marginRight: "auto",
+                marginTop: 40,
+                marginBottom: 20,
                 backgroundColor: "#fff",
                 borderRadius: 7,
                 borderTopWidth: 0,
