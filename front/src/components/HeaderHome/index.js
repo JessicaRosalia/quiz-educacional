@@ -10,17 +10,24 @@ const HeaderHome = ({ navigation }) => {
 
     const [nome, setNome] = useState("");
 
+    const navigateResetLogin = () => navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+    });
+
     useEffect(async () => {
         const token = await SecureStore.getItemAsync("auth-token");
-        const user = getUserInfo(token);
-        setNome(capitalize(user.name));
+        if (!token) {
+            navigateResetLogin();
+        } else {
+            const user = getUserInfo(token);
+            setNome(capitalize(user.name));
+        }
     })
-
-
 
     const sair = async () => {
         await SecureStore.deleteItemAsync("auth-token").then(() => {
-            navigation.navigate("Login");
+            navigateResetLogin();
         })
     }
 
