@@ -7,6 +7,7 @@ const Header = () => {
         <HeaderRN
             containerStyle={{
                 backgroundColor: "#f6f6f6",
+                paddingVertical: 20,
             }}
             leftComponent={{
                 icon: 'menu',
