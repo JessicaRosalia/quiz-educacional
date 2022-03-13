@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, SafeAreaView, Text, View } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { Alert, SafeAreaView, Text, View , ScrollView, TouchableOpacity} from 'react-native';
 import { getQuestions } from '../../api/utils';
 import style from './style';
 import backIcon from "../../assets/icons/btn-voltar.svg";

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import InputText from '../../components/InputText';
 import Label from '../../components/Label';
 import Select from '../../components/Select';
-import { ScrollView } from 'react-native-gesture-handler';
 import { postQuestion } from '../../api/utils';
 import { TouchableHighlight } from 'react-native';
 import style from './style';

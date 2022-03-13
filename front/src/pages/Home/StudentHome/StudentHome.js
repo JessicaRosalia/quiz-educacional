@@ -1,6 +1,5 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { Image, Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CardOptions from "../../../components/CardOptions";
 import HeaderHome from "../../../components/HeaderHome";
