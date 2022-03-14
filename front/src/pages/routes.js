@@ -10,6 +10,7 @@ import Registration from './Registration'
 import StartUp from './StartUp';
 import QuestionScreen from './QuestionScreen/QuestionScreen.js';
 import QuestionRegistration from './QuestionRegistration/QuestionRegistration';
+import QuestionsDatabase from './QuestionsDatabase/QuestionsDatabase';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ const Routes = () => {
                 <Stack.Screen name="Registration" component={Registration} />
                 <Stack.Screen name="QuestionScreen" component={QuestionScreen} />
                 <Stack.Screen name="QuestionRegistration" component={QuestionRegistration} />
+                <Stack.Screen name="QuestionsDatabase" component={QuestionsDatabase} />
             </Stack.Navigator>
         </NavigationContainer>
     )

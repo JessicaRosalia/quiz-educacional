@@ -45,7 +45,7 @@ export const create = async (payload: QuestionServiceInput): Promise<QuestionSer
 
         return questionDal.getById(q.id);
     } catch (error) {
-        console.log(`rollback: ${transaction}`)
+        console.error(`rollback: ${transaction}`)
         await transaction.rollback();
         throw error;
     }
@@ -69,4 +69,8 @@ export const getAnswerById = async (id: number): Promise<Option> => {
 
 export const deleteById = (id: number): Promise<boolean> => {
     return questionDal.deleteById(id)
+}
+
+export const findAll = async (): Promise<QuestionServiceOutput[]> => {
+    return questionDal.findAll();
 }
