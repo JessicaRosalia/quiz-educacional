@@ -1,12 +1,19 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+    container: {
+        height: "100%",
+    },
     registerButton: {
+        position: "absolute",
+        bottom: 2370,
+        right: 10,
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#0C066B",
-        height: 80,
-        width: 80,
+        resizeMode: "contain",
+        width: 70,
+        height: 70,
         borderRadius: 50,
     },
     registerText: {
