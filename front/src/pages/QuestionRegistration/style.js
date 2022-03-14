@@ -1,23 +1,33 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-    containerRegisterQuestion: {
-        backgroundColor: "#f1f1f1",
+    container: {
         height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
+        backgroundColor: "#fff",
+    },
+    pageTitle: {
+        color: "#0C066B",
+        fontWeight: "bold",
+        fontSize: 20,
+        marginLeft: 25,
+        marginTop: 30,
+        marginBottom: 35,
     },
     viewBox: {
         width: "90%",
-        backgroundColor: "#fff",
+        borderColor: "#c4c4c4",
+        borderWidth: 0.2,
+        shadowColor: "#c4c4c4",
         borderRadius: 20,
         paddingLeft: 10,
         paddingRight: 10,
         paddingTop: 20,
-        paddingBottom: 30,
-        height: "90%",
+        paddingBottom: 20,
+        height: "85%",
+        marginTop: "auto",
+        marginBottom: 20,
+        marginLeft: "auto",
+        marginRight: "auto",
     },
     subject: {
         marginBottom: 30,
