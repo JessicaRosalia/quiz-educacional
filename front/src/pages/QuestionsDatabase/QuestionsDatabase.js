@@ -46,7 +46,7 @@ const QuestionsDatabase = ({navigation}) => {
                                 animationType='slide'
                                 transparent={true}
                                 visible={modalIsVisible}
-                                onRequestClose
+                                onRequestClose={() => {setModalIsVisible(!modalIsVisible)}}
                             >
                                 <QuestionRegistration/>
                             </Modal>
