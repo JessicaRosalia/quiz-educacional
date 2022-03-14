@@ -51,31 +51,31 @@ const QuestionRegistration = () => {
 
 
     return (
-        <View style={style.containerRegisterQuestion}>
-            <View style={style.viewBox}>
-                <ScrollView>
-                    <View style={style.form}>
-                        <View style={style.subject}>
-                            <Label label={"Matéria"} required={true}/>
-                            <Select onChangeValueSelected={setSelectedValue} selectedValue={selectedValue}/>
+        <View style={style.container}>
+            <Text style={style.pageTitle}>Cadastro de Questão</Text>
+
+                <View style={style.viewBox}>
+                    <ScrollView>
+                        <View style={style.form}>
+                            <View style={style.subject}>
+                                <Label label={"Matéria"} required={true}/>
+                                <Select onChangeValueSelected={setSelectedValue} selectedValue={selectedValue}/>
+                            </View>
+                            <View style={style.questionDescription}>
+                                <InputText label={"Pergunta"} required={true} placeholder={"Informe o enunciado da pergunta"} onChangeValue={setQuestionDescription} />
+                            </View>
+                            <View style={style.alternatives}>
+                                <Text style={style.headerAlternatives}>Alternativas de resposta</Text>
+                                <InputText label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativeA} />
+                                <InputText label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} onChangeValue={setAlternativeB}/>
+                                <InputText label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} onChangeValue={setAlternativeC}/>
+                                <InputText label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} onChangeValue={setAlternativeD}/>
+                                <TouchableHighlight style={style.registerButton} onPress={registerQuestion}><Text style={style.registerText}>Cadastrar</Text></TouchableHighlight>
+                            </View>
                         </View>
-                        <View style={style.questionDescription}>
-                            <InputText label={"Pergunta"} required={true} placeholder={"Informe o enunciado da pergunta"} onChangeValue={setQuestionDescription} />
-                        </View>
-                        <View style={style.alternatives}>
-                            <Text style={style.headerAlternatives}>Alternativas de resposta</Text>
-                            <InputText label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativeA} />
-                            <InputText label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} onChangeValue={setAlternativeB}/>
-                            <InputText label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} onChangeValue={setAlternativeC}/>
-                            <InputText label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} onChangeValue={setAlternativeD}/>
-                            <TouchableHighlight style={style.registerButton} onPress={registerQuestion}><Text style={style.registerText}>Cadastrar</Text></TouchableHighlight>
-                        </View>
-                    </View>
-                </ScrollView>
-            </View>
-        </View>
-            
-            
+                    </ScrollView>
+                </View>
+        </View>    
     );
 };
 
