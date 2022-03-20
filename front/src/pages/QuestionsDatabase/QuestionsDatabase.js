@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, SafeAreaView, Text, View , ScrollView, TouchableOpacity, Modal} from 'react-native';
 import { getQuestions } from '../../api/utils';
 import style from './style';
@@ -6,9 +6,7 @@ import backIcon from "../../assets/icons/btn-voltar.svg";
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import QuestionsCard from '../../components/QuestionsCard';
-import  {Modalize}  from  'react-native-modalize' ;
 import QuestionRegistration from '../QuestionRegistration/QuestionRegistration';
-import { FAB } from 'react-native-elements';
 const QuestionsDatabase = ({navigation}) => {
     const [questionList, setQuestionList] = useState();
 
