@@ -1,9 +1,6 @@
 import * as QuestionService from '../../database/services/QuestionService'
 import * as AnswerService from '../../database/services/AnswerService'
 import { Answer, Question, QuestionDelete, QuestionUpdate } from '../dto/Question'
-function sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 import {
     Controller,
     Post,
