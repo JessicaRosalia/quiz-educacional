@@ -1,4 +1,4 @@
-import { Option } from "./Option";
+import { Option, OptionUpdate } from "./Option";
 
 /**
  * @example {
@@ -12,14 +12,50 @@ import { Option } from "./Option";
  *		    "body": "Opção 2",
  *			"answer": false
  *		}
- *	]
+ *	],
+ * "userId": 1,
+ * "questionCategoryId": 1
  *}
  */
 export interface Question {
     prompt: string,
     options: Option[]
-    userId: number
+    userId: number,
+    questionCategoryId: number,
 }
+
+/**
+ * @example {
+ * "prompt": "Isso é uma pergunta teste.",
+ * "options": [
+ *      {
+ *		    "body": "Opção 1",
+ *			"answer": true
+ *		},
+ *		{
+ *		    "body": "Opção 2",
+ *			"answer": false
+ *		}
+ *	],
+ * "userId": 1,
+ * "questionCategoryId": 1
+ *}
+ */
+export interface QuestionUpdate {
+    id: number,
+    prompt?: string,
+    options?: OptionUpdate[]
+    userId?: number,
+    questionCategoryId?: number,
+}
+
+/**
+ * @example {
+ * userId: 1,
+ * questionId: 2,
+ *}
+ */
+export interface QuestionDelete { userId: number, questionId: number }
 
 /**
  * @example {

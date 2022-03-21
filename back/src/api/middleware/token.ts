@@ -1,6 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import { UserType } from "../dto/User";
+import * as UserService from '../../database/services/UserService'
 
 interface AuthData {
   user: {
@@ -30,15 +31,17 @@ export function expressAuthentication(
         bearerToken,
         process.env.JWT_SECRET,
         (err, authData: AuthData) => {
-          if (err) {
-            reject(err);
-          } else {
+          if (err) reject(err);
+
+          UserService.exists(authData.user.id).then(exist => {
+            if (!exist) reject(new Error("usuário não existe"));
+
             req.body.userId = authData.user.id;
             if (!scopes.includes(authData.user.type))
-              reject(new Error("JWT não é do usuário do tipo correto."));
+              reject(new Error("usuário sem privilégios"));
 
             resolve(authData);
-          }
+          })
         }
       );
     }

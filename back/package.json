@@ -12,6 +12,7 @@
     "dev": "concurrently \"nodemon -x tsoa spec-and-routes\" \"nodemon\"",
     "predev-docker": "tsoa spec-and-routes",
     "dev-docker": "NODE_ENV=development-docker concurrently \"nodemon -x tsoa spec-and-routes\" \"nodemon\"",
+    "migrate": "sequelize-cli db:seed:all",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

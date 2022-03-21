@@ -74,3 +74,6 @@ export const deleteById = async (id: number): Promise<boolean> => {
     return !!deletedUserCount
 }
 
+export const exists = async (id: number): Promise<boolean> => {
+    return (await User.count({ where: { id } })) === 1
+}

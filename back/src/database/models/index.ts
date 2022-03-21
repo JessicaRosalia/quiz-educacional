@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import { User } from "./User";
+import { QuestionCategory } from './QuestionCategory';
 import { Question } from './Question';
 import { Option } from './Option';
 import { Answer } from './Answer';

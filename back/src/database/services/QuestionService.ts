@@ -1,16 +1,24 @@
 
 import { Transaction } from 'sequelize/types'
+import { QuestionUpdate } from '../../api/dto/Question'
 import * as questionDal from '../dal/question'
+import * as optionDal from '../dal/option'
 import { sequelize } from '../models'
 import { Option, OptionInput, OptionOutput } from '../models/Option'
-import { Question, QuestionInput, QuestionOuput } from '../models/Question'
+import { Question, QuestionInput, QuestionOutput } from '../models/Question'
+import { QuestionCategory, QuestionCategoryOutput } from '../models/QuestionCategory'
+import { User, UserOutput } from '../models/User'
 
 interface QuestionServiceInput extends QuestionInput {
     options: (OptionInput & { answer: boolean })[]
+    userId: number,
+    questionCategoryId: number,
 }
 
-interface QuestionServiceOutput extends QuestionOuput {
+interface QuestionServiceOutput extends QuestionOutput {
     options?: OptionOutput[],
+    user?: UserOutput,
+    category?: QuestionCategoryOutput
 }
 
 export const create = async (payload: QuestionServiceInput): Promise<QuestionServiceOutput> => {
@@ -41,6 +49,8 @@ export const create = async (payload: QuestionServiceInput): Promise<QuestionSer
         await q.addOptions(options, { transaction });
 
         await q.setAnswer(options[answerIndex], { transaction });
+        await q.setUser(await User.findByPk(inputQuestion.userId), { transaction });
+        await q.setCategory(await QuestionCategory.findByPk(inputQuestion.questionCategoryId), { transaction });
         await transaction.commit();
 
         return questionDal.getById(q.id);
@@ -49,13 +59,14 @@ export const create = async (payload: QuestionServiceInput): Promise<QuestionSer
         await transaction.rollback();
         throw error;
     }
-
-
 }
 
-export const update = async (id: number, payload: Partial<QuestionServiceInput>): Promise<QuestionServiceOutput> => {
-    const { options, ...inputQuestion } = payload
-    return questionDal.update(id, inputQuestion as QuestionInput)
+export const update = async (question: QuestionUpdate): Promise<QuestionServiceOutput> => {
+    if (question.options) {
+        console.log(question.options)
+        question.options.forEach(option => optionDal.update(option.id, option as OptionInput))
+    }
+    return questionDal.update(question.id, question as QuestionInput)
 }
 
 export const getById = (id: number): Promise<Question> => {
@@ -67,10 +78,18 @@ export const getAnswerById = async (id: number): Promise<Option> => {
     return question.answer;
 }
 
-export const deleteById = (id: number): Promise<boolean> => {
-    return questionDal.deleteById(id)
+export const deleteById = async (userId: number, questionId: number): Promise<boolean> => {
+    const q = await questionDal.getById(questionId);
+    if (q.user.id == userId)
+        q.options.forEach(option => optionDal.deleteById(option.id));
+    return questionDal.deleteById(questionId);
+    throw Error("Forbiden action.");
 }
 
 export const findAll = async (): Promise<QuestionServiceOutput[]> => {
     return questionDal.findAll();
+}
+
+export const findAllCategories = async (): Promise<QuestionCategoryOutput[]> => {
+    return questionDal.findAllCategories();
 }
