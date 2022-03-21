@@ -26,18 +26,15 @@ export interface Question {
 
 /**
  * @example {
+ * "id": 1
  * "prompt": "Isso é uma pergunta teste.",
  * "options": [
  *      {
+ *          "id": "2"
  *		    "body": "Opção 1",
  *			"answer": true
  *		},
- *		{
- *		    "body": "Opção 2",
- *			"answer": false
- *		}
  *	],
- * "userId": 1,
  * "questionCategoryId": 1
  *}
  */
