@@ -30,7 +30,7 @@ export interface Question {
  * "prompt": "Isso é uma pergunta teste.",
  * "options": [
  *      {
- *          "id": "2"
+ *          "id": 2
  *		    "body": "Opção 1",
  *		},
  *	],
