@@ -12,7 +12,7 @@ export default StyleSheet.create({
     },
     registerButton: {
         position: "absolute",
-        bottom: 2370,
+        top: 600,
         right: 10,
         alignItems: "center",
         justifyContent: "center",
@@ -25,7 +25,7 @@ export default StyleSheet.create({
     registerText: {
         color: "#fff",
         textAlign: "center",
-        lineHeight: 75,
+        lineHeight: 50,
         fontSize: 40,
     }
 })
