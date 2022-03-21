@@ -21,24 +21,27 @@ interface QuestionServiceOutput extends QuestionOutput {
     category?: QuestionCategoryOutput
 }
 
-export const create = async (payload: QuestionServiceInput): Promise<QuestionServiceOutput> => {
-    const { options: optionsInput, ...inputQuestion } = payload
 
+const testOptionAnswer = (options: boolean[], strict: boolean = false) => {
     let numOfAnswers = 0;
-    let answerIndex = -1;
-
-    optionsInput.forEach((option, index) => {
-        numOfAnswers += option.answer ? 1 : 0
-        if (option.answer) answerIndex = index
+    let answerIndex = 0;
+    options.forEach((option, index) => {
+        numOfAnswers += option ? 1 : 0
+        if (option) answerIndex = index
     })
-
     if (numOfAnswers > 1) {
         throw new Error("várias respostas fornecidas");
     }
-    if (numOfAnswers === 0) {
+    if (strict && numOfAnswers === 0) {
         throw new Error("nenhuma resposta fornecida");
     }
+    return answerIndex;
+}
 
+export const create = async (payload: QuestionServiceInput): Promise<QuestionServiceOutput> => {
+    const { options: optionsInput, ...inputQuestion } = payload
+
+    let answerIndex = testOptionAnswer(optionsInput.map(o => o.answer));
 
     let transaction: Transaction;
     try {
@@ -61,10 +64,12 @@ export const create = async (payload: QuestionServiceInput): Promise<QuestionSer
     }
 }
 
+
 export const update = async (question: QuestionUpdate): Promise<QuestionServiceOutput> => {
     if (question.options) {
-        console.log(question.options)
-        question.options.forEach(option => optionDal.update(option.id, option as OptionInput))
+        question.options.forEach(option => {
+            optionDal.update(option.id, option as OptionInput)
+        })
     }
     return questionDal.update(question.id, question as QuestionInput)
 }

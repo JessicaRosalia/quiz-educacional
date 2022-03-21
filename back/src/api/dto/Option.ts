@@ -11,12 +11,11 @@ export interface Option {
 
 /**
  * @example {
+ *  "id": 2
  *	"body": "Isso é opção teste",
- *	"answer": true
  *	}
  */
 export interface OptionUpdate {
     id: number,
     body?: string,
-    answer?: boolean
 }
