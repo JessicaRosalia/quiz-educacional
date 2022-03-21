@@ -47,7 +47,7 @@ export class QuestionController extends Controller {
     }
 
     /**
-     * Criar questão.
+     * Atualizar questão.
      * @returns Questão criada.
      */
     @Security("jwt", professorScope)
@@ -57,7 +57,7 @@ export class QuestionController extends Controller {
     }
 
     /**
-     * Criar questão.
+     * Deletar questão.
      * @returns Questão criada.
      */
     @Security("jwt", professorScope)
