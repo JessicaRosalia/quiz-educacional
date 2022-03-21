@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, SafeAreaView, Text, View , ScrollView, TouchableOpacity, Modal} from 'react-native';
+import { Alert, SafeAreaView, Text, View , ScrollView, TouchableOpacity, Modal, FlatList} from 'react-native';
 import { getQuestions } from '../../api/utils';
 import style from './style';
 import backIcon from "../../assets/icons/btn-voltar.svg";
@@ -27,30 +27,39 @@ const QuestionsDatabase = ({navigation}) => {
 
     return (
         <SafeAreaView>
-            <ScrollView>
-                <View style={style.container}>
-                    <Header />
-                    <ScrollView>
-                        <SearchBar />
-                        <QuestionsCard questionList={questionList} />
-                            <TouchableOpacity
-                                activeOpacity={0.4}
-                                onPress={() => setModalIsVisible(true)}
-                                style={style.registerButton}
-                            >
-                                <Text style={style.registerText}>+</Text>
-                            </TouchableOpacity>
-                            <Modal
-                                animationType='slide'
-                                transparent={true}
-                                visible={modalIsVisible}
-                                onRequestClose={() => {setModalIsVisible(!modalIsVisible)}}
-                            >
-                                <QuestionRegistration/>
-                            </Modal>
-                    </ScrollView>
+            <View style={style.container}>
+                <Header />
+                <SearchBar />
+                <View style={style.listCards}>
+                    <FlatList
+                        data={questionList}
+                        keyExtractor={(item, index) => index}
+                        renderItem={({item})=> (
+                            <QuestionsCard
+                                id={item.id}
+                                data={item}
+                                handleLeft={()=>alert("editar")}
+                                handleRight={()=>alert("excluir")}
+                            />
+                        ) }
+                    />
                 </View>
-            </ScrollView>
+                <TouchableOpacity
+                    activeOpacity={0.4}
+                    onPress={() => setModalIsVisible(true)}
+                    style={style.registerButton}
+                >
+                    <Text style={style.registerText}>+</Text>
+                </TouchableOpacity>
+                <Modal
+                    animationType='slide'
+                    transparent={true}
+                    visible={modalIsVisible}
+                    onRequestClose={() => {setModalIsVisible(!modalIsVisible)}}
+                >
+                    <QuestionRegistration/>
+                </Modal>
+            </View>
         </SafeAreaView>    
     );
 };

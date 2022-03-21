@@ -4,6 +4,12 @@ export default StyleSheet.create({
     container: {
         height: "100%",
     },
+    listCards: {
+        display: "flex",
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
     registerButton: {
         position: "absolute",
         bottom: 2370,

@@ -1,19 +1,74 @@
 import React from 'react';
-import { Text, View } from "react-native";
+import { Text, View, Animated, Image, TouchableOpacity } from "react-native";
 import style from './style.js';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-const QuestionsCard = ({questionList}) => {
+const QuestionsCard = ({handleLeft, handleRight, data}) => {
+
+    function LeftActions(progress, dragX) {
+
+        const scale = dragX.interpolate({
+            inputRange:[0, 100],
+            outputRange:[0, 1],
+            extrapolate: 'clamp',
+        })
+
+        return (
+            <View style={style.leftAction}>
+                <Animated.View
+                    style={{transform: [{scale}]}}
+                >
+                    <Image style={{width: 55, height: 55, marginLeft: 15,}} source={require("../../assets/icons/pencil.png")} />
+                </Animated.View>
+            </View>
+        )
+    }
+
+    function RightActions({progress, dragX, onPress}) {
+
+        const scale = dragX.interpolate({
+            inputRange:[-100, 0],
+            outputRange:[1, 0],
+            extrapolate: 'clamp',
+        })
+
+        return (
+            <TouchableOpacity onPress={onPress}>
+                <View style={style.rightAction}>
+                    <Animated.View style={{transform: [{scale}]}}>
+                        <Image style={{width: 65, height: 65, marginRight: 0,}} source={require("../../assets/icons/remove.png")} />
+                    </Animated.View>
+                </View>
+            </TouchableOpacity>
+        )
+
+    }
+
     return (
-        <View style={style.containerCards}>
-            {questionList?.map((question, index)=>{
-                return (
-                    <View style={style.questionCard} key={index}>
-                        <Text style={style.descriptionCard}>{question.descricao}</Text>     
-                        <Text style={style.answerCard}>Resposta correta: {question.resposta}</Text> 
-                    </View>
-                )
-            })} 
-        </View>
+        <Swipeable
+            renderLeftActions={LeftActions}
+            onSwipeableLeftOpen={handleLeft}
+            renderRightActions={
+                (progress, dragX) => <RightActions progress={progress} dragX={dragX} onPress={handleRight}/>}
+        > 
+            <View style={style.questionCard}>
+                <Text style={style.descriptionCard}>{data?.descricao}</Text>     
+                <Text style={style.answerCard}>Resposta correta: {data?.resposta}</Text> 
+            </View> 
+        </Swipeable>
     )
 };
 export default QuestionsCard;
+
+
+             {/* <View style={style.containerCards}>
+                {questionList?.map((question, index)=>{
+                    return (
+                        <View style={style.questionCard} key={index}>
+                            <Text style={style.descriptionCard}>{question.descricao}</Text>     
+                            <Text style={style.answerCard}>Resposta correta: {question.resposta}</Text> 
+                        </View>
+                    )
+                })}
+                </View> 
+                 */}
