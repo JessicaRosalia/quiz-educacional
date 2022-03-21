@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import InputText from '../../components/InputText';
 import Label from '../../components/Label';
 import Select from '../../components/Select';
-import { ScrollView } from 'react-native-gesture-handler';
 import { postQuestion } from '../../api/utils';
 import { TouchableHighlight } from 'react-native';
 import style from './style';
 const QuestionRegistration = () => {
 
+    const [selectedValue, setSelectedValue] = useState("");
     const [questionDescription, setQuestionDescription] = useState("");
     const [alternativaA, setAlternativeA] = useState("");
     const [alternativeB, setAlternativeB] = useState("");
     const [alternativeC, setAlternativeC] = useState("");
     const [alternativeD, setAlternativeD] = useState("");
-    const [selectedValue, setSelectedValue] = useState("Selecione");
     const [question, setQuestion] = useState();
 
     const [errorSubject, setErrorSubject] = useState(false);
@@ -31,7 +30,7 @@ const QuestionRegistration = () => {
         }else if(alternativaA == "" || alternativeB == "" || alternativeC == "" || alternativeD == "" || selectedValue == "Selecione" || questionDescription == ""){
             setIsDisabled(true);
         }
-    },[alternativaA, alternativeB, alternativeC, alternativeD]);
+    },[questionDescription, alternativaA, alternativeB, alternativeC, alternativeD, selectedValue]);
 
     const registerIsInvalid = () => {
         let error = false
