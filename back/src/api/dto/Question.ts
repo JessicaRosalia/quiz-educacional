@@ -32,9 +32,9 @@ export interface Question {
  *      {
  *          "id": "2"
  *		    "body": "Opção 1",
- *			"answer": true
  *		},
  *	],
+ * "answerId": 2
  * "questionCategoryId": 1
  *}
  */
@@ -43,6 +43,7 @@ export interface QuestionUpdate {
     prompt?: string,
     options?: OptionUpdate[]
     userId?: number,
+    answerId?: number,
     questionCategoryId?: number,
 }
 

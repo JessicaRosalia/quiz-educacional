@@ -61,7 +61,7 @@ Question.init({
 
 Question.belongsTo(QuestionCategory, {
     as: 'category',
-    foreignKey: 'question_category_id',
+    foreignKey: 'questionCategoryId',
     constraints: false,
 });
 
