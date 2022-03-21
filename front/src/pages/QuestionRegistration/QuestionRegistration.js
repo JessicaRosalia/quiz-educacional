@@ -88,7 +88,8 @@ const QuestionRegistration = () => {
 
 
     return (
-        <View style={style.containerRegisterQuestion}>
+        <View style={style.container}>
+            <Text style={style.pageTitle}>Cadastro de Questão</Text>
             <View style={style.viewBox}>
                 <ScrollView>
                     <View style={style.form}>
@@ -111,8 +112,6 @@ const QuestionRegistration = () => {
                 </ScrollView>
             </View>
         </View>
-            
-            
     );
 };
 
