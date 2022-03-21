@@ -1,6 +1,6 @@
 import * as QuestionService from '../../database/services/QuestionService'
 import * as AnswerService from '../../database/services/AnswerService'
-import { Answer, Question } from '../dto/Question'
+import { Answer, Question, QuestionDelete, QuestionUpdate } from '../dto/Question'
 function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -12,6 +12,8 @@ import {
     Get,
     Path,
     Security,
+    Patch,
+    Delete,
 } from "tsoa";
 import { allScopes, professorScope } from '../../utils';
 
@@ -22,6 +24,18 @@ export const create = async (question: Question) => {
 
 @Route("question")
 export class QuestionController extends Controller {
+
+    /**
+     * Lista de questões.
+     * @param questionId ID da questão
+     * @returns Dados da questão.
+     */
+    @Security("jwt", professorScope)
+    @Get()
+    public async getQuestions() {
+        return QuestionService.findAll();
+    }
+
     /**
      * Criar questão.
      * @returns Questão criada.
@@ -33,14 +47,23 @@ export class QuestionController extends Controller {
     }
 
     /**
-     * Lista de questões.
-     * @param questionId ID da questão
-     * @returns Dados da questão.
+     * Criar questão.
+     * @returns Questão criada.
      */
     @Security("jwt", professorScope)
-    @Get()
-    public async getQuestions() {
-        return QuestionService.findAll();
+    @Patch()
+    public async update(@Body() question: QuestionUpdate) {
+        return QuestionService.update(question);
+    }
+
+    /**
+     * Criar questão.
+     * @returns Questão criada.
+     */
+    @Security("jwt", professorScope)
+    @Delete()
+    public async delete(@Body() question: QuestionDelete) {
+        return QuestionService.deleteById(question.userId, question.questionId);
     }
 
     /**
