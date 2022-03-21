@@ -1,7 +1,5 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Image, ScrollView, Text, View } from "react-native";
 import CardOptions from "../../../components/CardOptions";
 import HeaderHome from "../../../components/HeaderHome";
 import style from "../style";
@@ -14,7 +12,7 @@ const TeacherHome = ({ navigation }) => {
                 <HeaderHome navigation={navigation} />
                 <View style={style.containerMenus}>
                     <View style={style.cardUm}>
-                        <CardOptions>
+                        <CardOptions navigation={navigation} routeName="QuestionsDatabase">
                             <Image source={require("../../../assets/icons/prof-cadastroQuestoes.png")} />
                             <Text>Questões</Text>
                             <Text>Gerencie seu banco</Text>

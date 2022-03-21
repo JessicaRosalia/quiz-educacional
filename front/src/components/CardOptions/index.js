@@ -1,9 +1,7 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Text, Touchable, TouchableHighlightBase, View } from 'react-native';
-import { Button } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import style from '../../components/CardOptions/style';
+import { Text, TouchableOpacity, View } from 'react-native';
+import style from './style';
 
 function CardOptions({children, routeName, navigation}) {
 

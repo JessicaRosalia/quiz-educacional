@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Text } from 'react-native';
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Alert, Text, TouchableOpacity } from 'react-native';
 import style from './style';
 
 function QuestionAnswerField({ option, setAnswer, correctAnswer, wrongAnswer }) {
