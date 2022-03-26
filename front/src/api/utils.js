@@ -21,3 +21,16 @@ export async function getQuestions(){
     });
     return response.data;
 }
+
+export async function deleteQuestion(parameters){
+    const axios = await createAxiosInstance();
+    const response = await axios.delete('/question', parameters, {
+    });
+}
+
+export async function editQuestion(parameters){
+    const axios = await createAxiosInstance();
+    const response = await axios.patch(`/question`, parameters, {
+    });
+    return response.data;
+}

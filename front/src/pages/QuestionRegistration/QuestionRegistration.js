@@ -6,7 +6,7 @@ import Select from '../../components/Select';
 import { postQuestion } from '../../api/utils';
 import { TouchableHighlight } from 'react-native';
 import style from './style';
-const QuestionRegistration = () => {
+const QuestionRegistration = ({questionSelected}) => {
 
     const [selectedValue, setSelectedValue] = useState("");
     const [questionDescription, setQuestionDescription] = useState("");
@@ -23,6 +23,14 @@ const QuestionRegistration = () => {
     const [errorAlternC, setErrorAlternC] = useState(false);
     const [errorAlternD, setErrorAlternD] = useState(false);
     const [isDisabled, setIsDisabled] = useState(true);
+
+    useEffect(() => {
+        if(questionSelected){
+            console.log(questionSelected);
+            //setSelectedValue(questionSelected.selectedValue);
+            //setQuestionDescription(questionSelected.description);
+        }
+    }, [questionSelected]);
 
     useEffect(()=>{
         if (alternativaA !== "" && alternativeB !== "" && alternativeC !== "" && alternativeD !== "" && selectedValue !== "Selecione" && questionDescription !== "") {
