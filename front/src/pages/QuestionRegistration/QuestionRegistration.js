@@ -72,7 +72,9 @@ const QuestionRegistration = () => {
                 body: alternativeD,
                 answer: false
             }
-        ]
+        ],
+        userId: 1,
+        questionCategoryId: 1
     }
 
     async function registerQuestion () {
