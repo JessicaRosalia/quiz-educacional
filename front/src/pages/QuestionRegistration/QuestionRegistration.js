@@ -80,7 +80,9 @@ const QuestionRegistration = ({questionSelected}) => {
                 body: alternativeD,
                 answer: false
             }
-        ]
+        ],
+        userId: 1,
+        questionCategory: 1,
     }
 
     async function registerQuestion () {
