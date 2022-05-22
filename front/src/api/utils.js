@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import base64 from 'react-native-base64';
 import createAxiosInstance from './';
@@ -22,10 +23,17 @@ export async function getQuestions(){
     return response.data;
 }
 
-export async function deleteQuestion(parameters){
+export async function deleteQuestion(ttt){
     const axios = await createAxiosInstance();
-    const response = await axios.delete('/question', parameters, {
+    const response = axios.delete('/question', ttt, {
+        headers: {
+            
+        },
+        body: {
+            ttt
+        }
     });
+    return response.data;
 }
 
 export async function editQuestion(parameters){

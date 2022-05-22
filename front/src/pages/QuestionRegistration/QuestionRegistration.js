@@ -26,7 +26,7 @@ const QuestionRegistration = ({questionSelected}) => {
 
     useEffect(() => {
         if(questionSelected){
-            console.log(questionSelected);
+            console.log("tanana", questionSelected);
             //setSelectedValue(questionSelected.selectedValue);
             //setQuestionDescription(questionSelected.description);
         }
@@ -82,7 +82,7 @@ const QuestionRegistration = ({questionSelected}) => {
             }
         ],
         userId: 1,
-        questionCategory: 1,
+        questionCategoryId: 1,
     }
 
     async function registerQuestion () {

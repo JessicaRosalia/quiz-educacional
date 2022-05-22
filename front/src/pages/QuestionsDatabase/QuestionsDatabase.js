@@ -11,12 +11,13 @@ const QuestionsDatabase = ({navigation}) => {
     const [questionList, setQuestionList] = useState();
 
     const [modalIsVisible, setModalIsVisible] = useState(false);
+    const [questionSelected, setQuestionSelected] = useState(false);
 
     useEffect(()=>{
         getQuestions().then(questions=>{
             if(questions){
                 const list = questions.map((question)=>{
-                    return {descricao: question.prompt, resposta: question.answerId};
+                    return {userId: question.userId, questionId: question.id, descricao: question.prompt, resposta: question.answerId};
                 })
                 setQuestionList([...list])
             }
@@ -25,61 +26,34 @@ const QuestionsDatabase = ({navigation}) => {
         })
     },[]);
 
-    const questionD = {
-        userId: 1,
-        questionId: 0,
-    }
-
-    const questionEd = {
-        prompt: "Isso é uma quarta pergunta",
-        options: [
-          {
-            body: "Opção 1",
-            answer: true
-          },
-          {
-            body: "Opção 2",
-            answer: false
-          },
-          {
-            body: "Opção 3",
-            answer: false
-          },
-          {
-            body: "Opção 4",
-            answer: false
-          }
-        ],
-        userId: 1,
-        questionId: 1,
-        questionCategoryId: 1
-      }
-
-    const redirectToQuestionR = (questionSelected) => {
-
-        return (
-            <Modal
-                animationType='slide'
-                transparent={true}
-                visible={modalIsVisible}
-                onRequestClose={() => {setModalIsVisible(!modalIsVisible)}}
-            >
-                <QuestionRegistration questionSelected={questionSelected}/>
-            </Modal>
-        )
-        
-    }
-
     {/*const edittQuestion = async () => {
         await editQuestion(questionEd).then(()=> {
             console.log("editou");
         }).catch(error => console.log("erroooo", error))
     }*/}
 
-    const deleteeQuestion = async () => {
-        await deleteQuestion(questionD).then(()=> {
+    async function removeQuestion (question) {
+        const userId = question.userId;
+        const questionId = question.questionId;
+        const questionTmp = {
+            userId: userId,
+            questionId: 2
+        }
+        // const ttt = JSON.stringify(questionTmp);
+        // console.log("h", ttt);
+        // console.log("sedsds", userId, questionId, questionTmp)
+        await deleteQuestion(questionTmp).then(()=> {
             console.log("apagou");
-        }).catch(error => console.log("erroooo", error))
+        }).catch(error => console.log("erroooo", error.response.data))
+
+        // const r = await axios.delete(`/question`, questionTmp, {
+        // });
+        
+    }
+    
+    const OpenEditModal = (question) => {
+        setQuestionSelected(question);
+        setModalIsVisible(true);
     }
 
     return (
@@ -95,8 +69,8 @@ const QuestionsDatabase = ({navigation}) => {
                             <QuestionsCard
                                 id={item.id}
                                 data={item}
-                                handleLeft={(item) => redirectToQuestionR(item)}
-                                handleRight={(e) => deleteeQuestion(e)}
+                                handleLeft={() => {OpenEditModal(item)}}
+                                handleRight={() => removeQuestion(item)}
                             />
                         ) }
                     />
@@ -108,14 +82,16 @@ const QuestionsDatabase = ({navigation}) => {
                 >
                     <Text style={style.registerText}>+</Text>
                 </TouchableOpacity>
-                <Modal
-                    animationType='slide'
-                    transparent={true}
-                    visible={modalIsVisible}
-                    onRequestClose={() => {setModalIsVisible(!modalIsVisible)}}
-                >
-                    <QuestionRegistration/>
-                </Modal>
+                {modalIsVisible &&       
+                    <Modal
+                        animationType='slide'
+                        transparent={true}
+                        visible={modalIsVisible}
+                        onRequestClose={() => setModalIsVisible(!modalIsVisible)}
+                    >
+                        <QuestionRegistration questionSelected={questionSelected}/>   
+                    </Modal>   
+                }
             </View>
         </SafeAreaView>    
     );
