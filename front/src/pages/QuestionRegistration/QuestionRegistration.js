@@ -114,7 +114,7 @@ const QuestionRegistration = ({questionSelected}) => {
                         </View>
                         <View style={style.alternatives}>
                             <Text style={style.headerAlternatives}>Alternativas de resposta</Text>
-                            <InputText value={alternativeA || "dfdf"} label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativeA} errorMessage={errorAlternA} />
+                            <InputText value={alternativeA} label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativeA} errorMessage={errorAlternA} />
                             <InputText value={alternativeB} label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} onChangeValue={setAlternativeB} errorMessage={errorAlternB} />
                             <InputText value={alternativeC} label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} onChangeValue={setAlternativeC} errorMessage={errorAlternC} />
                             <InputText value={alternativeD} label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} onChangeValue={setAlternativeD} errorMessage={errorAlternD} />

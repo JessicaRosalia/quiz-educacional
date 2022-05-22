@@ -50,6 +50,12 @@ const QuestionsDatabase = ({navigation}) => {
         // });
         
     }
+
+    const openModalRegister = () => {
+        setQuestionSelected(false);
+        setModalIsVisible(true);
+
+    }
     
     const OpenEditModal = (question) => {
         setQuestionSelected(question);
@@ -77,7 +83,7 @@ const QuestionsDatabase = ({navigation}) => {
                 </View>
                 <TouchableOpacity
                     activeOpacity={0.4}
-                    onPress={() => setModalIsVisible(true)}
+                    onPress={() => openModalRegister()}
                     style={style.registerButton}
                 >
                     <Text style={style.registerText}>+</Text>
