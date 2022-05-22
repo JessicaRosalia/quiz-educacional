@@ -10,7 +10,7 @@ const QuestionRegistration = ({questionSelected}) => {
 
     const [selectedValue, setSelectedValue] = useState("");
     const [questionDescription, setQuestionDescription] = useState("");
-    const [alternativaA, setAlternativeA] = useState("");
+    const [alternativeA, setAlternativeA] = useState("");
     const [alternativeB, setAlternativeB] = useState("");
     const [alternativeC, setAlternativeC] = useState("");
     const [alternativeD, setAlternativeD] = useState("");
@@ -26,23 +26,26 @@ const QuestionRegistration = ({questionSelected}) => {
 
     useEffect(() => {
         if(questionSelected){
-            console.log("tanana", questionSelected);
             //setSelectedValue(questionSelected.selectedValue);
-            //setQuestionDescription(questionSelected.description);
+            setQuestionDescription(questionSelected.description);
+            setAlternativeA(questionSelected.alternativeA);
+            setAlternativeB(questionSelected.alternativeB);
+            setAlternativeC(questionSelected.alternativeC);
+            setAlternativeD(questionSelected.alternativeD);
         }
     }, [questionSelected]);
 
     useEffect(()=>{
-        if (alternativaA !== "" && alternativeB !== "" && alternativeC !== "" && alternativeD !== "" && selectedValue !== "Selecione" && questionDescription !== "") {
+        if (alternativeA !== "" && alternativeB !== "" && alternativeC !== "" && alternativeD !== "" && selectedValue !== "Selecione" && questionDescription !== "") {
             setIsDisabled(false);
-        }else if(alternativaA == "" || alternativeB == "" || alternativeC == "" || alternativeD == "" || selectedValue == "Selecione" || questionDescription == ""){
+        }else if(alternativeA == "" || alternativeB == "" || alternativeC == "" || alternativeD == "" || selectedValue == "Selecione" || questionDescription == ""){
             setIsDisabled(true);
         }
-    },[questionDescription, alternativaA, alternativeB, alternativeC, alternativeD, selectedValue]);
+    },[questionDescription, alternativeA, alternativeB, alternativeC, alternativeD, selectedValue]);
 
     const registerIsInvalid = () => {
         let error = false
-        if (alternativaA == null) {
+        if (alternativeA == null) {
             setErrorAlternA("Preencha o campo corretamente.");
             error = true;
         }
@@ -65,7 +68,7 @@ const QuestionRegistration = ({questionSelected}) => {
         prompt: questionDescription,
         options: [
             {
-                body: alternativaA,
+                body: alternativeA,
                 answer: false
             },
             {
@@ -107,14 +110,14 @@ const QuestionRegistration = ({questionSelected}) => {
                             <Select onChangeValueSelected={setSelectedValue} selectedValue={selectedValue}/>
                         </View>
                         <View style={style.questionDescription}>
-                            <InputText label={"Pergunta"} required={true} placeholder={"Informe o enunciado da pergunta"} onChangeValue={setQuestionDescription} errorMessage={errorDesc} />
+                            <InputText value={questionDescription} label={"Pergunta"} required={true} placeholder={"Informe o enunciado da pergunta"} onChangeValue={setQuestionDescription} errorMessage={errorDesc} />
                         </View>
                         <View style={style.alternatives}>
                             <Text style={style.headerAlternatives}>Alternativas de resposta</Text>
-                            <InputText label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativeA} errorMessage={errorAlternA} />
-                            <InputText label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} onChangeValue={setAlternativeB} errorMessage={errorAlternB} />
-                            <InputText label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} onChangeValue={setAlternativeC} errorMessage={errorAlternC} />
-                            <InputText label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} onChangeValue={setAlternativeD} errorMessage={errorAlternD} />
+                            <InputText value={alternativeA || "dfdf"} label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativeA} errorMessage={errorAlternA} />
+                            <InputText value={alternativeB} label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} onChangeValue={setAlternativeB} errorMessage={errorAlternB} />
+                            <InputText value={alternativeC} label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} onChangeValue={setAlternativeC} errorMessage={errorAlternC} />
+                            <InputText value={alternativeD} label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} onChangeValue={setAlternativeD} errorMessage={errorAlternD} />
                             <TouchableHighlight disabled={isDisabled} style={style.registerButton} onPress={registerQuestion}><Text style={style.registerText}>Cadastrar</Text></TouchableHighlight>
                         </View>
                     </View>

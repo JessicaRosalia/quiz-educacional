@@ -17,7 +17,7 @@ const QuestionsDatabase = ({navigation}) => {
         getQuestions().then(questions=>{
             if(questions){
                 const list = questions.map((question)=>{
-                    return {userId: question.userId, questionId: question.id, descricao: question.prompt, resposta: question.answerId};
+                    return {userId: question.userId, questionId: question.id, selectedValue: question.selectedValue, description: question.prompt, alternativeA: question.options[0].body, alternativeB: question.options[1]?.body, alternativeC: question.options[2]?.body, alternativeD: question.options[3]?.body, answer: question.answerId};
                 })
                 setQuestionList([...list])
             }
