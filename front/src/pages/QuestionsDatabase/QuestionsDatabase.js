@@ -22,7 +22,7 @@ const QuestionsDatabase = ({navigation}) => {
                 setQuestionList([...list])
             }
         }).catch(()=>{
-            Alert.alert("Por algum motivo a lista não pôde ser exibida. Tente novamente!");
+            return <Text>Ops! Por algum motivo a lista não pôde ser exibida. Tente novamente!</Text>
         })
     },[questionList]);
 
@@ -61,7 +61,8 @@ const QuestionsDatabase = ({navigation}) => {
                 <Header />
                 <SearchBar />
                 <View style={style.listCards}>
-                    <FlatList
+                    {questionList ?
+                    (<FlatList
                         data={questionList}
                         keyExtractor={(item, index) => index}
                         renderItem={({item})=> (
@@ -72,7 +73,11 @@ const QuestionsDatabase = ({navigation}) => {
                                 handleRight={() => removeQuestion(item)}
                             />
                         ) }
-                    />
+                    />)
+                : <View>
+                    <Text>Você não possui nenhuma questão cadastrada ainda.</Text>
+                </View>
+                }
                 </View>
                 <TouchableOpacity
                     activeOpacity={0.4}
