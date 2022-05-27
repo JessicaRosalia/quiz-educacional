@@ -9,7 +9,7 @@ const InputText = ({value, label, placeholder, onChangeValue, errorMessage}) => 
     return (
         <View style={style.input}>
             <Label label={label} required={true}/>
-            <Input value={value} placeholder={placeholder} keyboardType="default" selectionColor={"#c3c3c3"} placeholderTextColor="#c3c3c3" onChangeText={value => onChangeValue(value)} errorMessage={errorMessage} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
+            <Input defaultValue={value} placeholder={placeholder} keyboardType="default" selectionColor={"#c3c3c3"} placeholderTextColor="#c3c3c3" onChangeText={value => onChangeValue(value)} errorMessage={errorMessage} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
         </View>
     )
 }

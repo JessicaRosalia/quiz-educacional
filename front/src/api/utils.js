@@ -26,19 +26,20 @@ export async function getQuestions(){
 export async function deleteQuestion(ttt){
     const axios = await createAxiosInstance();
     const response = axios.delete('/question', ttt, {
-        headers: {
-            
-        },
-        body: {
-            ttt
-        }
     });
     return response.data;
 }
 
-export async function editQuestion(parameters){
+export async function editQuestionService(parameters){
     const axios = await createAxiosInstance();
     const response = await axios.patch(`/question`, parameters, {
+    });
+    return response.data;
+}
+
+export async function getUserId(){
+    const axios = await createAxiosInstance();
+    const response = await axios.get('/user', {
     });
     return response.data;
 }

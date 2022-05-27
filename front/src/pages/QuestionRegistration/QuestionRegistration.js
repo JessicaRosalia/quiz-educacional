@@ -3,10 +3,16 @@ import { Text, View, ScrollView } from 'react-native';
 import InputText from '../../components/InputText';
 import Label from '../../components/Label';
 import Select from '../../components/Select';
-import { postQuestion } from '../../api/utils';
+import { editQuestionService, getUserId, postQuestion } from '../../api/utils';
 import { TouchableHighlight } from 'react-native';
 import style from './style';
 const QuestionRegistration = ({questionSelected}) => {
+
+    const [userId, setUserId] = useState(false);
+        
+    useEffect(() => {
+        getUserId().then((data) => setUserId(data.id)).catch((erro)=>console.log("Não foi possível recuperar o usuário logado."));
+    }, [])
 
     const [selectedValue, setSelectedValue] = useState("");
     const [questionDescription, setQuestionDescription] = useState("");
@@ -14,7 +20,7 @@ const QuestionRegistration = ({questionSelected}) => {
     const [alternativeB, setAlternativeB] = useState("");
     const [alternativeC, setAlternativeC] = useState("");
     const [alternativeD, setAlternativeD] = useState("");
-    const [question, setQuestion] = useState();
+    const [question, setQuestion] = useState({});
 
     const [errorSubject, setErrorSubject] = useState(false);
     const [errorDesc, setErrorDesc] = useState(false);
@@ -26,22 +32,31 @@ const QuestionRegistration = ({questionSelected}) => {
 
     useEffect(() => {
         if(questionSelected){
-            //setSelectedValue(questionSelected.selectedValue);
+            setSelectedValue(questionSelected.category);
             setQuestionDescription(questionSelected.description);
-            setAlternativeA(questionSelected.alternativeA);
-            setAlternativeB(questionSelected.alternativeB);
-            setAlternativeC(questionSelected.alternativeC);
-            setAlternativeD(questionSelected.alternativeD);
+            setAlternativeA(questionSelected.alternativeA.text);
+            setAlternativeB(questionSelected.alternativeB.text);
+            setAlternativeC(questionSelected.alternativeC.text);
+            setAlternativeD(questionSelected.alternativeD.text);
+             setQuestion({...questionSelected});
         }
     }, [questionSelected]);
 
     useEffect(()=>{
-        if (alternativeA !== "" && alternativeB !== "" && alternativeC !== "" && alternativeD !== "" && selectedValue !== "Selecione" && questionDescription !== "") {
-            setIsDisabled(false);
-        }else if(alternativeA == "" || alternativeB == "" || alternativeC == "" || alternativeD == "" || selectedValue == "Selecione" || questionDescription == ""){
-            setIsDisabled(true);
-        }
+            if (alternativeA !== "" && alternativeB !== "" && alternativeC !== "" && alternativeD !== "" && selectedValue !== "Selecione" && questionDescription !== "") {
+                setIsDisabled(false);
+            }else if(alternativeA == "" || alternativeB == "" || alternativeC == "" || alternativeD == "" || selectedValue == "Selecione" || questionDescription == ""){
+                setIsDisabled(true);
+            }
     },[questionDescription, alternativeA, alternativeB, alternativeC, alternativeD, selectedValue]);
+
+//     useEffect(()=>{
+//         if (question?.alternativeA?.text !== "" && question?.alternativeB?.text !== "" && question?.alternativeC?.text !== "" && question?.alternativeD?.text !== "" && selectedValue !== "Selecione" && question?.description !== "") {
+//             setIsDisabled(false);
+//         }else if(question?.alternativeA?.text == "" || question?.alternativeB?.text == "" || question?.alternativeC?.text == "" || question?.alternativeD?.text == "" || selectedValue == "Selecione" || question?.description == ""){
+//             setIsDisabled(true);
+//         }
+// },[question?.description, question?.alternativeA?.text, question?.alternativeB?.text, question?.alternativeC?.text, question?.alternativeD?.text, selectedValue]);
 
     const registerIsInvalid = () => {
         let error = false
@@ -84,18 +99,49 @@ const QuestionRegistration = ({questionSelected}) => {
                 answer: false
             }
         ],
-        userId: 1,
+        userId: userId,
         questionCategoryId: 1,
     }
 
     async function registerQuestion () {
         if (!registerIsInvalid()) {
             await postQuestion(questionParam).then(question=>{
-                setQuestion(question);
+                // setQuestion(question);
             }).catch(()=>{
                 console.log("Ocorreu um erro ao tentar cadastrar a questão. Você pode tentar novamente.");
             })
         }
+    }
+
+    async function editQuestion () {
+        const parameter = {
+            id: question?.questionId,
+            prompt: questionDescription,
+            options: [
+                {
+                    id: question?.alternativeA?.id,
+                    body: alternativeA,
+                },
+                {
+                    id: question?.alternativeB?.id,
+                    body: alternativeB,
+                },
+                {
+                    id: question?.alternativeC?.id,
+                    body: alternativeC,
+                },
+                {
+                    id: question?.alternativeD?.id,
+                    body: alternativeD,
+                }
+            ],
+            userId: userId,
+            answerId: question?.answerId,
+            questionCategoryId: 1
+        }
+        await editQuestionService(parameter).then(()=> {
+            console.log("editou");
+        }).catch(error => console.log("erroooo", error.response.data))
     }
 
 
@@ -110,15 +156,15 @@ const QuestionRegistration = ({questionSelected}) => {
                             <Select onChangeValueSelected={setSelectedValue} selectedValue={selectedValue}/>
                         </View>
                         <View style={style.questionDescription}>
-                            <InputText value={questionDescription} label={"Pergunta"} required={true} placeholder={"Informe o enunciado da pergunta"} onChangeValue={setQuestionDescription} errorMessage={errorDesc} />
+                            <InputText value={question?.description} label={"Pergunta"} required={true} placeholder={"Informe o enunciado da pergunta"} onChangeValue={setQuestionDescription} errorMessage={errorDesc} />
                         </View>
                         <View style={style.alternatives}>
                             <Text style={style.headerAlternatives}>Alternativas de resposta</Text>
-                            <InputText value={alternativeA} label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativeA} errorMessage={errorAlternA} />
-                            <InputText value={alternativeB} label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} onChangeValue={setAlternativeB} errorMessage={errorAlternB} />
-                            <InputText value={alternativeC} label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} onChangeValue={setAlternativeC} errorMessage={errorAlternC} />
-                            <InputText value={alternativeD} label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} onChangeValue={setAlternativeD} errorMessage={errorAlternD} />
-                            <TouchableHighlight disabled={isDisabled} style={style.registerButton} onPress={registerQuestion}><Text style={style.registerText}>Cadastrar</Text></TouchableHighlight>
+                            <InputText value={question?.alternativeA?.text || ""} label={"Alternativa A"} placeholder={"Informe o texto da alternativa A"} onChangeValue={setAlternativeA} errorMessage={errorAlternA} />
+                            <InputText value={question?.alternativeB?.text || ""} label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} onChangeValue={setAlternativeB} errorMessage={errorAlternB} />
+                            <InputText value={question?.alternativeC?.text || ""} label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} onChangeValue={setAlternativeC} errorMessage={errorAlternC} />
+                            <InputText value={question?.alternativeD?.text || ""} label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} onChangeValue={setAlternativeD} errorMessage={errorAlternD} />
+                            <TouchableHighlight disabled={isDisabled} style={style.registerButton} onPress={questionSelected ? editQuestion : registerQuestion}><Text style={style.registerText}>Cadastrar</Text></TouchableHighlight>
                         </View>
                     </View>
                 </ScrollView>
