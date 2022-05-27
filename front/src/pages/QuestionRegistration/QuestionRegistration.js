@@ -50,14 +50,6 @@ const QuestionRegistration = ({questionSelected}) => {
             }
     },[questionDescription, alternativeA, alternativeB, alternativeC, alternativeD, selectedValue]);
 
-//     useEffect(()=>{
-//         if (question?.alternativeA?.text !== "" && question?.alternativeB?.text !== "" && question?.alternativeC?.text !== "" && question?.alternativeD?.text !== "" && selectedValue !== "Selecione" && question?.description !== "") {
-//             setIsDisabled(false);
-//         }else if(question?.alternativeA?.text == "" || question?.alternativeB?.text == "" || question?.alternativeC?.text == "" || question?.alternativeD?.text == "" || selectedValue == "Selecione" || question?.description == ""){
-//             setIsDisabled(true);
-//         }
-// },[question?.description, question?.alternativeA?.text, question?.alternativeB?.text, question?.alternativeC?.text, question?.alternativeD?.text, selectedValue]);
-
     const registerIsInvalid = () => {
         let error = false
         if (alternativeA == null) {
@@ -105,8 +97,7 @@ const QuestionRegistration = ({questionSelected}) => {
 
     async function registerQuestion () {
         if (!registerIsInvalid()) {
-            await postQuestion(questionParam).then(question=>{
-                // setQuestion(question);
+            await postQuestion(questionParam).then(()=>{
             }).catch(()=>{
                 console.log("Ocorreu um erro ao tentar cadastrar a questão. Você pode tentar novamente.");
             })
