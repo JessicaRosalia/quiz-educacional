@@ -8,7 +8,7 @@ import SearchBar from '../../components/SearchBar';
 import QuestionsCard from '../../components/QuestionsCard';
 import QuestionRegistration from '../QuestionRegistration/QuestionRegistration';
 const QuestionsDatabase = ({navigation}) => {
-    const [questionList, setQuestionList] = useState();
+    const [questionList, setQuestionList] = useState([]);
 
     const [modalIsVisible, setModalIsVisible] = useState(false);
     const [questionSelected, setQuestionSelected] = useState(false);
@@ -24,7 +24,7 @@ const QuestionsDatabase = ({navigation}) => {
         }).catch(()=>{
             Alert.alert("Por algum motivo a lista não pôde ser exibida. Tente novamente!");
         })
-    },[]);
+    },[questionList]);
 
     async function removeQuestion (question) {
         const userId = question.userId;
