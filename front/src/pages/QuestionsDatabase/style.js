@@ -27,5 +27,20 @@ export default StyleSheet.create({
         textAlign: "center",
         lineHeight: 50,
         fontSize: 40,
+    },
+
+
+    outerView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.2)'
+    },
+    modalView: {
+        backgroundColor: 'white',
+        borderRadius: 30,
+        padding: 35,
+        width: 200,
+        alignItems: 'center'
     }
 })

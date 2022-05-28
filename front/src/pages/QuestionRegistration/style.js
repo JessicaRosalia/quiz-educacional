@@ -57,5 +57,10 @@ export default StyleSheet.create({
             justifyContent: "center",
             fontSize: 16,
             fontWeight: "bold",
+    },
+    containerAlternative: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
     }
 })

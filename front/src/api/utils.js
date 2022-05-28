@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import base64 from 'react-native-base64';
 import createAxiosInstance from './';
@@ -18,6 +19,27 @@ export async function postQuestion(parameters){
 export async function getQuestions(){
     const axios = await createAxiosInstance();
     const response = await axios.get(`/question`, {
+    });
+    return response.data;
+}
+
+export async function deleteQuestion(ttt){
+    const axios = await createAxiosInstance();
+    const response = axios.delete('/question', ttt, {
+    });
+    return response.data;
+}
+
+export async function editQuestionService(parameters){
+    const axios = await createAxiosInstance();
+    const response = await axios.patch(`/question`, parameters, {
+    });
+    return response.data;
+}
+
+export async function getUserId(){
+    const axios = await createAxiosInstance();
+    const response = await axios.get('/user', {
     });
     return response.data;
 }
