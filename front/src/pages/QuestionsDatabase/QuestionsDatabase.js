@@ -31,18 +31,11 @@ const QuestionsDatabase = ({navigation}) => {
         const questionId = question.questionId;
         const questionTmp = {
             userId: userId,
-            questionId: 2
+            questionId: questionId,
         }
-        // const ttt = JSON.stringify(questionTmp);
-        // console.log("h", ttt);
-        // console.log("sedsds", userId, questionId, questionTmp)
         await deleteQuestion(questionTmp).then(()=> {
             console.log("apagou");
-        }).catch(error => console.log("erroooo", error.response.data))
-
-        // const r = await axios.delete(`/question`, questionTmp, {
-        // });
-        
+        }).catch(error => console.log("erroooo", error.response.data))   
     }
 
     const openModalRegister = () => {
