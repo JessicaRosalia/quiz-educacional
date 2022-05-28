@@ -5,6 +5,8 @@ import Label from '../../components/Label';
 import Select from '../../components/Select';
 import { editQuestionService, getUserId, postQuestion } from '../../api/utils';
 import { TouchableHighlight } from 'react-native';
+import { RadioButton } from 'react-native-paper';
+
 import style from './style';
 const QuestionRegistration = ({questionSelected}) => {
 
@@ -20,6 +22,14 @@ const QuestionRegistration = ({questionSelected}) => {
     const [alternativeB, setAlternativeB] = useState("");
     const [alternativeC, setAlternativeC] = useState("");
     const [alternativeD, setAlternativeD] = useState("");
+    const [correctAlternative, setCorrectAlternative] = useState(false);
+
+    useEffect(() => {
+        console.log(correctAlternative);
+        let t = correctAlternative === "A" || false
+        console.log(t)
+    }, [correctAlternative])
+
     const [question, setQuestion] = useState({});
 
     const [errorSubject, setErrorSubject] = useState(false);
@@ -38,7 +48,8 @@ const QuestionRegistration = ({questionSelected}) => {
             setAlternativeB(questionSelected.alternativeB.text);
             setAlternativeC(questionSelected.alternativeC.text);
             setAlternativeD(questionSelected.alternativeD.text);
-             setQuestion({...questionSelected});
+            setCorrectAlternative(questionSelected.answerId);
+            setQuestion({...questionSelected});
         }
     }, [questionSelected]);
 
@@ -76,19 +87,19 @@ const QuestionRegistration = ({questionSelected}) => {
         options: [
             {
                 body: alternativeA,
-                answer: false
+                answer: correctAlternative === "A" || false
             },
             {
                 body: alternativeB,
-                answer: false
+                answer: correctAlternative === "B" || false
             },
             {
                 body: alternativeC,
-                answer: true
+                answer: correctAlternative === "C" || false
             },
             {
                 body: alternativeD,
-                answer: false
+                answer: correctAlternative === "D" || false
             }
         ],
         userId: userId,
@@ -127,7 +138,7 @@ const QuestionRegistration = ({questionSelected}) => {
                 }
             ],
             userId: userId,
-            answerId: question?.answerId,
+            answerId: correctAlternative,
             questionCategoryId: 1
         }
         await editQuestionService(parameter).then(()=> {
@@ -155,8 +166,31 @@ const QuestionRegistration = ({questionSelected}) => {
                             <InputText value={question?.alternativeB?.text || ""} label={"Alternativa B"} placeholder={"Informe o texto da alternativa B"} onChangeValue={setAlternativeB} errorMessage={errorAlternB} />
                             <InputText value={question?.alternativeC?.text || ""} label={"Alternativa C"} placeholder={"Informe o texto da alternativa C"} onChangeValue={setAlternativeC} errorMessage={errorAlternC} />
                             <InputText value={question?.alternativeD?.text || ""} label={"Alternativa D"} placeholder={"Informe o texto da alternativa D"} onChangeValue={setAlternativeD} errorMessage={errorAlternD} />
-                            <TouchableHighlight disabled={isDisabled} style={style.registerButton} onPress={questionSelected ? editQuestion : registerQuestion}><Text style={style.registerText}>Cadastrar</Text></TouchableHighlight>
                         </View>
+                        <View>
+                            <Label style={style.label} label={"Alternativa Correta:"} required={true}/>
+                            <View style={style.correctAlternative}>
+                                <RadioButton.Group onValueChange={v => setCorrectAlternative(v)} value={correctAlternative}>
+                                    <View style={style.containerAlternative}>
+                                        <RadioButton value="A" />
+                                        <Text>Alternativa A</Text>
+                                    </View>
+                                    <View style={style.containerAlternative} >
+                                        <RadioButton value="B" />
+                                        <Text>Alternativa B</Text>
+                                    </View>
+                                    <View style={style.containerAlternative}>
+                                        <RadioButton value="C" />
+                                        <Text>Alternativa C</Text>
+                                    </View>
+                                    <View style={style.containerAlternative}>
+                                        <RadioButton value="D" />
+                                        <Text>Alternativa D</Text>
+                                    </View>
+                                </RadioButton.Group>
+                            </View>
+                        </View>
+                        <TouchableHighlight disabled={isDisabled} style={style.registerButton} onPress={questionSelected ? editQuestion : registerQuestion}><Text style={style.registerText}>Cadastrar</Text></TouchableHighlight>
                     </View>
                 </ScrollView>
             </View>

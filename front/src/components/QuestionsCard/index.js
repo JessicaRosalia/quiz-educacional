@@ -53,7 +53,7 @@ const QuestionsCard = ({handleLeft, handleRight, data}) => {
         > 
             <View style={style.questionCard}>
                 <Text style={style.descriptionCard}>{data?.description}</Text>     
-                <Text style={style.answerCard}>Resposta correta: {data?.answer}</Text> 
+                <Text style={style.answerCard}>Resposta correta: {data?.answerId}</Text> 
             </View> 
         </Swipeable>
     )
