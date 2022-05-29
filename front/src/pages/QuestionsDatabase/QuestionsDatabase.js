@@ -7,11 +7,54 @@ import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import QuestionsCard from '../../components/QuestionsCard';
 import QuestionRegistration from '../QuestionRegistration/QuestionRegistration';
+import { ScrollView } from 'react-native-gesture-handler';
 const QuestionsDatabase = ({navigation}) => {
     const [questionList, setQuestionList] = useState([]);
-
+    const [searchText, setSearchText] = useState("");
     const [modalIsVisible, setModalIsVisible] = useState(false);
     const [questionSelected, setQuestionSelected] = useState(false);
+    
+    const [f, setF] = useState([]);
+    const filterSearch = (searchValue) => {
+        // questionList.filter((searchValue) => {
+            if(searchText === ""){
+                return searchValue;
+            }else if(searchValue.description.includes(searchText)){
+                return searchValue;
+            }
+
+        // })
+    }
+
+    const teste = () => {
+        const res=questionList.filter((searchValue) => {
+            if(searchText === ""){
+                return searchValue;
+                //setF(searchValue);
+            }else if(searchValue.description.includes(searchText)){
+                return searchValue;
+                //setF(searchValue);
+            }
+
+        })
+       setF(res);
+       return res;
+    }
+
+    useEffect(() => {
+        const res=questionList.filter((searchValue) => {
+            if(searchText === ""){
+                return searchValue;
+                //setF(searchValue);
+            }else if(searchValue.description.includes(searchText)){
+                return searchValue;
+                //setF(searchValue);
+            }
+
+        })
+       setF(res);
+    }, [questionList])
+    // teste();
 
     useEffect(()=>{
         getQuestions().then(questions=>{
@@ -52,26 +95,26 @@ const QuestionsDatabase = ({navigation}) => {
         <SafeAreaView>
             <View style={style.container}>
                 <Header />
-                <SearchBar />
+                <SearchBar searchText={searchText} setSearchText={setSearchText}/>
+                <ScrollView>
                 <View style={style.listCards}>
-                    {questionList ?
-                    (<FlatList
-                        data={questionList}
-                        keyExtractor={(item, index) => index}
-                        renderItem={({item})=> (
-                            <QuestionsCard
-                                id={item.id}
-                                data={item}
-                                handleLeft={() => {OpenEditModal(item)}}
-                                handleRight={() => removeQuestion(item)}
-                            />
-                        ) }
-                    />)
-                : <View>
+                    {
+                    questionList ?
+                    questionList.filter(filterSearch).map((item, index) => (
+                        <QuestionsCard
+                            key={index}
+                            id={item.id}
+                            data={item}
+                            handleLeft={() => {OpenEditModal(item)}}
+                            handleRight={() => removeQuestion(item)}
+                        />
+                    )) :
+                <View>
                     <Text>Você não possui nenhuma questão cadastrada ainda.</Text>
                 </View>
                 }
                 </View>
+                </ScrollView>
                 <TouchableOpacity
                     activeOpacity={0.4}
                     onPress={() => openModalRegister()}
