@@ -14,47 +14,13 @@ const QuestionsDatabase = ({navigation}) => {
     const [modalIsVisible, setModalIsVisible] = useState(false);
     const [questionSelected, setQuestionSelected] = useState(false);
     
-    const [f, setF] = useState([]);
     const filterSearch = (searchValue) => {
-        // questionList.filter((searchValue) => {
-            if(searchText === ""){
-                return searchValue;
-            }else if(searchValue.description.includes(searchText)){
-                return searchValue;
-            }
-
-        // })
+        if(searchText === ""){
+            return searchValue;
+        }else if(searchValue.description.includes(searchText)){
+            return searchValue;
+        }
     }
-
-    const teste = () => {
-        const res=questionList.filter((searchValue) => {
-            if(searchText === ""){
-                return searchValue;
-                //setF(searchValue);
-            }else if(searchValue.description.includes(searchText)){
-                return searchValue;
-                //setF(searchValue);
-            }
-
-        })
-       setF(res);
-       return res;
-    }
-
-    useEffect(() => {
-        const res=questionList.filter((searchValue) => {
-            if(searchText === ""){
-                return searchValue;
-                //setF(searchValue);
-            }else if(searchValue.description.includes(searchText)){
-                return searchValue;
-                //setF(searchValue);
-            }
-
-        })
-       setF(res);
-    }, [questionList])
-    // teste();
 
     useEffect(()=>{
         getQuestions().then(questions=>{
