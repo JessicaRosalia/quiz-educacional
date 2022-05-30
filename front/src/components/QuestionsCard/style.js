@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
     questionCard: {
         width: 315,
-        //marginBottom: 20,
+        marginBottom: 20,
         backgroundColor: "#fff",
         height: 105,
         borderRadius: 7,
