@@ -49,7 +49,8 @@ const QuestionsCard = ({handleLeft, handleRight, data}) => {
             renderLeftActions={LeftActions}
             onSwipeableLeftOpen={handleLeft}
             renderRightActions={
-                (progress, dragX) => <RightActions progress={progress} dragX={dragX} onPress={handleRight}/>}
+                (progress, dragX) => <RightActions progress={progress} dragX={dragX} onPress={handleRight}/>
+            }
         > 
             <View style={style.questionCard}>
                 <Text style={style.descriptionCard}>{data?.description}</Text>     
@@ -59,16 +60,3 @@ const QuestionsCard = ({handleLeft, handleRight, data}) => {
     )
 };
 export default QuestionsCard;
-
-
-             {/* <View style={style.containerCards}>
-                {questionList?.map((question, index)=>{
-                    return (
-                        <View style={style.questionCard} key={index}>
-                            <Text style={style.descriptionCard}>{question.descricao}</Text>     
-                            <Text style={style.answerCard}>Resposta correta: {question.resposta}</Text> 
-                        </View>
-                    )
-                })}
-                </View> 
-                 */}
