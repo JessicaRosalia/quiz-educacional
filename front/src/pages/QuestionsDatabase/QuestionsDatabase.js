@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Alert, SafeAreaView, Text, View, TouchableOpacity, Modal, FlatList} from 'react-native';
 import { deleteQuestion, getQuestions } from '../../api/utils';
 import style from './style';
@@ -9,6 +9,10 @@ import QuestionsCard from '../../components/QuestionsCard';
 import QuestionRegistration from '../QuestionRegistration/QuestionRegistration';
 import { ScrollView } from 'react-native-gesture-handler';
 const QuestionsDatabase = ({navigation}) => {
+
+    const isMounted = useRef(true);
+    useEffect(() => () => { isMounted.current = false }, [isMounted])
+    
     const [questionList, setQuestionList] = useState([]);
     const [searchText, setSearchText] = useState("");
     const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -60,7 +64,7 @@ const QuestionsDatabase = ({navigation}) => {
     return (
         <SafeAreaView>
             <View style={style.container}>
-                <Header />
+                <Header navigation={navigation}/>
                 <SearchBar searchText={searchText} setSearchText={setSearchText}/>
                 <ScrollView>
                 <View style={style.listCards}>
