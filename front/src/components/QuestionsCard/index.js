@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, Animated, Image, TouchableOpacity } from "react-native";
+import { Text, View, Animated, Image, TouchableOpacity, Alert } from "react-native";
 import style from './style.js';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import {Ionicons} from 'react-native-vector-icons';
 
 const QuestionsCard = ({handleLeft, handleRight, data}) => {
 
@@ -53,8 +54,17 @@ const QuestionsCard = ({handleLeft, handleRight, data}) => {
             }
         > 
             <View style={style.questionCard}>
-                <Text style={style.descriptionCard}>{data?.description}</Text>     
-                <Text style={style.answerCard}>Resposta correta: {data?.answerId}</Text> 
+                <Image
+                    style={style.questionCategory}
+                    source={require("../../assets/icons/estudante-historico.png")}
+                />
+                <Text style={style.questionDdescription}>{data?.description}</Text>
+                <Ionicons
+                    name="chevron-forward"
+                    size={30}
+                    color="#0C066B"
+                    onPress={() => Alert.alert("Em construção")}
+                /> 
             </View> 
         </Swipeable>
     )

@@ -2,6 +2,10 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     questionCard: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
         width: 315,
         marginBottom: 20,
         backgroundColor: "#fff",
@@ -11,14 +15,10 @@ export default StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 20,
     },
-    descriptionCard: {
+    questionDdescription: {
         color: "#151515",
         fontSize: 17,
         marginBottom: 10,
-    },
-    answerCard: {
-        color: "#151515",
-        fontSize: 15,
     },
     leftAction: {
         backgroundColor: "#c4c4c4",
