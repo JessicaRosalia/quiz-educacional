@@ -66,25 +66,24 @@ const QuestionsDatabase = ({navigation}) => {
             <View style={style.container}>
                 <Header navigation={navigation}/>
                 <SearchBar searchText={searchText} setSearchText={setSearchText}/>
-                <ScrollView>
                 <View style={style.listCards}>
-                    {
-                    questionList ?
-                    questionList.filter(filterSearch).map((item, index) => (
-                        <QuestionsCard
-                            key={index}
-                            id={item.id}
-                            data={item}
-                            handleLeft={() => {OpenEditModal(item)}}
-                            handleRight={() => removeQuestion(item)}
-                        />
-                    )) :
-                <View>
-                    <Text>Você não possui nenhuma questão cadastrada ainda.</Text>
+                    {questionList ? 
+                        (<ScrollView>
+                            {questionList.filter(filterSearch).map((item, index) => (
+                                
+                                <QuestionsCard
+                                    key={index}
+                                    id={item.id}
+                                    data={item}
+                                    handleLeft={() => {OpenEditModal(item)}}
+                                    handleRight={() => removeQuestion(item)}
+                                />
+                            ))}
+                        </ScrollView>)
+                        :
+                        <Text style={style.listCardsEmpty}>Você não possui nenhuma questão cadastrada ainda.</Text>
+                    }
                 </View>
-                }
-                </View>
-                </ScrollView>
                 <TouchableOpacity
                     activeOpacity={0.4}
                     onPress={() => openModalRegister()}
