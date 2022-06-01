@@ -24,6 +24,7 @@ export default StyleSheet.create({
         backgroundColor: "#c4c4c4",
         justifyContent: "center",
         alignItems: "flex-start",
+        flex: 1,
         height: 105,
     },
     rightAction: {
@@ -31,6 +32,7 @@ export default StyleSheet.create({
         justifyContent: "center",
         alignItems: "flex-end",
         height: 105,
+        flex: 1,
     },
 })
 
