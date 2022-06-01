@@ -6,7 +6,7 @@ import {Ionicons} from 'react-native-vector-icons';
 
 const QuestionsCard = ({handleLeft, handleRight, data}) => {
 
-    function LeftActions(progress, dragX) {
+    function LeftActions({progress, dragX, onPress}) {
 
         const scale = dragX.interpolate({
             inputRange:[0, 100],
@@ -15,13 +15,13 @@ const QuestionsCard = ({handleLeft, handleRight, data}) => {
         })
 
         return (
-            <View style={style.leftAction}>
-                <Animated.View
-                    style={{transform: [{scale}]}}
-                >
-                    <Image style={{width: 55, height: 55, marginLeft: 15,}} source={require("../../assets/icons/pencil.png")} />
-                </Animated.View>
-            </View>
+            <TouchableOpacity onPress={onPress}>
+                <View style={style.leftAction}>
+                    <Animated.View style={{transform: [{scale}]}}>
+                        <Image style={{width: 55, height: 55, marginLeft: 0,}} source={require("../../assets/icons/pencil.png")} />
+                    </Animated.View>
+                </View>
+            </TouchableOpacity>
         )
     }
 
@@ -47,7 +47,9 @@ const QuestionsCard = ({handleLeft, handleRight, data}) => {
 
     return (
         <Swipeable
-            renderLeftActions={LeftActions}
+            renderLeftActions={
+                (progress, dragX) => <LeftActions progress={progress} dragX={dragX} onPress={handleLeft}/>
+            }
             onSwipeableLeftOpen={handleLeft}
             renderRightActions={
                 (progress, dragX) => <RightActions progress={progress} dragX={dragX} onPress={handleRight}/>
@@ -58,7 +60,7 @@ const QuestionsCard = ({handleLeft, handleRight, data}) => {
                     style={style.questionCategory}
                     source={require("../../assets/icons/estudante-historico.png")}
                 />
-                <Text style={style.questionDdescription}>{data?.description}</Text>
+                <Text style={style.questionDescription}>{data?.description}</Text>
                 <Ionicons
                     name="chevron-forward"
                     size={30}

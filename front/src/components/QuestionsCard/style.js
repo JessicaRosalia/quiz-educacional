@@ -15,7 +15,7 @@ export default StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 20,
     },
-    questionDdescription: {
+    questionDescription: {
         color: "#151515",
         fontSize: 17,
         marginBottom: 10,
@@ -23,7 +23,6 @@ export default StyleSheet.create({
     leftAction: {
         backgroundColor: "#c4c4c4",
         justifyContent: "center",
-        flex: 1,
         alignItems: "flex-start",
         height: 105,
     },
@@ -31,7 +30,6 @@ export default StyleSheet.create({
         backgroundColor: "red",
         justifyContent: "center",
         alignItems: "flex-end",
-        flex: 1,
         height: 105,
     },
 })
