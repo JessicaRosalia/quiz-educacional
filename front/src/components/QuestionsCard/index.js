@@ -3,13 +3,18 @@ import { Text, View, Animated, Image, TouchableOpacity, Alert } from "react-nati
 import style from './style.js';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {Ionicons} from 'react-native-vector-icons';
+import DeleteIcon from 'react-native-vector-icons/MaterialIcons';
+import EditIcon from 'react-native-vector-icons/MaterialIcons';
+
+const DeleteAnimatedIcon = Animated.createAnimatedComponent(DeleteIcon);
+const EditAnimatedIcon = Animated.createAnimatedComponent(EditIcon);
 
 const QuestionsCard = ({handleLeft, handleRight, data}) => {
 
     const renderLeftActions = (progress, dragX) => {
         const scale = dragX.interpolate({
             inputRange:[0, 100],
-            outputRange:[0, 1],
+            outputRange:[1, 1],
             extrapolate: 'clamp',
         });
 
@@ -17,7 +22,12 @@ const QuestionsCard = ({handleLeft, handleRight, data}) => {
             <TouchableOpacity onPress={handleLeft}>
                 <View style={style.leftAction}>
                     <Animated.View style={{transform: [{scale}]}}>
-                        <Image style={{width: 65, height: 65, marginLeft: 0,}} source={require("../../assets/icons/pencil.png")} />
+                    <EditAnimatedIcon
+                        name="edit"
+                        size={35}
+                        color="#FFF"
+                        style={{paddingHorizontal: 10}}
+                    />
                     </Animated.View>
                 </View>
             </TouchableOpacity>
@@ -35,7 +45,12 @@ const QuestionsCard = ({handleLeft, handleRight, data}) => {
             <TouchableOpacity onPress={handleRight}>
             <View style={style.rightAction}>
                 <Animated.View style={{transform: [{scale}]}}>
-                    <Image style={{width: 65, height: 65, marginRight: 0,}} source={require("../../assets/icons/remove.png")} />
+                    <DeleteAnimatedIcon
+                        name="delete-forever"
+                        size={35}
+                        color="#FFF"
+                        style={{paddingHorizontal: 10}}
+                    />
                 </Animated.View>
             </View>
             </TouchableOpacity>
