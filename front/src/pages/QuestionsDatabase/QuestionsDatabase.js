@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Alert, SafeAreaView, Text, View, TouchableOpacity, Modal, FlatList} from 'react-native';
 import { deleteQuestion, getQuestions } from '../../api/utils';
 import style from './style';
@@ -8,16 +8,47 @@ import SearchBar from '../../components/SearchBar';
 import QuestionsCard from '../../components/QuestionsCard';
 import QuestionRegistration from '../QuestionRegistration/QuestionRegistration';
 import { ScrollView } from 'react-native-gesture-handler';
+import DeleteIcon from 'react-native-vector-icons/MaterialIcons';
+import EditIcon from 'react-native-vector-icons/MaterialIcons';
+
+
 const QuestionsDatabase = ({navigation}) => {
 
     const isMounted = useRef(true);
     useEffect(() => () => { isMounted.current = false }, [isMounted])
+
+    const filterOptions = [
+        {
+            id: 1,
+            label: "Biologia",
+        },
+        {
+            id: 2,
+            label: "Física"
+        }
+    ]
+
     
     const [questionList, setQuestionList] = useState([]);
+    const [filteredQuestions, setFilteredQuestions] = useState(questionList);
     const [searchText, setSearchText] = useState("");
     const [modalIsVisible, setModalIsVisible] = useState(false);
     const [questionSelected, setQuestionSelected] = useState(false);
+
+    useEffect(()=> {
+        setFilteredQuestions(questionList);
+    }, [questionList]);
     
+    const filterDiscipline = (option) => {
+        questionList.map((question) => {
+            if(question.questionCategoryId === option.id) {
+                setFilteredQuestions([{...question}])
+            }
+        })  
+        
+    }
+
+
     const filterSearch = (searchValue) => {
         if(searchText === ""){
             return searchValue;
@@ -37,7 +68,7 @@ const QuestionsDatabase = ({navigation}) => {
         }).catch(()=>{
             return <Text>Ops! Por algum motivo a lista não pôde ser exibida. Tente novamente!</Text>
         })
-    },[questionList]);
+    },[]);
 
     async function removeQuestion (question) {
         const userId = question.userId;
@@ -66,10 +97,19 @@ const QuestionsDatabase = ({navigation}) => {
             <View style={style.container}>
                 <Header navigation={navigation}/>
                 <SearchBar searchText={searchText} setSearchText={setSearchText}/>
+                {
+                    filterOptions.map((option) => (
+                        <TouchableOpacity key={option.id} onPress={() => filterDiscipline(option)}>
+                            <View style={{backgroundColor: "red", width: 65, height: 65}}>
+                                <Text>{option.label}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    ))
+                }
                 <View style={style.listCards}>
-                    {questionList ? 
+                    {filteredQuestions ? 
                         (<ScrollView>
-                            {questionList.filter(filterSearch).map((item, index) => (
+                            {filteredQuestions.filter(filterSearch).map((item, index) => (
                                 
                                 <QuestionsCard
                                     key={index}
