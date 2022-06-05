@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, Alert } from 'react-native';
 import InputText from '../../components/InputText';
 import Label from '../../components/Label';
 import Select from '../../components/Select';
@@ -8,7 +8,8 @@ import { TouchableHighlight } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 
 import style from './style';
-const QuestionRegistration = ({questionSelected}) => {
+import Toast from 'react-native-root-toast';
+const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
 
     const [userId, setUserId] = useState(false);
         
@@ -82,35 +83,43 @@ const QuestionRegistration = ({questionSelected}) => {
         return error;
     }
 
-    const questionParam = {
-        prompt: questionDescription,
-        options: [
-            {
-                body: alternativeA,
-                answer: correctAlternative === "A" || false
-            },
-            {
-                body: alternativeB,
-                answer: correctAlternative === "B" || false
-            },
-            {
-                body: alternativeC,
-                answer: correctAlternative === "C" || false
-            },
-            {
-                body: alternativeD,
-                answer: correctAlternative === "D" || false
-            }
-        ],
-        userId: userId,
-        questionCategoryId: 1,
-    }
 
     async function registerQuestion () {
+        const questionParam = {
+            prompt: questionDescription,
+            options: [
+                {
+                    body: alternativeA,
+                    answer: true
+                },
+                {
+                    body: alternativeB,
+                    answer: false
+                },
+                {
+                    body: alternativeC,
+                    answer: false
+                },
+                {
+                    body: alternativeD,
+                    answer: false
+                }
+            ],
+            userId: userId,
+            questionCategoryId: 1,
+        }
         if (!registerIsInvalid()) {
             await postQuestion(questionParam).then(()=>{
+                Toast.show("Questão cadastrada com sucesso!", {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                });
+                setModalIsVisible(false);
             }).catch(()=>{
-                console.log("Ocorreu um erro ao tentar cadastrar a questão. Você pode tentar novamente.");
+                Toast.show("Ocorreu um erro ao tentar cadastrar a questão. Tente novamente.", {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                });
             })
         }
     }

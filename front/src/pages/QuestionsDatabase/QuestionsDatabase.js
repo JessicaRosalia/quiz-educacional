@@ -11,6 +11,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import DeleteIcon from 'react-native-vector-icons/MaterialIcons';
 import EditIcon from 'react-native-vector-icons/MaterialIcons';
 import DisciplineCard from '../../components/DisciplineCard';
+import Toast from 'react-native-root-toast';
 
 
 const QuestionsDatabase = ({navigation}) => {
@@ -66,8 +67,16 @@ const QuestionsDatabase = ({navigation}) => {
             questionId: questionId,
         }
         await deleteQuestion(questionTmp).then(()=> {
-            console.log("apagou");
-        }).catch(error => console.log("erroooo", error.response.data))   
+            Toast.show("A questão foi excluída!", {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+            });
+        }).catch(error => {
+            Toast.show(error.response.data, {
+                duration: Toast.durations.SHORT,
+                position: Toast.positions.BOTTOM,
+            });
+        })   
     }
 
     const openModalRegister = () => {
@@ -117,7 +126,7 @@ const QuestionsDatabase = ({navigation}) => {
                         visible={modalIsVisible}
                         onRequestClose={() => setModalIsVisible(!modalIsVisible)}
                     >
-                        <QuestionRegistration questionSelected={questionSelected}/>   
+                        <QuestionRegistration questionSelected={questionSelected} setModalIsVisible={setModalIsVisible}/>   
                     </Modal>   
                 }
             </View>
