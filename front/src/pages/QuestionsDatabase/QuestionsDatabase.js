@@ -10,6 +10,7 @@ import QuestionRegistration from '../QuestionRegistration/QuestionRegistration';
 import { ScrollView } from 'react-native-gesture-handler';
 import DeleteIcon from 'react-native-vector-icons/MaterialIcons';
 import EditIcon from 'react-native-vector-icons/MaterialIcons';
+import DisciplineCard from '../../components/DisciplineCard';
 
 
 const QuestionsDatabase = ({navigation}) => {
@@ -17,16 +18,13 @@ const QuestionsDatabase = ({navigation}) => {
     const isMounted = useRef(true);
     useEffect(() => () => { isMounted.current = false }, [isMounted])
 
-    const filterOptions = [
-        {
-            id: 1,
-            label: "Biologia",
-        },
-        {
-            id: 2,
-            label: "Física"
+    const handleFilteredQuestions = (questions) => {
+        if(questions){
+            setFilteredQuestions(questions);
+        }else{
+            setFilteredQuestions(null);
         }
-    ]
+    }
 
     
     const [questionList, setQuestionList] = useState([]);
@@ -39,16 +37,6 @@ const QuestionsDatabase = ({navigation}) => {
         setFilteredQuestions(questionList);
     }, [questionList]);
     
-    const filterDiscipline = (option) => {
-        questionList.map((question) => {
-            if(question.questionCategoryId === option.id) {
-                setFilteredQuestions([{...question}])
-            }
-        })  
-        
-    }
-
-
     const filterSearch = (searchValue) => {
         if(searchText === ""){
             return searchValue;
@@ -97,20 +85,11 @@ const QuestionsDatabase = ({navigation}) => {
             <View style={style.container}>
                 <Header navigation={navigation}/>
                 <SearchBar searchText={searchText} setSearchText={setSearchText}/>
-                {
-                    filterOptions.map((option) => (
-                        <TouchableOpacity key={option.id} onPress={() => filterDiscipline(option)}>
-                            <View style={{backgroundColor: "red", width: 65, height: 65}}>
-                                <Text>{option.label}</Text>
-                            </View>
-                        </TouchableOpacity>
-                    ))
-                }
+                <DisciplineCard questionList={questionList} handleFilteredQuestions={handleFilteredQuestions}/>
                 <View style={style.listCards}>
                     {filteredQuestions ? 
                         (<ScrollView>
                             {filteredQuestions.filter(filterSearch).map((item, index) => (
-                                
                                 <QuestionsCard
                                     key={index}
                                     id={item.id}
