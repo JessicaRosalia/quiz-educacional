@@ -111,13 +111,13 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
         if (!registerIsInvalid()) {
             await postQuestion(questionParam).then(()=>{
                 Toast.show("Questão cadastrada com sucesso!", {
-                    duration: Toast.durations.SHORT,
+                    duration: Toast.durations.LONG,
                     position: Toast.positions.BOTTOM,
                 });
                 setModalIsVisible(false);
             }).catch(()=>{
                 Toast.show("Ocorreu um erro ao tentar cadastrar a questão. Tente novamente.", {
-                    duration: Toast.durations.SHORT,
+                    duration: Toast.durations.LONG,
                     position: Toast.positions.BOTTOM,
                 });
             })

@@ -72,8 +72,8 @@ const QuestionsDatabase = ({navigation}) => {
                 position: Toast.positions.BOTTOM,
             });
         }).catch(error => {
-            Toast.show(error.response.data, {
-                duration: Toast.durations.SHORT,
+            Toast.show("Ocorreu um erro ao tentar excluir a questão. Tente novamente.", {
+                duration: Toast.durations.LONG,
                 position: Toast.positions.BOTTOM,
             });
         })   
