@@ -100,7 +100,7 @@ const QuestionsDatabase = ({navigation}) => {
                             ))}
                         </ScrollView>)
                         :
-                        <Text style={style.listCardsEmpty}>Você não possui nenhuma questão cadastrada ainda.</Text>
+                        <Text style={style.listCardsEmpty}>Nenhuma questão foi encontrada.</Text>
                     }
                 </View>
                 <TouchableOpacity
