@@ -48,7 +48,7 @@ const DisciplineCard = ({questionList, handleFilteredQuestions}) => {
             <TouchableOpacity key={option.id} onPress={() => filterDiscipline(option)}>
                 <View style={style.ContainerCardFilter}>
                     <View style={filterSelected === option.id ? style.ContainerFilterSelected : style.ContainerCategory }>
-                        <Image source={require("../../assets/icons/btn-verSenha.png")} />
+                        <Image source={require("../../assets/icons/image35.png")}/>
                     </View>
                     <Text style={filterSelected === option.id ? style.CategoryFilterSelected : style.Category}>{option.label}</Text>
                 </View>
