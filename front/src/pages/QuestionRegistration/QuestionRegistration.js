@@ -125,7 +125,7 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
     }
 
     async function editQuestion () {
-        const parameter = {
+        const parameters = {
             id: question?.questionId,
             prompt: questionDescription,
             options: [
@@ -146,13 +146,22 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
                     body: alternativeD,
                 }
             ],
-            userId: userId,
-            answerId: correctAlternative,
+            userId: 2,
+            answerId: 2,
             questionCategoryId: 1
         }
-        await editQuestionService(parameter).then(()=> {
-            console.log("editou");
-        }).catch(error => console.log("erroooo", error.response.data))
+        await editQuestionService(parameters).then(()=> {
+            Toast.show("A questão foi editada com sucesso!", {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+            });
+            setModalIsVisible(false);
+        }).catch((error) => {
+            Toast.show("Ocorreu um erro ao tentar editar a questão. Tente novamente.", {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+            });
+        })
     }
 
 
