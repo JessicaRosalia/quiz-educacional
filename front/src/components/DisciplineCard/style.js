@@ -2,14 +2,17 @@ import { StyleSheet } from 'react-native';
 
 const style = StyleSheet.create({
     ContainerAllFilters: {
+        marginLeft: 25,
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
+        marginTop: 5,
+        marginBottom: 30,
     },
     ContainerCardFilter: {
         display: "flex",
         alignItems: "center",
-        marginRight: 10,
+        marginRight: 20,
     },
     ContainerFilterSelected: {
         backgroundColor: "#A5A3FF",
