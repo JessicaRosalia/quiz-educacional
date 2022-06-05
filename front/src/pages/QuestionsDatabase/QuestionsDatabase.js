@@ -1,15 +1,12 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Alert, SafeAreaView, Text, View, TouchableOpacity, Modal, FlatList} from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { SafeAreaView, Text, View, TouchableOpacity, Modal} from 'react-native';
 import { deleteQuestion, getQuestions } from '../../api/utils';
 import style from './style';
-import backIcon from "../../assets/icons/btn-voltar.svg";
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import QuestionsCard from '../../components/QuestionsCard';
 import QuestionRegistration from '../QuestionRegistration/QuestionRegistration';
 import { ScrollView } from 'react-native-gesture-handler';
-import DeleteIcon from 'react-native-vector-icons/MaterialIcons';
-import EditIcon from 'react-native-vector-icons/MaterialIcons';
 import DisciplineCard from '../../components/DisciplineCard';
 import Toast from 'react-native-root-toast';
 
@@ -71,7 +68,7 @@ const QuestionsDatabase = ({navigation}) => {
                 duration: Toast.durations.LONG,
                 position: Toast.positions.BOTTOM,
             });
-        }).catch(error => {
+        }).catch(() => {
             Toast.show("Ocorreu um erro ao tentar excluir a questão. Tente novamente.", {
                 duration: Toast.durations.LONG,
                 position: Toast.positions.BOTTOM,
