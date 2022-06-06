@@ -29,7 +29,7 @@ const DisciplineCard = ({questionList, handleFilteredQuestions}) => {
 
         if(option.id !== 0) {
             filterResult = questionList.filter((question) => {
-                if(question.questionCategoryId === option.id){
+                if(question?.questionCategoryId === option.id){
                     return {question};
                 }
             });   
