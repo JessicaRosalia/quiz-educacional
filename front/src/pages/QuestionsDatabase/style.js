@@ -10,6 +10,14 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
+    listCardsEmpty: {
+        color: "#404040",
+        width: "80%",
+        lineHeight: 24,
+        fontWeight: "700",
+        fontSize: 20,
+        textAlign: "center",
+    }, 
     registerButton: {
         position: "absolute",
         top: 600,
