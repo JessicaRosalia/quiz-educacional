@@ -64,14 +64,15 @@ const QuestionsDatabase = ({navigation}) => {
         })
     },[userId, modalIsVisible]);
 
-    async function removeQuestion (question) {
+     function removeQuestion (question) {
         const userId = question.userId;
         const questionId = question.questionId;
-        const questionTmp = {
+        
+         deleteQuestion({
             userId: userId,
             questionId: questionId,
-        }
-        await deleteQuestion(questionTmp).then(()=> {
+         })
+         .then(()=> {
             Toast.show("A questão foi excluída!", {
                 duration: Toast.durations.LONG,
                 position: Toast.positions.BOTTOM,
