@@ -32,7 +32,7 @@ const QuestionsDatabase = ({navigation}) => {
 
     
     const [questionList, setQuestionList] = useState([]);
-    const [filteredQuestions, setFilteredQuestions] = useState(questionList);
+    const [filteredQuestions, setFilteredQuestions] = useState();
     const [searchText, setSearchText] = useState("");
     const [modalIsVisible, setModalIsVisible] = useState(false);
     const [questionSelected, setQuestionSelected] = useState(false);
@@ -52,12 +52,11 @@ const QuestionsDatabase = ({navigation}) => {
     useEffect( () => {
         getQuestions().then(questions=>{
             if(questions){
-                const list = questions.map((question)=>{
+                questions.map((question)=>{
                     if(question.userId == userId) {
-                        return {userId: question.userId, questionId: question.id, selectedValue: question.category, description: question.prompt, alternativeA: {id: question.options[0].id, text: question.options[0]?.body}, alternativeB: {id: question.options[1]?.id, text: question.options[1]?.body}, alternativeC: {id: question.options[2]?.id, text: question.options[2]?.body}, alternativeD: {id: question.options[3]?.id, text: question.options[3]?.body}, answerId: question.answerId, questionCategoryId: question.questionCategoryId};
+                        setQuestionList([{userId: question.userId, questionId: question.id, selectedValue: question.category, description: question.prompt, alternativeA: {id: question.options[0].id, text: question.options[0]?.body}, alternativeB: {id: question.options[1]?.id, text: question.options[1]?.body}, alternativeC: {id: question.options[2]?.id, text: question.options[2]?.body}, alternativeD: {id: question.options[3]?.id, text: question.options[3]?.body}, answerId: question.answerId, questionCategoryId: question.questionCategoryId}]);
                     }
-                })
-                setQuestionList([...list])
+                });
             }
         }).catch(()=>{
             return <Text>Ops! Por algum motivo a lista não pôde ser exibida. Tente novamente!</Text>
@@ -102,9 +101,9 @@ const QuestionsDatabase = ({navigation}) => {
                 <SearchBar searchText={searchText} setSearchText={setSearchText}/>
                 <DisciplineCard questionList={questionList} handleFilteredQuestions={handleFilteredQuestions}/>
                 <View style={style.listCards}>
-                    {filteredQuestions ? 
+                    {filteredQuestions?.length > 0 ? 
                         (<ScrollView>
-                            {filteredQuestions.filter(filterSearch).map((item, index) => (
+                            {filteredQuestions?.filter(filterSearch).map((item, index) => (
                                 <QuestionsCard
                                     key={index}
                                     id={item.id}

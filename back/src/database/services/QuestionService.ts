@@ -88,7 +88,6 @@ export const deleteById = async (userId: number, questionId: number): Promise<bo
     if (q.user.id == userId)
         q.options.forEach(option => optionDal.deleteById(option.id));
     return questionDal.deleteById(questionId);
-    throw Error("Forbiden action.");
 }
 
 export const findAll = async (): Promise<QuestionServiceOutput[]> => {
