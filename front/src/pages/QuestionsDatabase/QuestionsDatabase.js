@@ -55,14 +55,15 @@ const QuestionsDatabase = ({navigation}) => {
         }
     }
 
-    useEffect( () => {
+    useEffect(() => {
         getQuestions().then(questions=>{
             if(questions){
-                questions.map((question)=>{
-                    if(question.userId == userId) {
-                        setQuestionList([{userId: question.userId, questionId: question.id, selectedValue: question.category, description: question.prompt, alternativeA: {id: question.options[0].id, text: question.options[0]?.body}, alternativeB: {id: question.options[1]?.id, text: question.options[1]?.body}, alternativeC: {id: question.options[2]?.id, text: question.options[2]?.body}, alternativeD: {id: question.options[3]?.id, text: question.options[3]?.body}, answerId: question.answerId, questionCategoryId: question.questionCategoryId}]);
-                    }
+                const aux = questions.filter((question) => {
+                    return question.userId == userId;
+                }).map((question) => {
+                    return {userId: question.userId, questionId: question.id, selectedValue: question.category, description: question.prompt, alternativeA: {id: question.options[0].id, text: question.options[0]?.body}, alternativeB: {id: question.options[1]?.id, text: question.options[1]?.body}, alternativeC: {id: question.options[2]?.id, text: question.options[2]?.body}, alternativeD: {id: question.options[3]?.id, text: question.options[3]?.body}, answerId: question.answerId, questionCategoryId: question.questionCategoryId};
                 });
+                setQuestionList(aux);
             }
         }).catch(()=>{
             setErrorMessageListQuestions("Ops! Por algum motivo a lista não pôde ser exibida. Tente novamente!");
@@ -104,13 +105,18 @@ const QuestionsDatabase = ({navigation}) => {
         setSizeFilterResult(filteredQuestions?.length || 0)
     }, [filteredQuestions])
 
-    useEffect(() => {
-        console.log("a", sizeFilterResult)
-    }, [sizeFilterResult])
+    // useEffect(() => {
+    //     console.log("a", sizeFilterResult)
+    // }, [sizeFilterResult])
 
-    useEffect(() => {
-        console.log("error", errorMessageListQuestions)
-    }, [errorMessageListQuestions])
+    // useEffect(() => {
+    //     console.log("error", errorMessageListQuestions)
+    // }, [errorMessageListQuestions])
+
+    // useEffect(() => {
+    //     console.log("teste", filteredQuestions)
+    // }, [filteredQuestions])
+
 
     return (
         <SafeAreaView>
@@ -125,7 +131,7 @@ const QuestionsDatabase = ({navigation}) => {
                         <>
                             <Text>{sizeFilterResult == 1 ? "1 resultado encontrado" : `${sizeFilterResult} resultados encontrados`}</Text>
                             <ScrollView>
-                                {filteredQuestions?.filter(filterSearch).map((item, index) => (
+                                {filteredQuestions && filteredQuestions?.filter(filterSearch).map((item, index) => (
                                     <QuestionsCard
                                         key={index}
                                         id={item.id}
