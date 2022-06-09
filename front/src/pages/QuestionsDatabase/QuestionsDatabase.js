@@ -36,6 +36,12 @@ const QuestionsDatabase = ({navigation}) => {
     const [searchText, setSearchText] = useState("");
     const [modalIsVisible, setModalIsVisible] = useState(false);
     const [questionSelected, setQuestionSelected] = useState(false);
+    const [errorMessageListQuestions, setErrorMessageListQuestions] = useState("");
+
+    useEffect(() => {
+        if(filteredQuestions?.length == 0) setErrorMessageListQuestions("Nenhuma questão foi encontrada.");
+
+    }, [filteredQuestions])
 
     useEffect(()=> {
         setFilteredQuestions(questionList);
@@ -59,7 +65,7 @@ const QuestionsDatabase = ({navigation}) => {
                 });
             }
         }).catch(()=>{
-            return <Text>Ops! Por algum motivo a lista não pôde ser exibida. Tente novamente!</Text>
+            setErrorMessageListQuestions("Ops! Por algum motivo a lista não pôde ser exibida. Tente novamente!");
         })
     },[userId, modalIsVisible]);
 
@@ -114,7 +120,7 @@ const QuestionsDatabase = ({navigation}) => {
                             ))}
                         </ScrollView>)
                         :
-                        <Text style={style.listCardsEmpty}>Nenhuma questão foi encontrada.</Text>
+                        <Text style={style.listCardsEmpty}>{errorMessageListQuestions}</Text>
                     }
                 </View>
                 <TouchableOpacity
