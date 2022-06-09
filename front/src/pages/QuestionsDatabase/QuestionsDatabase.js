@@ -16,10 +16,11 @@ const QuestionsDatabase = ({navigation}) => {
     const [userId, setUserId] = useState(false);
     const [questionList, setQuestionList] = useState([]);
     const [filteredQuestions, setFilteredQuestions] = useState();
+    const [sizeFilterResult, setSizeFilterResult] = useState(false);
     const [searchText, setSearchText] = useState("");
     const [modalIsVisible, setModalIsVisible] = useState(false);
     const [questionSelected, setQuestionSelected] = useState(false);
-    const [errorMessageListQuestions, setErrorMessageListQuestions] = useState("");
+    const [errorMessageListQuestions, setErrorMessageListQuestions] = useState(false);
         
     useEffect( () => {
         getUserId().then((data) => setUserId(data.id)).catch((erro)=>console.log(erro, "Não foi possível recuperar o usuário logado."));
@@ -28,18 +29,19 @@ const QuestionsDatabase = ({navigation}) => {
     // const isMounted = useRef(true);
     // useEffect(() => () => { isMounted.current = false }, [isMounted])
 
-    const handleFilteredQuestions = (questions) => {
-        if(questions){
-            setFilteredQuestions(questions);
+    const handleFilteredQuestions = (filterResult) => {
+        if(filterResult){
+            setFilteredQuestions(filterResult);
+            // setSizeFilterResult(filterResult?.length);
         }else{
             setFilteredQuestions(null);
         }
     }
 
-    useEffect(() => {
-        if(filteredQuestions?.length == 0) setErrorMessageListQuestions("Nenhuma questão foi encontrada.");
+    // useEffect(() => {
+    //     if(filteredQuestions?.length == 0) setErrorMessageListQuestions("Nenhuma questão foi encontrada.");
 
-    }, [filteredQuestions])
+    // }, [filteredQuestions])
 
     useEffect(()=> {
         setFilteredQuestions(questionList);
@@ -97,6 +99,18 @@ const QuestionsDatabase = ({navigation}) => {
         setQuestionSelected(question);
         setModalIsVisible(true);
     }
+    
+    useEffect(() => {
+        setSizeFilterResult(filteredQuestions?.length || 0)
+    }, [filteredQuestions])
+
+    useEffect(() => {
+        console.log("a", sizeFilterResult)
+    }, [sizeFilterResult])
+
+    useEffect(() => {
+        console.log("error", errorMessageListQuestions)
+    }, [errorMessageListQuestions])
 
     return (
         <SafeAreaView>
@@ -105,21 +119,24 @@ const QuestionsDatabase = ({navigation}) => {
                 <SearchBar searchText={searchText} setSearchText={setSearchText}/>
                 <DisciplineCard questionList={questionList} handleFilteredQuestions={handleFilteredQuestions}/>
                 <View style={style.listCards}>
-                    {filteredQuestions?.length > 0 ? 
-                        (<ScrollView>
-                            {filteredQuestions?.filter(filterSearch).map((item, index) => (
-                                <QuestionsCard
-                                    key={index}
-                                    id={item.id}
-                                    data={item}
-                                    handleLeft={() => {OpenEditModal(item)}}
-                                    handleRight={() => removeQuestion(item)}
-                                />
-                            ))}
-                        </ScrollView>)
-                        :
+                    {errorMessageListQuestions ? (
                         <Text style={style.listCardsEmpty}>{errorMessageListQuestions}</Text>
-                    }
+                    ):(
+                        <>
+                            <Text>{sizeFilterResult == 1 ? "1 resultado encontrado" : `${sizeFilterResult} resultados encontrados`}</Text>
+                            <ScrollView>
+                                {filteredQuestions?.filter(filterSearch).map((item, index) => (
+                                    <QuestionsCard
+                                        key={index}
+                                        id={item.id}
+                                        data={item}
+                                        handleLeft={() => {OpenEditModal(item)}}
+                                        handleRight={() => removeQuestion(item)}
+                                    />
+                                ))}
+                            </ScrollView>
+                        </>
+                    )} 
                 </View>
                 <TouchableOpacity
                     activeOpacity={0.4}
