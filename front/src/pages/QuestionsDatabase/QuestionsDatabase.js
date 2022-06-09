@@ -110,7 +110,7 @@ const QuestionsDatabase = ({navigation}) => {
                         <Text style={style.listCardsEmpty}>{errorMessageListQuestions}</Text>
                     ):(
                         <>
-                            <Text>{sizeFilterResult == 1 ? "1 resultado encontrado" : `${sizeFilterResult} resultados encontrados`}</Text>
+                            <Text style={style.resultsFound}>{sizeFilterResult == 1 ? "1 resultado encontrado" : `${sizeFilterResult} resultados encontrados`}</Text>
                             <ScrollView>
                                 {filteredQuestions && filteredQuestions?.filter(filterSearch).map((item, index) => (
                                     <QuestionsCard
