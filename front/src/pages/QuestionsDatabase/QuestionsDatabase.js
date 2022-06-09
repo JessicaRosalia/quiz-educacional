@@ -37,18 +37,6 @@ const QuestionsDatabase = ({navigation}) => {
         }
     }
 
-    useEffect(()=> {
-        setFilteredQuestions(questionList);
-    }, [questionList]);
-    
-    const filterSearch = (searchValue) => {
-        if(searchText === ""){
-            return searchValue;
-        }else if(searchValue.description.includes(searchText)){
-            return searchValue;
-        }
-    }
-
     useEffect(() => {
         getQuestions().then(questions=>{
             if(questions){
@@ -63,6 +51,22 @@ const QuestionsDatabase = ({navigation}) => {
             setErrorMessageListQuestions("Ops! Por algum motivo a lista não pôde ser exibida. Tente novamente!");
         })
     },[userId, modalIsVisible]);
+
+    useEffect(()=> {
+        setFilteredQuestions(questionList);
+    }, [questionList]);
+
+    useEffect(() => {
+        setSizeFilterResult(filteredQuestions?.length || 0)
+    }, [filteredQuestions])
+    
+    const filterSearch = (searchValue) => {
+        if(searchText === ""){
+            return searchValue;
+        }else if(searchValue.description.includes(searchText)){
+            return searchValue;
+        }
+    }
 
     function removeQuestion (question) {
         const userId = question.userId;
@@ -94,11 +98,6 @@ const QuestionsDatabase = ({navigation}) => {
         setQuestionSelected(question);
         setModalIsVisible(true);
     }
-    
-    useEffect(() => {
-        setSizeFilterResult(filteredQuestions?.length || 0)
-    }, [filteredQuestions])
-
 
     return (
         <SafeAreaView>
