@@ -32,16 +32,10 @@ const QuestionsDatabase = ({navigation}) => {
     const handleFilteredQuestions = (filterResult) => {
         if(filterResult){
             setFilteredQuestions(filterResult);
-            // setSizeFilterResult(filterResult?.length);
         }else{
             setFilteredQuestions(null);
         }
     }
-
-    // useEffect(() => {
-    //     if(filteredQuestions?.length == 0) setErrorMessageListQuestions("Nenhuma questão foi encontrada.");
-
-    // }, [filteredQuestions])
 
     useEffect(()=> {
         setFilteredQuestions(questionList);
@@ -104,18 +98,6 @@ const QuestionsDatabase = ({navigation}) => {
     useEffect(() => {
         setSizeFilterResult(filteredQuestions?.length || 0)
     }, [filteredQuestions])
-
-    // useEffect(() => {
-    //     console.log("a", sizeFilterResult)
-    // }, [sizeFilterResult])
-
-    // useEffect(() => {
-    //     console.log("error", errorMessageListQuestions)
-    // }, [errorMessageListQuestions])
-
-    // useEffect(() => {
-    //     console.log("teste", filteredQuestions)
-    // }, [filteredQuestions])
 
 
     return (
