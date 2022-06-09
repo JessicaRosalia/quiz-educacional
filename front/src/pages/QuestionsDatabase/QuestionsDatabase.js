@@ -14,6 +14,12 @@ import Toast from 'react-native-root-toast';
 const QuestionsDatabase = ({navigation}) => {
 
     const [userId, setUserId] = useState(false);
+    const [questionList, setQuestionList] = useState([]);
+    const [filteredQuestions, setFilteredQuestions] = useState();
+    const [searchText, setSearchText] = useState("");
+    const [modalIsVisible, setModalIsVisible] = useState(false);
+    const [questionSelected, setQuestionSelected] = useState(false);
+    const [errorMessageListQuestions, setErrorMessageListQuestions] = useState("");
         
     useEffect( () => {
         getUserId().then((data) => setUserId(data.id)).catch((erro)=>console.log(erro, "Não foi possível recuperar o usuário logado."));
@@ -29,14 +35,6 @@ const QuestionsDatabase = ({navigation}) => {
             setFilteredQuestions(null);
         }
     }
-
-    
-    const [questionList, setQuestionList] = useState([]);
-    const [filteredQuestions, setFilteredQuestions] = useState();
-    const [searchText, setSearchText] = useState("");
-    const [modalIsVisible, setModalIsVisible] = useState(false);
-    const [questionSelected, setQuestionSelected] = useState(false);
-    const [errorMessageListQuestions, setErrorMessageListQuestions] = useState("");
 
     useEffect(() => {
         if(filteredQuestions?.length == 0) setErrorMessageListQuestions("Nenhuma questão foi encontrada.");
@@ -69,7 +67,7 @@ const QuestionsDatabase = ({navigation}) => {
         })
     },[userId, modalIsVisible]);
 
-     function removeQuestion (question) {
+    function removeQuestion (question) {
         const userId = question.userId;
         const questionId = question.questionId;
         
