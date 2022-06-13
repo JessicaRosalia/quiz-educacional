@@ -8,6 +8,7 @@ const style = StyleSheet.create({
         alignItems: "center",
         marginTop: 5,
         marginBottom: 30,
+        width: "87%",
     },
     ContainerCardFilter: {
         display: "flex",

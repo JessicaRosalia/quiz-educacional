@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Image, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import style from "./style";
 
 const DisciplineCard = ({questionList, handleFilteredQuestions}) => {
@@ -10,15 +10,28 @@ const DisciplineCard = ({questionList, handleFilteredQuestions}) => {
     const filterOptions = [
         {
             id: 0,
-            label: "Todos",
+            label: "Todas",
+            photo: require("../../assets/icons/subjects/categories.png")
         },
         {
             id: 1,
-            label: "Biologia",
+            label: "Ciência",
+            photo: require("../../assets/icons/subjects/science.png")
         },
         {
             id: 2,
-            label: "Física"
+            label: "Geografia",
+            photo: require("../../assets/icons/subjects/geography.png")
+        },
+        {
+            id: 3,
+            label: "História",
+            photo: require("../../assets/icons/subjects/history.png")
+        },
+        {
+            id: 4,
+            label: "Matemática",
+            photo: require("../../assets/icons/subjects/math.png")
         }
     ]
 
@@ -44,16 +57,18 @@ const DisciplineCard = ({questionList, handleFilteredQuestions}) => {
 
     return (
         <View style={style.ContainerAllFilters}>
-        {filterOptions.map((option) => (
-            <TouchableOpacity key={option.id} onPress={() => filterDiscipline(option)}>
-                <View style={style.ContainerCardFilter}>
-                    <View style={filterSelected === option.id ? style.ContainerFilterSelected : style.ContainerCategory }>
-                        <Image source={require("../../assets/icons/image35.png")}/>
+            <ScrollView horizontal>
+            {filterOptions.map((option) => (
+                <TouchableOpacity key={option.id} onPress={() => filterDiscipline(option)}>
+                    <View style={style.ContainerCardFilter}>
+                        <View style={filterSelected === option.id ? style.ContainerFilterSelected : style.ContainerCategory }>
+                            <Image source={option.photo}/>
+                        </View>
+                        <Text style={filterSelected === option.id ? style.CategoryFilterSelected : style.Category}>{option.label}</Text>
                     </View>
-                    <Text style={filterSelected === option.id ? style.CategoryFilterSelected : style.Category}>{option.label}</Text>
-                </View>
-            </TouchableOpacity>
-        ))}
+                </TouchableOpacity>
+            ))}
+            </ScrollView>
         </View>
     )
 }
