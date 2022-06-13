@@ -128,7 +128,7 @@ const QuestionsDatabase = ({navigation}) => {
                             </View>
                         )
                         ) : (
-                        <Text style={style.listCardsEmpty}>Lista vazia</Text>
+                        <Text style={style.listCardsEmpty}>Você não possui nenhuma questão cadastrada.</Text>
                     )}
                 </View>
                 <TouchableOpacity
