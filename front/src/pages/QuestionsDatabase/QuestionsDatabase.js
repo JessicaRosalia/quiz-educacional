@@ -15,7 +15,7 @@ const QuestionsDatabase = ({navigation}) => {
 
     const [userId, setUserId] = useState(false);
     const [questionList, setQuestionList] = useState([]);
-    const [filteredQuestions, setFilteredQuestions] = useState();
+    const [filteredQuestions, setFilteredQuestions] = useState([]);
     const [sizeFilterResult, setSizeFilterResult] = useState(false);
     const [searchText, setSearchText] = useState("");
     const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -106,24 +106,30 @@ const QuestionsDatabase = ({navigation}) => {
                 <SearchBar searchText={searchText} setSearchText={setSearchText}/>
                 <DisciplineCard questionList={questionList} handleFilteredQuestions={handleFilteredQuestions}/>
                 <View style={style.listCards}>
-                    {errorMessageListQuestions ? (
-                        <Text style={style.listCardsEmpty}>{errorMessageListQuestions}</Text>
-                    ):(
-                        <>
-                            <Text style={style.resultsFound}>{sizeFilterResult == 1 ? "1 resultado encontrado" : `${sizeFilterResult} resultados encontrados`}</Text>
-                            <ScrollView>
-                                {filteredQuestions && filteredQuestions?.filter(filterSearch).map((item, index) => (
-                                    <QuestionsCard
-                                        key={index}
-                                        id={item.id}
-                                        data={item}
-                                        handleLeft={() => {OpenEditModal(item)}}
-                                        handleRight={() => removeQuestion(item)}
-                                    />
-                                ))}
-                            </ScrollView>
-                        </>
-                    )} 
+                    {
+                    questionList?.length > 0
+                    ? (
+                        errorMessageListQuestions ? (
+                            <Text style={style.listCardsEmpty}>{errorMessageListQuestions}</Text>
+                        ):( 
+                            <View>
+                                <Text style={style.resultsFound}>{sizeFilterResult == 1 ? "1 resultado encontrado" : `${sizeFilterResult} resultados encontrados`}</Text>
+                                <ScrollView>
+                                    {filteredQuestions && filteredQuestions?.filter(filterSearch).map((item, index) => (
+                                        <QuestionsCard
+                                            key={index}
+                                            id={item.id}
+                                            data={item}
+                                            handleLeft={() => {OpenEditModal(item)}}
+                                            handleRight={() => removeQuestion(item)}
+                                        />
+                                    ))}
+                                </ScrollView>
+                            </View>
+                        )
+                        ) : (
+                        <Text style={style.listCardsEmpty}>Lista vazia</Text>
+                    )}
                 </View>
                 <TouchableOpacity
                     activeOpacity={0.4}

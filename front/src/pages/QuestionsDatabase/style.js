@@ -22,6 +22,7 @@ export default StyleSheet.create({
         marginBottom: 20,
         fontWeight: "bold",
         fontSize: 18,
+        textAlign: "center",
     },
     registerButton: {
         position: "absolute",
