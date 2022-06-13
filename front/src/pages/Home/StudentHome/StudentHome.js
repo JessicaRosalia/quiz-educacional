@@ -14,20 +14,20 @@ const StudentHome = ({ navigation }) => {
                 <View style={style.containerMenus}>
                     <View style={style.cardUm}>
                         <CardOptions>
-                            <Image source={require("../../../assets/icons/estudante-historico.png")} />
+                            <Image source={require("../../../assets/icons/student-historic.png")} />
                             <Text>Histórico</Text>
                             <Text>Veja seu histórico de partidas</Text>
                         </CardOptions>
                     </View>
                     <View style={style.cardDois}>
                         <CardOptions>
-                            <Image source={require("../../../assets/icons/prof-estudante-busca.png")} />
+                            <Image source={require("../../../assets/icons/teacher-student-search.png")} />
                             <Text>Busca</Text>
                             <Text>Busque por colegas, professores</Text>
                         </CardOptions>
                         <View style={style.cardTres}>
                             <CardOptions navigation={navigation} routeName="QuestionScreen">
-                                <Image source={require("../../../assets/icons/estudante-jogar.png")} />
+                                <Image source={require("../../../assets/icons/student-play.png")} />
                                 <Text>Jogar</Text>
                                 <Text>Jogue com amigos</Text>
                             </CardOptions>
