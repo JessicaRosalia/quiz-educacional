@@ -58,7 +58,6 @@ export default StyleSheet.create({
     linkCadastro: {
         color: "#000",
         fontSize: 23,
-        marginBottom: 20,
     },
     textoCad: {
         color: "#0C066B",
