@@ -3,7 +3,7 @@ import { SearchBar as Search } from 'react-native-elements';
 const SearchBar = ({searchText, setSearchText}) => {
     return (
         <Search
-            placeholder="Pesquise aqui"
+            placeholder="Pesquise questões"
             containerStyle={{
                 width: 315,
                 marginLeft: "auto",

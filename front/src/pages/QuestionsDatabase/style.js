@@ -17,7 +17,13 @@ export default StyleSheet.create({
         fontWeight: "700",
         fontSize: 20,
         textAlign: "center",
-    }, 
+    },
+    resultsFound: {
+        marginBottom: 20,
+        fontWeight: "bold",
+        fontSize: 18,
+        textAlign: "center",
+    },
     registerButton: {
         position: "absolute",
         top: 600,
@@ -36,7 +42,6 @@ export default StyleSheet.create({
         lineHeight: 50,
         fontSize: 40,
     },
-
 
     outerView: {
         flex: 1,
