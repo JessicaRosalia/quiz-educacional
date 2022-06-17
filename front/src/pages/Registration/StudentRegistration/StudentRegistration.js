@@ -17,6 +17,7 @@ const StudentRegistration = ({ navigation }) => {
 
     const [errorNome, setErrorNome] = useState(false);
     const [errorCpf, setErrorCpf] = useState(false);
+    const [errorEmail, setErrorEmail] = useState(false);
     const [errorSenha, setErrorSenha] = useState(false);
     const [errorCadastro, setErrorCadastro] = useState(false);
 
@@ -46,7 +47,7 @@ const StudentRegistration = ({ navigation }) => {
             if (error.response) {
                 const errorMsg = error.response.data.message;
                 console.log(errorMsg);
-                Toast.show(capitalize(errorMsg), {
+                Toast.show(errorMsg, {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.CENTER,
                 });
@@ -55,20 +56,24 @@ const StudentRegistration = ({ navigation }) => {
     }
 
     const validar = () => {
-        let error = false
-        if (nome == null) {
-            setErrorNome("Preencha seu nome corretamente.")
-            error = true
+        let error = false;
+        if (nome === null || nome === "") {
+            setErrorNome("Preencha seu nome corretamente");
+            error = true;
         }
-        if (cpf == null) {
-            setErrorCpf("Preencha seu CPF corretamente.")
-            error = true
+        if (cpf === null || cpf === "") {
+            setErrorCpf("Preencha seu CPF corretamente");
+            error = true;
         }
-        if (senha == null) {
-            setErrorSenha("Você precisa inserir uma senha.")
-            error = true
+        if (senha === null || senha === "") {
+            setErrorSenha("Preencha sua senha corretamente");
+            error = true;
         }
-        return !error
+        if(email === null || email === "") {
+            setErrorEmail("Preencha seu e-mail corretamente");
+            error = true;
+        }
+        return !error;
     }
 
     return (
@@ -101,7 +106,8 @@ const StudentRegistration = ({ navigation }) => {
                         </View>
 
                         <View style={style.input}>
-                            <Input label="E-mail" placeholder="exemplo@gmail.com" keyboardType="email-address" autoCapitalize="none" placeholderTextColor="#c3c3c3" onChangeText={value => setEmail(value)} style={{ color: "#000", fontSize: 15 }} />
+                            <Text style={style.label}>E-mail <Text style={style.required}>*</Text> </Text>
+                            <Input placeholder="exemplo@gmail.com" keyboardType="email-address" autoCapitalize="none" placeholderTextColor="#c3c3c3" onChangeText={value => setEmail(value)} errorMessage={errorEmail} errorStyle={{ color: "red" }} style={{ color: "#000", fontSize: 15 }} />
                         </View>
 
                         <View style={style.input}>
