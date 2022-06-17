@@ -48,7 +48,6 @@ const TeacherRegistration = ({ navigation }) => {
             });
             navigation.navigate('Login');
         }).catch(error => {
-            console.error(error);
             if (error.response) {
                 const errorMsg = error.response.data.message;
                 Toast.show(capitalize(errorMsg), {
