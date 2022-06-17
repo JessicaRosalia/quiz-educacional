@@ -5,6 +5,7 @@ import createAxiosInstance from '../../../api';
 import Toast from 'react-native-root-toast';
 import style from '../style';
 import MaskInput, { Masks } from 'react-native-mask-input';
+import { capitalize } from '../../../components/utils';
 
 const StudentRegistration = ({ navigation }) => {
 
@@ -50,11 +51,9 @@ const StudentRegistration = ({ navigation }) => {
             });
             navigation.navigate('Login');
         }).catch(error => {
-            console.error(error);
             if (error.response) {
                 const errorMsg = error.response.data.message;
-                console.log(errorMsg);
-                Toast.show(errorMsg, {
+                Toast.show(capitalize(errorMsg), {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.CENTER,
                 });
