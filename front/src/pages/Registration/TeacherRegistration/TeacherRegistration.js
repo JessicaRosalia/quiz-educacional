@@ -6,6 +6,7 @@ import createAxiosInstance from '../../../api';
 import TabNav from '../../../components/TabNav/index';
 import style from '../style';
 import Toast from 'react-native-root-toast';
+import { capitalize } from '../../../components/utils';
 
 const TeacherRegistration = ({ navigation }) => {
 
@@ -50,7 +51,6 @@ const TeacherRegistration = ({ navigation }) => {
             console.error(error);
             if (error.response) {
                 const errorMsg = error.response.data.message;
-                console.log(errorMsg);
                 Toast.show(capitalize(errorMsg), {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.CENTER,
