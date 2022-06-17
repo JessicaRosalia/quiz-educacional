@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import MaskInput, { Masks } from 'react-native-mask-input';
 import { Input } from 'react-native-elements/dist/input/Input';
@@ -25,6 +25,14 @@ const TeacherRegistration = ({ navigation }) => {
     const [errorSenha, setErrorSenha] = useState(false);
     const [errorCadastro, setErrorCadastro] = useState(false);
 
+    useEffect(() => {
+        if(nome) setErrorNome(false);
+        if(cpf) setErrorCpf(false);
+        if(nomeEscola) SetErrorNomeEscola(false);
+        if(numeroMatricula) setErrorNumeroMatricula(false);
+        if(email) setErrorEmail(false);
+        if(senha) setErrorSenha(false);
+    }, [nome, cpf, nomeEscola, numeroMatricula, email, senha]);
 
     const cadastrar = async () => {
         if (!validar()) {
