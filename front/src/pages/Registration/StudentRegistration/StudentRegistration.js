@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Input } from 'react-native-elements/dist/input/Input';
 import createAxiosInstance from '../../../api';
@@ -20,6 +20,13 @@ const StudentRegistration = ({ navigation }) => {
     const [errorEmail, setErrorEmail] = useState(false);
     const [errorSenha, setErrorSenha] = useState(false);
     const [errorCadastro, setErrorCadastro] = useState(false);
+
+    useEffect(() => {
+        if(nome) setErrorNome(false);
+        if(cpf) setErrorCpf(false);
+        if(email) setErrorEmail(false);
+        if(senha) setErrorSenha(false);
+    }, [nome, cpf, email, senha])
 
     const cadastrar = async () => {
         if (!validar()) {
