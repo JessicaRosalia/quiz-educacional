@@ -43,10 +43,8 @@ const Login = ({ navigation }) => {
                 if (user.type === "professor") navigation.navigate('TeacherHome');
             })
         }).catch(error => {
-            console.error(error);
             if (error.response) {
                 const errorMsg = error.response.data.message;
-                console.log(errorMsg);
                 Toast.show(capitalize(errorMsg), {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.CENTER,
