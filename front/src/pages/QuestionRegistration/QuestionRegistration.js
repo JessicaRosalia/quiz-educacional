@@ -185,19 +185,19 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
                             <View style={style.correctAlternative}>
                                 <RadioButton.Group onValueChange={v => setCorrectAlternative(v)} value={correctAlternative}>
                                     <View style={style.containerAlternative}>
-                                        <RadioButton  value={question?.alternativeA?.id}/>
+                                        <RadioButton value={ question?.alternativeA?.id || "A"}/>
                                         <Text>Alternativa A</Text>
                                     </View>
                                     <View style={style.containerAlternative} >
-                                        <RadioButton value={question?.alternativeB?.id}/>
+                                        <RadioButton value={question?.alternativeB?.id || "B"}/>
                                         <Text>Alternativa B</Text>
                                     </View>
                                     <View style={style.containerAlternative}>
-                                        <RadioButton  value={question?.alternativeC?.id}/>
+                                        <RadioButton value={question?.alternativeC?.id || "C"}/>
                                         <Text>Alternativa C</Text>
                                     </View>
                                     <View style={style.containerAlternative}>
-                                        <RadioButton value={question?.alternativeD?.id} />
+                                        <RadioButton value={question?.alternativeD?.id || "D"}/>
                                         <Text>Alternativa D</Text>
                                     </View>
                                 </RadioButton.Group>
