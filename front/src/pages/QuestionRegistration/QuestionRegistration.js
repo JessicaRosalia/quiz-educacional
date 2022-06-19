@@ -50,12 +50,12 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
     }, [questionSelected]);
 
     useEffect(()=>{
-            if (alternativeA !== "" && alternativeB !== "" && alternativeC !== "" && alternativeD !== "" && selectedValue !== "Selecione" && questionDescription !== "") {
+            if (alternativeA !== "" && alternativeB !== "" && alternativeC !== "" && alternativeD !== "" && selectedValue !== "Selecione" && questionDescription !== "" && correctAlternative !== false) {
                 setIsDisabled(false);
-            }else if(alternativeA == "" || alternativeB == "" || alternativeC == "" || alternativeD == "" || selectedValue == "Selecione" || questionDescription == ""){
+            }else if(alternativeA == "" || alternativeB == "" || alternativeC == "" || alternativeD == "" || selectedValue == "Selecione" || questionDescription == "" || correctAlternative == false){
                 setIsDisabled(true);
             }
-    },[questionDescription, alternativeA, alternativeB, alternativeC, alternativeD, selectedValue]);
+    },[questionDescription, alternativeA, alternativeB, alternativeC, alternativeD, selectedValue, correctAlternative]);
 
     const registerIsInvalid = () => {
         let error = false
