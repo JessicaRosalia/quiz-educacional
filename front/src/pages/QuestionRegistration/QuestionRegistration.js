@@ -142,7 +142,7 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
                 }
             ],
             userId: 2,
-            answerId: 2,
+            answerId: correctAlternative,
             questionCategoryId: 1
         }
         await editQuestionService(parameters).then(()=> {
@@ -185,19 +185,19 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
                             <View style={style.correctAlternative}>
                                 <RadioButton.Group onValueChange={v => setCorrectAlternative(v)} value={correctAlternative}>
                                     <View style={style.containerAlternative}>
-                                        <RadioButton value="A" />
+                                        <RadioButton  value={question?.alternativeA?.id}/>
                                         <Text>Alternativa A</Text>
                                     </View>
                                     <View style={style.containerAlternative} >
-                                        <RadioButton value="B" />
+                                        <RadioButton value={question?.alternativeB?.id}/>
                                         <Text>Alternativa B</Text>
                                     </View>
                                     <View style={style.containerAlternative}>
-                                        <RadioButton value="C" />
+                                        <RadioButton  value={question?.alternativeC?.id}/>
                                         <Text>Alternativa C</Text>
                                     </View>
                                     <View style={style.containerAlternative}>
-                                        <RadioButton value="D" />
+                                        <RadioButton value={question?.alternativeD?.id} />
                                         <Text>Alternativa D</Text>
                                     </View>
                                 </RadioButton.Group>
