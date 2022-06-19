@@ -72,21 +72,27 @@ const QuestionsDatabase = ({navigation}) => {
         const userId = question.userId;
         const questionId = question.questionId;
         
-         deleteQuestion({
+        deleteQuestion({
             userId: userId,
             questionId: questionId,
-         })
-         .then(()=> {
+        })
+        .then(()=> {
             Toast.show("A questão foi excluída!", {
                 duration: Toast.durations.LONG,
                 position: Toast.positions.BOTTOM,
             });
+
+            const remainingList = questionList.filter((question) => {
+                if(question.questionId !== questionId) return question
+            });
+
+            setQuestionList(remainingList);
         }).catch(() => {
             Toast.show("Ocorreu um erro ao tentar excluir a questão. Tente novamente.", {
                 duration: Toast.durations.LONG,
                 position: Toast.positions.BOTTOM,
             });
-        })   
+        })
     }
 
     const openModalRegister = () => {
