@@ -25,11 +25,6 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
     const [alternativeD, setAlternativeD] = useState("");
     const [correctAlternative, setCorrectAlternative] = useState(false);
 
-    useEffect(() => {
-        console.log(correctAlternative);
-        let t = correctAlternative === "A" || false
-        console.log(t)
-    }, [correctAlternative])
 
     const [question, setQuestion] = useState({});
 
@@ -84,25 +79,25 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
     }
 
 
-    async function registerQuestion () {
+    async function registerQuestion () {        
         const questionParam = {
             prompt: questionDescription,
             options: [
                 {
                     body: alternativeA,
-                    answer: true
+                    answer: correctAlternative === "A"
                 },
                 {
                     body: alternativeB,
-                    answer: false
+                    answer: correctAlternative === "B"
                 },
                 {
                     body: alternativeC,
-                    answer: false
+                    answer: correctAlternative === "C"
                 },
                 {
                     body: alternativeD,
-                    answer: false
+                    answer: correctAlternative === "D"
                 }
             ],
             userId: userId,
