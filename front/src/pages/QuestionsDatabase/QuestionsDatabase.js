@@ -21,21 +21,23 @@ const QuestionsDatabase = ({navigation}) => {
     const [modalIsVisible, setModalIsVisible] = useState(false);
     const [questionSelected, setQuestionSelected] = useState(false);
     const [errorMessageListQuestions, setErrorMessageListQuestions] = useState(false);
-        
+
+    const filterSearch = (searchValue) => {
+        if(searchText === ""){
+            return searchValue;
+        }else if(searchValue.description.includes(searchText)){
+            return searchValue;
+        }
+    }
+
+    const numberOfFilteredQuestions = filteredQuestions?.filter(filterSearch)?.length;
+
     useEffect( () => {
         getUserId().then((data) => setUserId(data.id)).catch((erro)=>console.log(erro, "Não foi possível recuperar o usuário logado."));
-    }, [])
+    }, []);
 
     // const isMounted = useRef(true);
     // useEffect(() => () => { isMounted.current = false }, [isMounted])
-
-    const handleFilteredQuestions = (filterResult) => {
-        if(filterResult){
-            setFilteredQuestions(filterResult);
-        }else{
-            setFilteredQuestions(null);
-        }
-    }
 
     useEffect(() => {
         getQuestions().then(questions=>{
@@ -55,16 +57,26 @@ const QuestionsDatabase = ({navigation}) => {
     useEffect(()=> {
         setFilteredQuestions(questionList);
     }, [questionList]);
-
-    useEffect(() => {
-        setSizeFilterResult(filteredQuestions?.length || 0)
-    }, [filteredQuestions])
     
-    const filterSearch = (searchValue) => {
-        if(searchText === ""){
-            return searchValue;
-        }else if(searchValue.description.includes(searchText)){
-            return searchValue;
+    useEffect(() => {
+            setSizeFilterResult(numberOfFilteredQuestions);
+    }, [numberOfFilteredQuestions]);
+
+    // useEffect(() => {
+    //     setSizeFilterResult(filteredQuestions?.length || 0)
+    // }, [filteredQuestions])
+
+    // useEffect(() => {
+        
+    //     setSizeFilterResult(filteredQuestions?.filter(filterSearch)?.length);
+    // }, [])
+
+    
+    const handleFilteredQuestions = (filterResult) => {
+        if(filterResult){
+            setFilteredQuestions(filterResult);
+        }else{
+            setFilteredQuestions(null);
         }
     }
 
