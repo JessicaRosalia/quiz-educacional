@@ -36,9 +36,6 @@ const QuestionsDatabase = ({navigation}) => {
         getUserId().then((data) => setUserId(data.id)).catch((erro)=>console.log(erro, "Não foi possível recuperar o usuário logado."));
     }, []);
 
-    // const isMounted = useRef(true);
-    // useEffect(() => () => { isMounted.current = false }, [isMounted])
-
     useEffect(() => {
         getQuestions().then(questions=>{
             if(questions){
@@ -61,16 +58,6 @@ const QuestionsDatabase = ({navigation}) => {
     useEffect(() => {
             setSizeFilterResult(numberOfFilteredQuestions);
     }, [numberOfFilteredQuestions]);
-
-    // useEffect(() => {
-    //     setSizeFilterResult(filteredQuestions?.length || 0)
-    // }, [filteredQuestions])
-
-    // useEffect(() => {
-        
-    //     setSizeFilterResult(filteredQuestions?.filter(filterSearch)?.length);
-    // }, [])
-
     
     const handleFilteredQuestions = (filterResult) => {
         if(filterResult){
