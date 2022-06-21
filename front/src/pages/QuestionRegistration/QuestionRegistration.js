@@ -25,11 +25,6 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
     const [alternativeD, setAlternativeD] = useState("");
     const [correctAlternative, setCorrectAlternative] = useState(false);
 
-    useEffect(() => {
-        console.log(correctAlternative);
-        let t = correctAlternative === "A" || false
-        console.log(t)
-    }, [correctAlternative])
 
     const [question, setQuestion] = useState({});
 
@@ -55,12 +50,12 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
     }, [questionSelected]);
 
     useEffect(()=>{
-            if (alternativeA !== "" && alternativeB !== "" && alternativeC !== "" && alternativeD !== "" && selectedValue !== "Selecione" && questionDescription !== "") {
+            if (alternativeA !== "" && alternativeB !== "" && alternativeC !== "" && alternativeD !== "" && selectedValue !== "Selecione" && questionDescription !== "" && correctAlternative !== false) {
                 setIsDisabled(false);
-            }else if(alternativeA == "" || alternativeB == "" || alternativeC == "" || alternativeD == "" || selectedValue == "Selecione" || questionDescription == ""){
+            }else if(alternativeA == "" || alternativeB == "" || alternativeC == "" || alternativeD == "" || selectedValue == "Selecione" || questionDescription == "" || correctAlternative == false){
                 setIsDisabled(true);
             }
-    },[questionDescription, alternativeA, alternativeB, alternativeC, alternativeD, selectedValue]);
+    },[questionDescription, alternativeA, alternativeB, alternativeC, alternativeD, selectedValue, correctAlternative]);
 
     const registerIsInvalid = () => {
         let error = false
@@ -84,25 +79,25 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
     }
 
 
-    async function registerQuestion () {
+    async function registerQuestion () {        
         const questionParam = {
             prompt: questionDescription,
             options: [
                 {
                     body: alternativeA,
-                    answer: true
+                    answer: correctAlternative === "A"
                 },
                 {
                     body: alternativeB,
-                    answer: false
+                    answer: correctAlternative === "B"
                 },
                 {
                     body: alternativeC,
-                    answer: false
+                    answer: correctAlternative === "C"
                 },
                 {
                     body: alternativeD,
-                    answer: false
+                    answer: correctAlternative === "D"
                 }
             ],
             userId: userId,
@@ -147,7 +142,7 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
                 }
             ],
             userId: 2,
-            answerId: 2,
+            answerId: correctAlternative,
             questionCategoryId: 1
         }
         await editQuestionService(parameters).then(()=> {
@@ -190,19 +185,19 @@ const QuestionRegistration = ({questionSelected, setModalIsVisible}) => {
                             <View style={style.correctAlternative}>
                                 <RadioButton.Group onValueChange={v => setCorrectAlternative(v)} value={correctAlternative}>
                                     <View style={style.containerAlternative}>
-                                        <RadioButton value="A" />
+                                        <RadioButton value={ question?.alternativeA?.id || "A"}/>
                                         <Text>Alternativa A</Text>
                                     </View>
                                     <View style={style.containerAlternative} >
-                                        <RadioButton value="B" />
+                                        <RadioButton value={question?.alternativeB?.id || "B"}/>
                                         <Text>Alternativa B</Text>
                                     </View>
                                     <View style={style.containerAlternative}>
-                                        <RadioButton value="C" />
+                                        <RadioButton value={question?.alternativeC?.id || "C"}/>
                                         <Text>Alternativa C</Text>
                                     </View>
                                     <View style={style.containerAlternative}>
-                                        <RadioButton value="D" />
+                                        <RadioButton value={question?.alternativeD?.id || "D"}/>
                                         <Text>Alternativa D</Text>
                                     </View>
                                 </RadioButton.Group>

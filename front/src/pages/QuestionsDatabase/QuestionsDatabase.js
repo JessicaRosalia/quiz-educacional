@@ -21,21 +21,20 @@ const QuestionsDatabase = ({navigation}) => {
     const [modalIsVisible, setModalIsVisible] = useState(false);
     const [questionSelected, setQuestionSelected] = useState(false);
     const [errorMessageListQuestions, setErrorMessageListQuestions] = useState(false);
-        
-    useEffect( () => {
-        getUserId().then((data) => setUserId(data.id)).catch((erro)=>console.log(erro, "Não foi possível recuperar o usuário logado."));
-    }, [])
 
-    // const isMounted = useRef(true);
-    // useEffect(() => () => { isMounted.current = false }, [isMounted])
-
-    const handleFilteredQuestions = (filterResult) => {
-        if(filterResult){
-            setFilteredQuestions(filterResult);
-        }else{
-            setFilteredQuestions(null);
+    const filterSearch = (searchValue) => {
+        if(searchText === ""){
+            return searchValue;
+        }else if(searchValue.description.includes(searchText)){
+            return searchValue;
         }
     }
+
+    const numberOfFilteredQuestions = filteredQuestions?.filter(filterSearch)?.length;
+
+    useEffect( () => {
+        getUserId().then((data) => setUserId(data.id)).catch((erro)=>console.log(erro, "Não foi possível recuperar o usuário logado."));
+    }, []);
 
     useEffect(() => {
         getQuestions().then(questions=>{
@@ -55,16 +54,16 @@ const QuestionsDatabase = ({navigation}) => {
     useEffect(()=> {
         setFilteredQuestions(questionList);
     }, [questionList]);
-
-    useEffect(() => {
-        setSizeFilterResult(filteredQuestions?.length || 0)
-    }, [filteredQuestions])
     
-    const filterSearch = (searchValue) => {
-        if(searchText === ""){
-            return searchValue;
-        }else if(searchValue.description.includes(searchText)){
-            return searchValue;
+    useEffect(() => {
+            setSizeFilterResult(numberOfFilteredQuestions);
+    }, [numberOfFilteredQuestions]);
+    
+    const handleFilteredQuestions = (filterResult) => {
+        if(filterResult){
+            setFilteredQuestions(filterResult);
+        }else{
+            setFilteredQuestions(null);
         }
     }
 
@@ -72,21 +71,27 @@ const QuestionsDatabase = ({navigation}) => {
         const userId = question.userId;
         const questionId = question.questionId;
         
-         deleteQuestion({
+        deleteQuestion({
             userId: userId,
             questionId: questionId,
-         })
-         .then(()=> {
+        })
+        .then(()=> {
             Toast.show("A questão foi excluída!", {
                 duration: Toast.durations.LONG,
                 position: Toast.positions.BOTTOM,
             });
+
+            const remainingList = questionList.filter((question) => {
+                if(question.questionId !== questionId) return question
+            });
+
+            setQuestionList(remainingList);
         }).catch(() => {
             Toast.show("Ocorreu um erro ao tentar excluir a questão. Tente novamente.", {
                 duration: Toast.durations.LONG,
                 position: Toast.positions.BOTTOM,
             });
-        })   
+        })
     }
 
     const openModalRegister = () => {
