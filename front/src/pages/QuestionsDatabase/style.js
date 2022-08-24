@@ -10,6 +10,20 @@ export default StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
+    listCardsEmpty: {
+        color: "#404040",
+        width: "80%",
+        lineHeight: 24,
+        fontWeight: "700",
+        fontSize: 20,
+        textAlign: "center",
+    },
+    resultsFound: {
+        marginBottom: 20,
+        fontWeight: "bold",
+        fontSize: 18,
+        textAlign: "center",
+    },
     registerButton: {
         position: "absolute",
         top: 600,
@@ -27,5 +41,19 @@ export default StyleSheet.create({
         textAlign: "center",
         lineHeight: 50,
         fontSize: 40,
+    },
+
+    outerView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.2)'
+    },
+    modalView: {
+        backgroundColor: 'white',
+        borderRadius: 30,
+        padding: 35,
+        width: 200,
+        alignItems: 'center'
     }
 })

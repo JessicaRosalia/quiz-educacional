@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { SearchBar as Search } from 'react-native-elements';
-const SearchBar = () => {
-    const [search, setSearch] = useState("");
+const SearchBar = ({searchText, setSearchText}) => {
     return (
         <Search
-            placeholder="Pesquise aqui"
+            placeholder="Pesquise questões"
             containerStyle={{
                 width: 315,
                 marginLeft: "auto",
@@ -21,8 +20,8 @@ const SearchBar = () => {
             }}
             round
             autoCorrect={false}
-            value={search}
-            onChangeText={(text)=>setSearch(text)}
+            value={searchText}
+            onChangeText={(text)=>setSearchText(text)}
         />
     )
 }

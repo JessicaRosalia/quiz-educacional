@@ -43,10 +43,8 @@ const Login = ({ navigation }) => {
                 if (user.type === "professor") navigation.navigate('TeacherHome');
             })
         }).catch(error => {
-            console.error(error);
             if (error.response) {
                 const errorMsg = error.response.data.message;
-                console.log(errorMsg);
                 Toast.show(capitalize(errorMsg), {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.CENTER,
@@ -105,7 +103,8 @@ const Login = ({ navigation }) => {
 
             <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
                 <View style={style.Barra}>
-                    <Text style={style.linkCadastro}>  Não possui cadastro?  <Text style={style.textoCad}>Cadastre-se</Text></Text>
+                    <Text style={style.linkCadastro}>Não possui cadastro?</Text>
+                    <Text style={style.textoCad}>Cadastre-se</Text>
                 </View>
             </TouchableOpacity>
         </View>

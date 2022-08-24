@@ -13,20 +13,20 @@ const TeacherHome = ({ navigation }) => {
                 <View style={style.containerMenus}>
                     <View style={style.cardUm}>
                         <CardOptions navigation={navigation} routeName="QuestionsDatabase">
-                            <Image source={require("../../../assets/icons/prof-cadastroQuestoes.png")} />
+                            <Image source={require("../../../assets/icons/teacher-questions.png")} />
                             <Text>Questões</Text>
                             <Text>Gerencie seu banco</Text>
                         </CardOptions>
                     </View>
                     <View style={style.cardDois}>
                         <CardOptions>
-                            <Image source={require("../../../assets/icons/prof-estudante-busca.png")} />
+                            <Image source={require("../../../assets/icons/teacher-student-search.png")} />
                             <Text>Busca</Text>
                             <Text>Busque por colegas, professores</Text>
                         </CardOptions>
                         <View style={style.cardTres}>
                             <CardOptions >
-                                <Image source={require("../../../assets/icons/prof-duelos.png")} />
+                                <Image source={require("../../../assets/icons/teacher-duels.png")} />
                                 <Text>Duelos</Text>
                                 <Text>Gerencie competições</Text>
                             </CardOptions>

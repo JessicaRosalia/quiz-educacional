@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import MaskInput, { Masks } from 'react-native-mask-input';
 import { Input } from 'react-native-elements/dist/input/Input';
@@ -6,6 +6,7 @@ import createAxiosInstance from '../../../api';
 import TabNav from '../../../components/TabNav/index';
 import style from '../style';
 import Toast from 'react-native-root-toast';
+import { capitalize } from '../../../components/utils';
 
 const TeacherRegistration = ({ navigation }) => {
 
@@ -24,6 +25,14 @@ const TeacherRegistration = ({ navigation }) => {
     const [errorSenha, setErrorSenha] = useState(false);
     const [errorCadastro, setErrorCadastro] = useState(false);
 
+    useEffect(() => {
+        if(nome) setErrorNome(false);
+        if(cpf) setErrorCpf(false);
+        if(nomeEscola) SetErrorNomeEscola(false);
+        if(numeroMatricula) setErrorNumeroMatricula(false);
+        if(email) setErrorEmail(false);
+        if(senha) setErrorSenha(false);
+    }, [nome, cpf, nomeEscola, numeroMatricula, email, senha]);
 
     const cadastrar = async () => {
         if (!validar()) {
@@ -47,10 +56,8 @@ const TeacherRegistration = ({ navigation }) => {
             });
             navigation.navigate('Login');
         }).catch(error => {
-            console.error(error);
             if (error.response) {
                 const errorMsg = error.response.data.message;
-                console.log(errorMsg);
                 Toast.show(capitalize(errorMsg), {
                     duration: Toast.durations.LONG,
                     position: Toast.positions.CENTER,

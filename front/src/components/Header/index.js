@@ -1,23 +1,20 @@
 import React from "react";
-import { Header as HeaderRN } from 'react-native-elements';
+import { Text, View } from "react-native";
+import {Ionicons} from 'react-native-vector-icons';
 import style from "./style";
 
-const Header = () => {
+const Header = ({navigation}) => {
     return (
-        <HeaderRN
-            containerStyle={{
-                backgroundColor: "#f6f6f6",
-                paddingVertical: 20,
-            }}
-            leftComponent={{
-                icon: 'menu',
-                color: "#0C066B"
-            }}
-            centerComponent={{
-                text: "Meu banco de Questões",
-                style: style.titleHeader,
-            }}
-        />
+        <View style={style.containerHeader}>
+            <Ionicons
+                style={style.iconHeader}
+                name="chevron-back"
+                size={35}
+                color="#0C066B"
+                onPress={() => navigation.navigate("TeacherHome")}
+            />
+            <Text style={style.titleHeader}>Banco de Questões</Text>
+        </View>
     )
 }
 export default Header;
