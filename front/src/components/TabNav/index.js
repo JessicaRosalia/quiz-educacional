@@ -12,9 +12,7 @@ const TabNav = ({login, register, page}) => {
     }
 
     function handleRegisterButton() {
-        if(page.navigate('TeacherRegistration')){
-            setPageIsCadNow(true) && setPageIsLoginNow(false);
-        }
+        page.navigate('TeacherRegistration') && setPageIsCadNow(true) && setPageIsLoginNow(false);
     }
 
     return (
