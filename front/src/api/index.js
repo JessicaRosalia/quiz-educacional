@@ -9,7 +9,7 @@ const createAxiosInstance = async () => {
 
     const api = (typeof manifest.packagerOpts === "object") && manifest.packagerOpts.dev
         ? `http://${manifest.debuggerHost.split(":").shift().concat(":3000")}`
-        : "http://quiz-educacional.com.br";
+        : "https://quiz-educacional.com.br";
 
 
     const instance = axios.create({
