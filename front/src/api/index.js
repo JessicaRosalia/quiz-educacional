@@ -8,8 +8,8 @@ const createAxiosInstance = async () => {
     const token = await SecureStore.getItemAsync("auth-token");
 
     const api = (typeof manifest.packagerOpts === "object") && manifest.packagerOpts.dev
-        ? `http://${manifest.debuggerHost.split(":").shift().concat(":3000")}`
-        : "http://quiz-educacional.com.br";
+        ? `https://${manifest.debuggerHost.split(":").shift().concat(":3000")}`
+        : "https://quiz-educacional.com.br";
 
 
     const instance = axios.create({
