@@ -30,7 +30,7 @@ function QuestionScreen() {
             if (isLoading) {
                 const axios = await createAxiosInstance();
                 axios.get(`/question/${questionId}`).then(res => {
-                    var data = res.data;
+                    const data = res.data;
                     setQuestion(data);
                     setIsLoading(false);
                 }).catch(() => {
